@@ -1,20 +1,6 @@
 ﻿using SGE.Aplicacion;
+using SGE.Repositorios;
 
-int b = 0;
-try
-{
-    incr(b);
-}
-catch (Exception e)
-{
-    Console.WriteLine(e.Message);
-}
-
-void incr(int x)
-{
-    x++;
-    if (x > 0)
-    {
-        throw new AutorizacionException("No se tienen los permisos necesarios");
-    }
-}
+IExpedienteRepositorio repo = new RepositorioExpediente();
+var altaex = new CasoDeUsoAltaExpediente(repo);
+altaex.Ejecutar(new Expediente() {Caratula = "prueba dos??", FechayHoraCr = DateTime.Now, Estado = EstadoExpediente.RecienIniciado, IdUltMod = 24, FechayHoraMod = DateTime.Now});
