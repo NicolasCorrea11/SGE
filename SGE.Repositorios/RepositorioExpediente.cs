@@ -1,5 +1,5 @@
 ﻿using SGE.Aplicacion;
-
+using System.IO;
 namespace SGE.Repositorios;
 
 public class RepositorioExpediente: IExpedienteRepositorio
@@ -48,4 +48,33 @@ public class RepositorioExpediente: IExpedienteRepositorio
         }
     }
 
+    public List<Expediente> listarExps()
+    {
+        using var sr = new StreamReader(_nomarch);
+        var resultado = new List<Expediente>();
+        while (!sr.EndOfStream)
+        {
+            var expe = new Expediente();
+            expe.Id = int.Parse(sr.ReadLine() ?? "");
+            expe.Caratula = sr.ReadLine() ?? "";
+            expe.FechayHoraCr = DateTime.Parse(sr.ReadLine() ?? "");
+            expe.FechayHoraMod = DateTime.Parse(sr.ReadLine() ?? "");
+            expe.IdUltMod = int.Parse(sr.ReadLine() ?? "");
+            resultado.Add(expe);
+        }
+        return resultado;
+    }
+
+    public void BajaExpediente(int id)
+    {
+        List<Expediente> lista = listarExps();
+        File.WriteAllText(_nomarch, "");
+        foreach (Expediente exp in lista)
+        {
+            if (exp.Id != id)
+            {
+                AltaExpediente(exp);
+            }
+        }
+    }
 }
