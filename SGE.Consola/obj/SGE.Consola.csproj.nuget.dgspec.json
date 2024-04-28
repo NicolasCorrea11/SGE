@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Acer\\Desktop\\Facultad\\Tercer semestre\\Seminario de Lenguajes(.Net)\\Proyecto\\SGE\\SGE.Consola\\SGE.Consola.csproj": {}
+    "C:\\Users\\ASUS\\Desktop\\Development\\C#\\Facultad\\sge-proy-dnet\\SGE.Consola\\SGE.Consola.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Acer\\Desktop\\Facultad\\Tercer semestre\\Seminario de Lenguajes(.Net)\\Proyecto\\SGE\\SGE.Aplicacion\\SGE.Aplicacion.csproj": {
+    "C:\\Users\\ASUS\\Desktop\\Development\\C#\\Facultad\\sge-proy-dnet\\SGE.Aplicacion\\SGE.Aplicacion.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Acer\\Desktop\\Facultad\\Tercer semestre\\Seminario de Lenguajes(.Net)\\Proyecto\\SGE\\SGE.Aplicacion\\SGE.Aplicacion.csproj",
+        "projectUniqueName": "C:\\Users\\ASUS\\Desktop\\Development\\C#\\Facultad\\sge-proy-dnet\\SGE.Aplicacion\\SGE.Aplicacion.csproj",
         "projectName": "SGE.Aplicacion",
-        "projectPath": "C:\\Users\\Acer\\Desktop\\Facultad\\Tercer semestre\\Seminario de Lenguajes(.Net)\\Proyecto\\SGE\\SGE.Aplicacion\\SGE.Aplicacion.csproj",
-        "packagesPath": "C:\\Users\\Acer\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Acer\\Desktop\\Facultad\\Tercer semestre\\Seminario de Lenguajes(.Net)\\Proyecto\\SGE\\SGE.Aplicacion\\obj\\",
+        "projectPath": "C:\\Users\\ASUS\\Desktop\\Development\\C#\\Facultad\\sge-proy-dnet\\SGE.Aplicacion\\SGE.Aplicacion.csproj",
+        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ASUS\\Desktop\\Development\\C#\\Facultad\\sge-proy-dnet\\SGE.Aplicacion\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Acer\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -62,17 +62,17 @@
         }
       }
     },
-    "C:\\Users\\Acer\\Desktop\\Facultad\\Tercer semestre\\Seminario de Lenguajes(.Net)\\Proyecto\\SGE\\SGE.Consola\\SGE.Consola.csproj": {
+    "C:\\Users\\ASUS\\Desktop\\Development\\C#\\Facultad\\sge-proy-dnet\\SGE.Consola\\SGE.Consola.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Acer\\Desktop\\Facultad\\Tercer semestre\\Seminario de Lenguajes(.Net)\\Proyecto\\SGE\\SGE.Consola\\SGE.Consola.csproj",
+        "projectUniqueName": "C:\\Users\\ASUS\\Desktop\\Development\\C#\\Facultad\\sge-proy-dnet\\SGE.Consola\\SGE.Consola.csproj",
         "projectName": "SGE.Consola",
-        "projectPath": "C:\\Users\\Acer\\Desktop\\Facultad\\Tercer semestre\\Seminario de Lenguajes(.Net)\\Proyecto\\SGE\\SGE.Consola\\SGE.Consola.csproj",
-        "packagesPath": "C:\\Users\\Acer\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Acer\\Desktop\\Facultad\\Tercer semestre\\Seminario de Lenguajes(.Net)\\Proyecto\\SGE\\SGE.Consola\\obj\\",
+        "projectPath": "C:\\Users\\ASUS\\Desktop\\Development\\C#\\Facultad\\sge-proy-dnet\\SGE.Consola\\SGE.Consola.csproj",
+        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ASUS\\Desktop\\Development\\C#\\Facultad\\sge-proy-dnet\\SGE.Consola\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Acer\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -84,11 +84,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Acer\\Desktop\\Facultad\\Tercer semestre\\Seminario de Lenguajes(.Net)\\Proyecto\\SGE\\SGE.Aplicacion\\SGE.Aplicacion.csproj": {
-                "projectPath": "C:\\Users\\Acer\\Desktop\\Facultad\\Tercer semestre\\Seminario de Lenguajes(.Net)\\Proyecto\\SGE\\SGE.Aplicacion\\SGE.Aplicacion.csproj"
+              "C:\\Users\\ASUS\\Desktop\\Development\\C#\\Facultad\\sge-proy-dnet\\SGE.Aplicacion\\SGE.Aplicacion.csproj": {
+                "projectPath": "C:\\Users\\ASUS\\Desktop\\Development\\C#\\Facultad\\sge-proy-dnet\\SGE.Aplicacion\\SGE.Aplicacion.csproj"
               },
-              "C:\\Users\\Acer\\Desktop\\Facultad\\Tercer semestre\\Seminario de Lenguajes(.Net)\\Proyecto\\SGE\\SGE.Repositorios\\SGE.Repositorios.csproj": {
-                "projectPath": "C:\\Users\\Acer\\Desktop\\Facultad\\Tercer semestre\\Seminario de Lenguajes(.Net)\\Proyecto\\SGE\\SGE.Repositorios\\SGE.Repositorios.csproj"
+              "C:\\Users\\ASUS\\Desktop\\Development\\C#\\Facultad\\sge-proy-dnet\\SGE.Repositorios\\SGE.Repositorios.csproj": {
+                "projectPath": "C:\\Users\\ASUS\\Desktop\\Development\\C#\\Facultad\\sge-proy-dnet\\SGE.Repositorios\\SGE.Repositorios.csproj"
               }
             }
           }
@@ -127,17 +127,17 @@
         }
       }
     },
-    "C:\\Users\\Acer\\Desktop\\Facultad\\Tercer semestre\\Seminario de Lenguajes(.Net)\\Proyecto\\SGE\\SGE.Repositorios\\SGE.Repositorios.csproj": {
+    "C:\\Users\\ASUS\\Desktop\\Development\\C#\\Facultad\\sge-proy-dnet\\SGE.Repositorios\\SGE.Repositorios.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Acer\\Desktop\\Facultad\\Tercer semestre\\Seminario de Lenguajes(.Net)\\Proyecto\\SGE\\SGE.Repositorios\\SGE.Repositorios.csproj",
+        "projectUniqueName": "C:\\Users\\ASUS\\Desktop\\Development\\C#\\Facultad\\sge-proy-dnet\\SGE.Repositorios\\SGE.Repositorios.csproj",
         "projectName": "SGE.Repositorios",
-        "projectPath": "C:\\Users\\Acer\\Desktop\\Facultad\\Tercer semestre\\Seminario de Lenguajes(.Net)\\Proyecto\\SGE\\SGE.Repositorios\\SGE.Repositorios.csproj",
-        "packagesPath": "C:\\Users\\Acer\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Acer\\Desktop\\Facultad\\Tercer semestre\\Seminario de Lenguajes(.Net)\\Proyecto\\SGE\\SGE.Repositorios\\obj\\",
+        "projectPath": "C:\\Users\\ASUS\\Desktop\\Development\\C#\\Facultad\\sge-proy-dnet\\SGE.Repositorios\\SGE.Repositorios.csproj",
+        "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ASUS\\Desktop\\Development\\C#\\Facultad\\sge-proy-dnet\\SGE.Repositorios\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Acer\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -149,8 +149,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Acer\\Desktop\\Facultad\\Tercer semestre\\Seminario de Lenguajes(.Net)\\Proyecto\\SGE\\SGE.Aplicacion\\SGE.Aplicacion.csproj": {
-                "projectPath": "C:\\Users\\Acer\\Desktop\\Facultad\\Tercer semestre\\Seminario de Lenguajes(.Net)\\Proyecto\\SGE\\SGE.Aplicacion\\SGE.Aplicacion.csproj"
+              "C:\\Users\\ASUS\\Desktop\\Development\\C#\\Facultad\\sge-proy-dnet\\SGE.Aplicacion\\SGE.Aplicacion.csproj": {
+                "projectPath": "C:\\Users\\ASUS\\Desktop\\Development\\C#\\Facultad\\sge-proy-dnet\\SGE.Aplicacion\\SGE.Aplicacion.csproj"
               }
             }
           }
