@@ -9,9 +9,10 @@ public class RepositorioExpediente: IExpedienteRepositorio
     public void AltaExpediente(Expediente e, int IdUser)
     {
         ServicioAutorizacionProvisiorio val = new ServicioAutorizacionProvisiorio();
+        int id = 1;
+        using var sw = new StreamWriter(_nomarch, true);
         if (val.PoseeElPermiso(IdUser, Permiso.ExpedienteAlta))
         {
-<<<<<<< HEAD
             sw.WriteLine(id);
             sw.WriteLine(e.Caratula);
             sw.WriteLine(e.FechayHoraCr);
@@ -39,53 +40,8 @@ public class RepositorioExpediente: IExpedienteRepositorio
             stw.WriteLine(e.Caratula);
             stw.WriteLine(e.FechayHoraCr);
             stw.WriteLine(e.FechayHoraMod);
-            stw.WriteLine(e.IdUltMod);
+            stw.WriteLine(IdUser);
             stw.WriteLine(e.Estado);
-=======
-            int id = 1;
-            using var sw = new StreamWriter(_nomarch, true);
-            if (sw.BaseStream.Length == 0)
-            {
-                sw.WriteLine(id);
-                sw.WriteLine(e.Caratula);
-                sw.WriteLine(e.FechayHoraCr);
-                sw.WriteLine(e.FechayHoraMod);
-                sw.WriteLine(e.IdUltMod);
-                sw.WriteLine(e.Estado);
-                sw.Close();
-            }
-            else
-            {
-                sw.Close();
-                using var cont = new StreamReader(_nomarch);
-                int filas = 0;
-                while (cont.ReadLine() != null)
-                {
-                    filas++;
-                }
-                cont.Close();
-                using var srr = new StreamReader(_nomarch);
-                for (int i = 0; i<filas-6;i++)
-                {
-                    srr.ReadLine();
-                }
-                id = int.Parse(srr.ReadLine() ?? "");
-                id++;
-                srr.Close();
-                using var stw = new StreamWriter(_nomarch, true);
-                stw.WriteLine(id);
-                stw.WriteLine(e.Caratula);
-                stw.WriteLine(e.FechayHoraCr);
-                stw.WriteLine(e.FechayHoraMod);
-                stw.WriteLine(e.IdUltMod);
-                stw.WriteLine(e.Estado);
-                stw.Close();
-            }
-        }
-        else
-        {
-            throw new AutorizacionException("No se tienen los permisos necesarios");
->>>>>>> 831b012dd6891777690c140ec9ef85131c651c69
         }
     }
 
@@ -108,23 +64,22 @@ public class RepositorioExpediente: IExpedienteRepositorio
 
     public void BajaExpediente(int idExp, int idUser)
     {
-<<<<<<< HEAD
-        List<Expediente> lista = ListarExps();
-        File.WriteAllText(_nomarch, "");
-        foreach (Expediente exp in lista)
-=======
         ServicioAutorizacionProvisiorio val = new ServicioAutorizacionProvisiorio();
         if (val.PoseeElPermiso(idUser, Permiso.ExpedienteBaja))
->>>>>>> 831b012dd6891777690c140ec9ef85131c651c69
         {
-            List<Expediente> lista = listarExps();
+            List<Expediente> lista = ListarExps();
             File.WriteAllText(_nomarch, "");
             foreach (Expediente exp in lista)
             {
-                if (exp.Id != idExp)
+                List<Expediente> lista2 = ListarExps();
+                File.WriteAllText(_nomarch, "");
+                foreach (Expediente expe in lista)
                 {
-                    AltaExpediente(exp, idUser);
-                }   
+                    if (exp.Id != idExp)
+                    {
+                        AltaExpediente(exp, idUser);
+                    }   
+                }
             }
         }
         else
@@ -138,7 +93,7 @@ public class RepositorioExpediente: IExpedienteRepositorio
         ServicioAutorizacionProvisiorio val = new ServicioAutorizacionProvisiorio();
         if (val.PoseeElPermiso(idUser, Permiso.ExpedienteModificacion))
         {
-            List<Expediente> lista = listarExps();
+            List<Expediente> lista = ListarExps();
             int i = 0;
             while (lista[i].Id != e.Id)
             {
@@ -160,16 +115,6 @@ public class RepositorioExpediente: IExpedienteRepositorio
         }
     }
 
-    public void ModificarExpediente(Expediente e, int idUser)
-    {
-        var val = new ServicioAutorizacionProvisiorio();
-        if (val.PoseeElPermiso(idUser, Permiso.ExpedienteModificacion))
-        {
-            List<Expediente> lista = ListarExps();
-
-        }
-    }
-
     public Expediente ConsultaPorId(int id)
     {
         var exp = new Expediente();
@@ -183,6 +128,4 @@ public class RepositorioExpediente: IExpedienteRepositorio
         }
         return exp;
     }
-
-
 }

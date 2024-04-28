@@ -2,8 +2,9 @@
 
 public class CasoDeUsoModificacionExpediente(IExpedienteRepositorio repo)
 {
-    public void Ejecutar(Expediente e,int IdUser) 
+    public void Ejecutar(Expediente e, int IdUser) 
     {
-        repo.ModificarExpediente(e, idUser);
+        e.FechayHoraMod = DateTime.Now;
+        repo.ModificarExpediente(e, IdUser);
     }
 }
