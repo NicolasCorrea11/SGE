@@ -1,14 +1,15 @@
 {
   "version": 2,
-<<<<<<< HEAD
   "dgSpecHash": "Jyts7dWvQi4F+CsNrV+oecCx3xJCuSDZLgu1vu26CC+iTQIWE7pN8o1K+wfhZF384jSo7KNW2j0Lpp2twENhoQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\Acer\\Desktop\\Facultad\\Tercer semestre\\Seminario de Lenguajes(.Net)\\Proyecto\\SGE\\SGE.Aplicacion\\SGE.Aplicacion.csproj",
-=======
-  "dgSpecHash": "gg08eHIIG0Mxx0D0NO7NPawXg110Q8Zlmxmuf+bcdi+g+oy385RIG+/mCZTSEYDs6WUaa6ncUb9QfA5Kzn54uw==",
-  "success": true,
-  "projectFilePath": "C:\\Users\\ASUS\\Desktop\\Development\\C#\\Facultad\\sge-proy-dnet-camper\\SGE.Aplicacion\\SGE.Aplicacion.csproj",
->>>>>>> d8a5bbb56cc676afd12ab73f6e2b288eb08eb7a8
   "expectedPackageFiles": [],
-  "logs": []
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file C:\\Users\\Acer\\Desktop\\Facultad\\Tercer semestre\\Seminario de Lenguajes(.Net)\\Proyecto\\SGE\\SGE.Aplicacion\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }

@@ -4,6 +4,14 @@ public class CasoDeUsoExpedienteModificacion(IExpedienteRepositorio repo)
 {
     public void Ejecutar(Expediente e, int idUser) 
     {
-        repo.ModificarExpediente(e, idUser);
+        ServicioAutorizacionProvisiorio val = new();
+        if (val.PoseeElPermiso(idUser, Permiso.ExpedienteModificacion))
+        {
+            repo.ModificarExpediente(e);
+        }
+        else
+        {
+            throw new AutorizacionException("No se tienen los permisos necesarios");
+        }
     }
 }

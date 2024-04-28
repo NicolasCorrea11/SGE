@@ -2,8 +2,16 @@
 
 public class CasoDeUsoTramiteAlta(ITramiteRepositorio repo)
 {
-  public void Ejecutar(Tramite t)
+  public void Ejecutar(Tramite t, int idUser)
   {
-    repo.AltaTramite(t);
+    ServicioAutorizacionProvisiorio val = new();
+    if (val.PoseeElPermiso(idUser, Permiso.TramiteAlta))
+    {
+      repo.AltaTramite(t);
+    }
+    else
+    {
+      throw new AutorizacionException("No se tienen los permisos necesarios");
+    }
   }
 }
