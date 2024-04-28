@@ -2,5 +2,5 @@
 
 public enum EstadoExpediente
 {
-    Recieniniciado, ParaResolver, ConResolucion, EnNotificacion, Finalizado
+    RecienIniciado, ParaResolver, ConResolucion, EnNotificacion, Finalizado
 }
