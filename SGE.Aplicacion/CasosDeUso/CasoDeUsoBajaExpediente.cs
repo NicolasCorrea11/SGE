@@ -2,8 +2,8 @@
 
 public class CasoDeUsoBajaExpediente(IExpedienteRepositorio repo)
 {
-    public void Ejecutar(int id)
+    public void Ejecutar(int idExp, int idUser)
     {
-        repo.BajaExpediente(id);
+        repo.BajaExpediente(idExp, idUser);
     }
 }

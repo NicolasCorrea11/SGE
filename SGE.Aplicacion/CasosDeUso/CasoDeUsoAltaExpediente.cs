@@ -2,10 +2,10 @@
 
 public class CasoDeUsoAltaExpediente(IExpedienteRepositorio repo)
 {
-    public void Ejecutar(Expediente e)
+    public void Ejecutar(Expediente e, int idUser)
     {   
         e.FechayHoraCr = DateTime.Now;
         e.FechayHoraMod = DateTime.Now;
-        repo.AltaExpediente(e);
+        repo.AltaExpediente(e, idUser);
     }
 }
