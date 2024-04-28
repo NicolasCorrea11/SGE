@@ -2,15 +2,17 @@
 
 public class TramiteValidador
 {
-    public bool esValido(Tramite t)
+    public bool esValido(Tramite t, out string mensajeError)
     {
-        if (t.Contenido != "" && t.IdUltMod > 0)
+        mensajeError = "";
+        if (string.IsNullOrWhiteSpace(t.Contenido))
         {
-            return true;
+            mensajeError += "El contenido no puede ser vacio";
         }
-        else 
+        if (t.IdUltMod <= 0)
         {
-            return false;
+            mensajeError += "Id de usuario no valido \n";
         }
+        return mensajeError == "";
     }
 }
