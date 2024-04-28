@@ -1,8 +1,14 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "OFwFXkas5NiNWxQS6YSaSNDAlVvFWMDE5g1YJj3WpCazSwm9jlefdpg/l/z736Md6al0Lm1xha6LSPWTMGIBBA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Acer\\Desktop\\Facultad\\Tercer semestre\\Seminario de Lenguajes(.Net)\\Proyecto\\SGE\\SGE.Repositorios\\SGE.Repositorios.csproj",
+=======
+  "dgSpecHash": "LcdOdh3/OCQS+NIZA6hba6dA3z/2T/0MhamzfmI79EULW/jqKVBh/ZtEVjpRE+6dZzNWuAT5oWWOgk8tQSuPqg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\ASUS\\Desktop\\Development\\C#\\Facultad\\sge-proy-dnet-camper\\SGE.Repositorios\\SGE.Repositorios.csproj",
+>>>>>>> d8a5bbb56cc676afd12ab73f6e2b288eb08eb7a8
   "expectedPackageFiles": [],
   "logs": []
 }

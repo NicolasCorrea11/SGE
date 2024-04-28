@@ -11,6 +11,37 @@ public class RepositorioExpediente: IExpedienteRepositorio
         ServicioAutorizacionProvisiorio val = new ServicioAutorizacionProvisiorio();
         if (val.PoseeElPermiso(IdUser, Permiso.ExpedienteAlta))
         {
+<<<<<<< HEAD
+            sw.WriteLine(id);
+            sw.WriteLine(e.Caratula);
+            sw.WriteLine(e.FechayHoraCr);
+            sw.WriteLine(e.FechayHoraMod);
+            sw.WriteLine(e.IdUltMod);
+            sw.WriteLine(e.Estado);
+        }
+        else
+        {
+            using var cont = new StreamReader(_nomarch);
+            int filas = 0;
+            while (cont.ReadLine() != null)
+            {
+                filas++;
+            }
+            using var srr = new StreamReader(_nomarch);
+            for (int i = 0; i < filas-6; i++)
+            {
+                srr.ReadLine();
+            }
+            id = int.Parse(srr.ReadLine() ?? "");
+            id++;
+            using var stw = new StreamWriter(_nomarch, true);
+            stw.WriteLine(id);
+            stw.WriteLine(e.Caratula);
+            stw.WriteLine(e.FechayHoraCr);
+            stw.WriteLine(e.FechayHoraMod);
+            stw.WriteLine(e.IdUltMod);
+            stw.WriteLine(e.Estado);
+=======
             int id = 1;
             using var sw = new StreamWriter(_nomarch, true);
             if (sw.BaseStream.Length == 0)
@@ -54,10 +85,11 @@ public class RepositorioExpediente: IExpedienteRepositorio
         else
         {
             throw new AutorizacionException("No se tienen los permisos necesarios");
+>>>>>>> 831b012dd6891777690c140ec9ef85131c651c69
         }
     }
 
-    public List<Expediente> listarExps()
+    public List<Expediente> ListarExps()
     {
         using var sr = new StreamReader(_nomarch);
         var resultado = new List<Expediente>();
@@ -76,8 +108,14 @@ public class RepositorioExpediente: IExpedienteRepositorio
 
     public void BajaExpediente(int idExp, int idUser)
     {
+<<<<<<< HEAD
+        List<Expediente> lista = ListarExps();
+        File.WriteAllText(_nomarch, "");
+        foreach (Expediente exp in lista)
+=======
         ServicioAutorizacionProvisiorio val = new ServicioAutorizacionProvisiorio();
         if (val.PoseeElPermiso(idUser, Permiso.ExpedienteBaja))
+>>>>>>> 831b012dd6891777690c140ec9ef85131c651c69
         {
             List<Expediente> lista = listarExps();
             File.WriteAllText(_nomarch, "");
@@ -121,4 +159,30 @@ public class RepositorioExpediente: IExpedienteRepositorio
             }
         }
     }
+
+    public void ModificarExpediente(Expediente e, int idUser)
+    {
+        var val = new ServicioAutorizacionProvisiorio();
+        if (val.PoseeElPermiso(idUser, Permiso.ExpedienteModificacion))
+        {
+            List<Expediente> lista = ListarExps();
+
+        }
+    }
+
+    public Expediente ConsultaPorId(int id)
+    {
+        var exp = new Expediente();
+        var lista = ListarExps();
+        foreach (Expediente e in lista)
+        {
+            if (id == e.Id)
+            {
+                exp = e;
+            }
+        }
+        return exp;
+    }
+
+
 }
