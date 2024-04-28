@@ -17,26 +17,22 @@ public class RepositorioExpediente: IExpedienteRepositorio
             sw.WriteLine(e.FechayHoraMod);
             sw.WriteLine(e.IdUltMod);
             sw.WriteLine(e.Estado);
-            sw.Close();
         }
         else
         {
-            sw.Close();
             using var cont = new StreamReader(_nomarch);
             int filas = 0;
             while (cont.ReadLine() != null)
             {
                 filas++;
             }
-            cont.Close();
             using var srr = new StreamReader(_nomarch);
-            for (int i = 0; i<filas-6;i++)
+            for (int i = 0; i < filas-6; i++)
             {
                 srr.ReadLine();
             }
             id = int.Parse(srr.ReadLine() ?? "");
             id++;
-            srr.Close();
             using var stw = new StreamWriter(_nomarch, true);
             stw.WriteLine(id);
             stw.WriteLine(e.Caratula);
@@ -44,11 +40,10 @@ public class RepositorioExpediente: IExpedienteRepositorio
             stw.WriteLine(e.FechayHoraMod);
             stw.WriteLine(e.IdUltMod);
             stw.WriteLine(e.Estado);
-            stw.Close();
         }
     }
 
-    public List<Expediente> listarExps()
+    public List<Expediente> ListarExps()
     {
         using var sr = new StreamReader(_nomarch);
         var resultado = new List<Expediente>();
@@ -67,7 +62,7 @@ public class RepositorioExpediente: IExpedienteRepositorio
 
     public void BajaExpediente(int id)
     {
-        List<Expediente> lista = listarExps();
+        List<Expediente> lista = ListarExps();
         File.WriteAllText(_nomarch, "");
         foreach (Expediente exp in lista)
         {
@@ -77,4 +72,30 @@ public class RepositorioExpediente: IExpedienteRepositorio
             }
         }
     }
+
+    public void ModificarExpediente(Expediente e, int idUser)
+    {
+        var val = new ServicioAutorizacionProvisiorio();
+        if (val.PoseeElPermiso(idUser, Permiso.ExpedienteModificacion))
+        {
+            List<Expediente> lista = ListarExps();
+
+        }
+    }
+
+    public Expediente ConsultaPorId(int id)
+    {
+        var exp = new Expediente();
+        var lista = ListarExps();
+        foreach (Expediente e in lista)
+        {
+            if (id == e.Id)
+            {
+                exp = e;
+            }
+        }
+        return exp;
+    }
+
+
 }
