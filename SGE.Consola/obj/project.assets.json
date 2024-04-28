@@ -51,19 +51,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-<<<<<<< HEAD
       "projectUniqueName": "C:\\Users\\Acer\\Desktop\\Facultad\\Tercer semestre\\Seminario de Lenguajes(.Net)\\Proyecto\\SGE\\SGE.Consola\\SGE.Consola.csproj",
       "projectName": "SGE.Consola",
       "projectPath": "C:\\Users\\Acer\\Desktop\\Facultad\\Tercer semestre\\Seminario de Lenguajes(.Net)\\Proyecto\\SGE\\SGE.Consola\\SGE.Consola.csproj",
       "packagesPath": "C:\\Users\\Acer\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Acer\\Desktop\\Facultad\\Tercer semestre\\Seminario de Lenguajes(.Net)\\Proyecto\\SGE\\SGE.Consola\\obj\\",
-=======
-      "projectUniqueName": "C:\\Users\\ASUS\\Desktop\\Development\\C#\\Facultad\\sge-proy-dnet-camper\\SGE.Consola\\SGE.Consola.csproj",
-      "projectName": "SGE.Consola",
-      "projectPath": "C:\\Users\\ASUS\\Desktop\\Development\\C#\\Facultad\\sge-proy-dnet-camper\\SGE.Consola\\SGE.Consola.csproj",
-      "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ASUS\\Desktop\\Development\\C#\\Facultad\\sge-proy-dnet-camper\\SGE.Consola\\obj\\",
->>>>>>> d8a5bbb56cc676afd12ab73f6e2b288eb08eb7a8
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Acer\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -78,19 +70,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-<<<<<<< HEAD
             "C:\\Users\\Acer\\Desktop\\Facultad\\Tercer semestre\\Seminario de Lenguajes(.Net)\\Proyecto\\SGE\\SGE.Aplicacion\\SGE.Aplicacion.csproj": {
               "projectPath": "C:\\Users\\Acer\\Desktop\\Facultad\\Tercer semestre\\Seminario de Lenguajes(.Net)\\Proyecto\\SGE\\SGE.Aplicacion\\SGE.Aplicacion.csproj"
             },
             "C:\\Users\\Acer\\Desktop\\Facultad\\Tercer semestre\\Seminario de Lenguajes(.Net)\\Proyecto\\SGE\\SGE.Repositorios\\SGE.Repositorios.csproj": {
               "projectPath": "C:\\Users\\Acer\\Desktop\\Facultad\\Tercer semestre\\Seminario de Lenguajes(.Net)\\Proyecto\\SGE\\SGE.Repositorios\\SGE.Repositorios.csproj"
-=======
-            "C:\\Users\\ASUS\\Desktop\\Development\\C#\\Facultad\\sge-proy-dnet-camper\\SGE.Aplicacion\\SGE.Aplicacion.csproj": {
-              "projectPath": "C:\\Users\\ASUS\\Desktop\\Development\\C#\\Facultad\\sge-proy-dnet-camper\\SGE.Aplicacion\\SGE.Aplicacion.csproj"
-            },
-            "C:\\Users\\ASUS\\Desktop\\Development\\C#\\Facultad\\sge-proy-dnet-camper\\SGE.Repositorios\\SGE.Repositorios.csproj": {
-              "projectPath": "C:\\Users\\ASUS\\Desktop\\Development\\C#\\Facultad\\sge-proy-dnet-camper\\SGE.Repositorios\\SGE.Repositorios.csproj"
->>>>>>> d8a5bbb56cc676afd12ab73f6e2b288eb08eb7a8
             }
           }
         }
@@ -128,5 +112,13 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.201/PortableRuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file C:\\Users\\Acer\\Desktop\\Facultad\\Tercer semestre\\Seminario de Lenguajes(.Net)\\Proyecto\\SGE\\SGE.Consola\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }
