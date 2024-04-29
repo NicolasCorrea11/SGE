@@ -2,7 +2,7 @@
 
 public class CasoDeUsoTramiteConsultaPorEtiqueta(ITramiteRepositorio repo)
 {
-  public Tramite Ejecutar(EtiquetaTramite etiqueta)
+  public List<Tramite> Ejecutar(EtiquetaTramite etiqueta)
   {
     return repo.ConsultaPorEtiqueta(etiqueta);
   }

@@ -1,17 +1,16 @@
 ﻿namespace SGE.Aplicacion;
 
-public class CasoDeUsoExpedienteModificacion(IExpedienteRepositorio repo)
+public class CasoDeUsoExpedienteModificacion(IExpedienteRepositorio repo, ServicioAutorizacionProvisiorio auth)
 {
     public void Ejecutar(Expediente e, int idUser) 
     {
-        ServicioAutorizacionProvisiorio val = new();
-        if (val.PoseeElPermiso(idUser, Permiso.ExpedienteModificacion))
+        if (!auth.PoseeElPermiso(idUser, Permiso.ExpedienteModificacion))
         {
-            repo.ModificarExpediente(e, idUser);
+            throw new AutorizacionException("No se tienen los permisos necesarios");
         }
         else
         {
-            throw new AutorizacionException("No se tienen los permisos necesarios");
+            repo.ModificarExpediente(e, idUser);
         }
     }
 }

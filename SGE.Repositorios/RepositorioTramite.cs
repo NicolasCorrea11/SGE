@@ -1,33 +1,33 @@
 ﻿namespace SGE.Repositorios;
-
-using System.Linq.Expressions;
 using SGE.Aplicacion;
 
 public class RepositorioTramite : ITramiteRepositorio
 {
   readonly string _nomarch = "tramites.txt";
 
-  public void AltaTramite(Tramite t, int idUser)
+  public void AltaTramite(Tramite tramite, int idUser)
   {
     string[] lineas = File.ReadAllLines(_nomarch);
-    int id = (lineas.Length / 7) + 1;
+    tramite.Id = (lineas.Length / 7) + 1;
+    tramite.IdUser = idUser;
     using var sw = new StreamWriter(_nomarch, true);
-    sw.WriteLine(id);
-    sw.WriteLine(t.ExpedienteId);
-    sw.WriteLine(t.Etiqueta);
-    sw.WriteLine(t.Contenido);
-    sw.WriteLine(t.FechayHoraCr);
-    sw.WriteLine(t.FechayHoraMod);
-    sw.WriteLine(idUser);
+    CopiarTramite(tramite, sw);
   }
 
-  public List<Tramite> ListarTramites()
+  public void CopiarTramite(Tramite tramite, StreamWriter sw)
   {
-    using var sr = new StreamReader(_nomarch);
-    List<Tramite> resultado = [];
-    while (!sr.EndOfStream)
-    {
-      Tramite tr = new()
+    sw.WriteLine(tramite.Id);
+    sw.WriteLine(tramite.ExpedienteId);
+    sw.WriteLine(tramite.Etiqueta.ToString());
+    sw.WriteLine(tramite.Contenido);
+    sw.WriteLine(tramite.FechayHoraCr);
+    sw.WriteLine(tramite.FechayHoraMod);
+    sw.WriteLine(tramite.IdUser);
+  }
+
+  public Tramite LeerTramite(StreamReader sr)
+  {
+    Tramite tramite = new()
       {
         Id = int.Parse(sr.ReadLine() ?? ""),
         ExpedienteId = int.Parse(sr.ReadLine() ?? ""),
@@ -37,65 +37,68 @@ public class RepositorioTramite : ITramiteRepositorio
         FechayHoraMod = DateTime.Parse(sr.ReadLine() ?? ""),
         IdUser = int.Parse(sr.ReadLine() ?? "")
       };
-      resultado.Add(tr);
+    return tramite;
+  }
+
+  public List<Tramite> ListarTramites()
+  {
+    using var sr = new StreamReader(_nomarch);
+    List<Tramite> resultado = [];
+    while (!sr.EndOfStream)
+    {
+      Tramite tramite = LeerTramite(sr);
+      resultado.Add(tramite);
     }
     return resultado;
 
   }
-  
-  public void BajaTramite(int IdTram)
+
+  public int BajaTramite(int id)
   {
     List<Tramite> lista = ListarTramites();
+    int resultado = -1;
     File.WriteAllText(_nomarch, "");
     using var sw = new StreamWriter(_nomarch, true);
-    foreach (Tramite tra in lista)
+    foreach (Tramite tramite in lista)
     {
-      if (tra.Id != IdTram)
-      {
-        sw.WriteLine(tra.Id);
-        sw.WriteLine(tra.ExpedienteId);
-        sw.WriteLine(tra.Etiqueta);
-        sw.WriteLine(tra.Contenido);
-        sw.WriteLine(tra.FechayHoraCr);
-        sw.WriteLine(tra.FechayHoraMod);
-        sw.WriteLine(tra.IdUltMod);
-      }
+      if (tramite.Id != id)
+        CopiarTramite(tramite, sw);
+      else
+        resultado = tramite.ExpedienteId;
     }
+    return resultado;
   }
 
   public void ModificacionTramite(Tramite nuevoTramite, int idUser)
   {
     List<Tramite> lista = ListarTramites();
     File.WriteAllText(_nomarch, "");
-    foreach (Tramite t in lista)
+    using var sw = new StreamWriter(_nomarch);
+    foreach (Tramite tramite in lista)
     {
-      if (t.Id == nuevoTramite.Id)
+      if (tramite.Id != nuevoTramite.Id)
       {
-        using var sw = new StreamWriter(_nomarch, true);
-        sw.WriteLine(t.Id);
-        sw.WriteLine(nuevoTramite.ExpedienteId);
-        sw.WriteLine(nuevoTramite.Etiqueta);
-        sw.WriteLine(nuevoTramite.Contenido);
-        sw.WriteLine(t.FechayHoraCr);
-        sw.WriteLine(DateTime.Now);
-        sw.WriteLine(idUser);
-        sw.Close();
+        CopiarTramite(tramite, sw);
       }
       else
       {
-        AltaTramite(t);
+        tramite.ExpedienteId = nuevoTramite.ExpedienteId;
+        tramite.Etiqueta = nuevoTramite.Etiqueta;
+        tramite.Contenido = nuevoTramite.Contenido;
+        tramite.FechayHoraMod = DateTime.Now;
+        tramite.IdUser = idUser;
+        CopiarTramite(tramite, sw);
       }
     }
   }
 
-  public Tramite ConsultaPorEtiqueta(EtiquetaTramite etiqueta)
+  public List<Tramite> ConsultaPorEtiqueta(EtiquetaTramite etiqueta)
   {
-    Tramite resultado = new();
-    List<Tramite> lista = ListarTramites();
-    foreach (Tramite t in lista)
+    List<Tramite> resultado = [];
+    foreach (Tramite tramite in ListarTramites())
     {
-      if (t.Etiqueta == etiqueta)
-        resultado = t;
+      if (tramite.Etiqueta == etiqueta)
+        resultado.Add(tramite);
     }
     return resultado;
   }
