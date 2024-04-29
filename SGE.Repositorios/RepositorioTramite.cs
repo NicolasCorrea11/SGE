@@ -5,7 +5,7 @@ public class RepositorioTramite : ITramiteRepositorio
 {
   readonly string _nomarch = "tramites.txt";
 
-  public void AltaTramite(Tramite t)
+  public void AltaTramite(Tramite t, int idUser)
   {
     string[] lineas = File.ReadAllLines(_nomarch);
     int id = (lineas.Length / 7) + 1;
@@ -16,7 +16,7 @@ public class RepositorioTramite : ITramiteRepositorio
     sw.WriteLine(t.Contenido);
     sw.WriteLine(t.FechayHoraCr);
     sw.WriteLine(t.FechayHoraMod);
-    sw.WriteLine(t.IdUltMod);
+    sw.WriteLine(idUser);
   }
 
   public List<Tramite> ListarTramites()
@@ -33,7 +33,7 @@ public class RepositorioTramite : ITramiteRepositorio
         Contenido = sr.ReadLine(),
         FechayHoraCr = DateTime.Parse(sr.ReadLine() ?? ""),
         FechayHoraMod = DateTime.Parse(sr.ReadLine() ?? ""),
-        IdUltMod = int.Parse(sr.ReadLine() ?? "")
+        IdUser = int.Parse(sr.ReadLine() ?? "")
       };
       resultado.Add(tr);
     }
@@ -52,7 +52,7 @@ public class RepositorioTramite : ITramiteRepositorio
     }
   }
 
-  public void ModificacionTramite(Tramite nuevoTramite)
+  public void ModificacionTramite(Tramite nuevoTramite, int idUser)
   {
     List<Tramite> lista = ListarTramites();
     File.WriteAllText(_nomarch, "");

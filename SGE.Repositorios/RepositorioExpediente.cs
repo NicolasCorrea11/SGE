@@ -6,17 +6,41 @@ public class RepositorioExpediente : IExpedienteRepositorio
 {
     readonly string _nomarch = "expedientes.txt";
 
-    public void AltaExpediente(Expediente e)
+    public void AltaExpediente(Expediente e, int idUser)
     {
         string[] lineas = File.ReadAllLines(_nomarch);
-        int id = (lineas.Length / 6) + 1;
+        e.Id = (lineas.Length / 6) + 1;
         using var sw = new StreamWriter(_nomarch, true);
-        sw.WriteLine(id);
+        sw.WriteLine(e.Id);
         sw.WriteLine(e.Caratula);
         sw.WriteLine(e.FechayHoraCr);
         sw.WriteLine(e.FechayHoraMod);
-        sw.WriteLine(e.IdUltMod);
+        sw.WriteLine(idUser);
         sw.WriteLine(e.Estado);
+    }
+
+    public void CopiarExpediente(Expediente e, StreamWriter sw)
+    {
+        sw.WriteLine(e.Id);
+        sw.WriteLine(e.Caratula);
+        sw.WriteLine(e.FechayHoraCr);
+        sw.WriteLine(e.FechayHoraMod);
+        sw.WriteLine(e.IdUser);
+        sw.WriteLine(e.Estado);
+    }
+
+    public Expediente LeerExpediente(StreamReader sr)
+    {
+        Expediente exp = new()
+        {
+            Id = int.Parse(sr.ReadLine() ?? ""),
+            Caratula = sr.ReadLine() ?? "",
+            FechayHoraCr = DateTime.Parse(sr.ReadLine() ?? ""),
+            FechayHoraMod = DateTime.Parse(sr.ReadLine() ?? ""),
+            IdUser = int.Parse(sr.ReadLine() ?? ""),
+            Estado = Enum.Parse<EstadoExpediente>(sr.ReadLine() ?? "")
+        };
+        return exp;
     }
 
     public List<Expediente> ListarExps()
@@ -25,14 +49,7 @@ public class RepositorioExpediente : IExpedienteRepositorio
         List<Expediente> resultado = [];
         while (!sr.EndOfStream)
         {
-            Expediente expe = new()
-            {
-                Id = int.Parse(sr.ReadLine() ?? ""),
-                Caratula = sr.ReadLine() ?? "",
-                FechayHoraCr = DateTime.Parse(sr.ReadLine() ?? ""),
-                FechayHoraMod = DateTime.Parse(sr.ReadLine() ?? ""),
-                IdUltMod = int.Parse(sr.ReadLine() ?? "")
-            };
+            Expediente expe = LeerExpediente(sr);
             resultado.Add(expe);
         }
         return resultado;
@@ -42,58 +59,60 @@ public class RepositorioExpediente : IExpedienteRepositorio
     {
         List<Expediente> lista = ListarExps();
         File.WriteAllText(_nomarch, "");
+        using var sw = new StreamWriter(_nomarch, true);
         foreach (Expediente exp in lista)
         {
             if (exp.Id != idExp)
             {
-                AltaExpediente(exp);
+                CopiarExpediente(exp, sw);
             }
         }
     }
 
-    public void ModificarExpediente(Expediente nuevoExp)
+    public void ModificarExpediente(Expediente nuevoExp, int idUser)
     {
         List<Expediente> lista = ListarExps();
+        File.WriteAllText(_nomarch, "");
+        using var sw = new StreamWriter(_nomarch, true);
         foreach (Expediente exp in lista)
         {
             if (exp.Id == nuevoExp.Id)
-                AltaExpediente(nuevoExp);
+            {
+                exp.Caratula = nuevoExp.Caratula;
+                exp.FechayHoraMod = DateTime.Now;
+                exp.Estado = nuevoExp.Estado;
+                exp.IdUser = idUser;
+                CopiarExpediente(exp, sw);
+            }
             else
-                AltaExpediente(exp);
+                CopiarExpediente(exp, sw);
         }
     }
 
-    public Expediente ConsultaPorId(int id)
+    public Expediente? ConsultaPorId(int id)
     {
-        Expediente resultado = new();
-        List<Expediente> lista = ListarExps();
-        foreach (Expediente exp in lista)
+        foreach (Expediente exp in ListarExps())
         {
             if (id == exp.Id)
-                resultado = exp;
+                return exp;
         }
-        return resultado;
+        return null;
     }
 
     public List<object> ConsultaTodos(int idExp)
     {
-        List<object> resultado = new();
-        List<Expediente> lista = ListarExps();
-        int i = 0;
-        while(lista[i].Id != idExp)
+        List<object> resultado = [];
+        foreach (Expediente e in ListarExps())
         {
-            i++;
+            if (idExp == e.Id)
+                resultado.Add(e);
         }
-        resultado.Add(lista[i]);
         using var sr = new StreamReader("tramites.txt");
-        RepositorioTramite rep = new();
-        List<Tramite> listram = rep.ListarTramites();
-        foreach(Tramite t in listram)
+        RepositorioTramite repo = new();
+        foreach (Tramite t in repo.ListarTramites())
         {
             if (t.ExpedienteId == idExp)
-            {
                 resultado.Add(t);
-            }
         }
         return resultado;
     }

@@ -2,8 +2,8 @@
 
 public class CasoDeUsoTramiteModificacion(ITramiteRepositorio repo)
 {
-  public void Ejecutar(Tramite t)
+  public void Ejecutar(Tramite t, int idUser)
   {
-    repo.ModificacionTramite(t);
+    repo.ModificacionTramite(t, idUser);
   }
 }

@@ -7,7 +7,7 @@ public class CasoDeUsoExpedienteModificacion(IExpedienteRepositorio repo)
         ServicioAutorizacionProvisiorio val = new();
         if (val.PoseeElPermiso(idUser, Permiso.ExpedienteModificacion))
         {
-            repo.ModificarExpediente(e);
+            repo.ModificarExpediente(e, idUser);
         }
         else
         {

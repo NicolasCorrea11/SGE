@@ -8,5 +8,8 @@ public class Tramite
     public string? Contenido {set;get;}
     public DateTime FechayHoraCr {set;get;}
     public DateTime FechayHoraMod {set;get;}
-    public int IdUltMod {set;get;}
+    public int IdUser {set;get;}
+
+    public override string ToString()
+        => $"ID = {Id}, ID del expediente = {ExpedienteId}, etiqueta = {Etiqueta}, contenido = {Contenido}, fecha y hora de creacion = {FechayHoraCr}, fecha y hora de modificacion = {FechayHoraMod}, ID de ultimo usuario en modificar = {IdUser}";
 }

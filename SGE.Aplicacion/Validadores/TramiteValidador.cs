@@ -9,7 +9,7 @@ public class TramiteValidador
         {
             mensajeError += "El contenido no puede ser vacio";
         }
-        if (t.IdUltMod <= 0)
+        if (t.IdUser <= 0)
         {
             mensajeError += "Id de usuario no valido \n";
         }

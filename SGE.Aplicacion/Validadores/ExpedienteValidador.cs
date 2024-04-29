@@ -9,7 +9,7 @@ public class ExpedienteValidador
         {
             mensajeError += "La caratula no puede estar vacia \n";
         }
-        if (e.IdUltMod <= 0)
+        if (e.IdUser <= 0)
         {
             mensajeError += "Id de usuario invalido \n";
         }

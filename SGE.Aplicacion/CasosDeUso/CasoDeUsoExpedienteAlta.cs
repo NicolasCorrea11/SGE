@@ -9,7 +9,7 @@ public class CasoDeUsoExpedienteAlta(IExpedienteRepositorio repo)
         {
             e.FechayHoraCr = DateTime.Now;
             e.FechayHoraMod = DateTime.Now;
-            repo.AltaExpediente(e);
+            repo.AltaExpediente(e, idUser);
         }
         else 
         {

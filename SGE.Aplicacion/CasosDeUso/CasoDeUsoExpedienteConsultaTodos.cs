@@ -4,8 +4,8 @@ namespace SGE.Aplicacion;
 
 public class CasoDeUsoExpedienteConsultaTodos(IExpedienteRepositorio repo)
 {
-    public void Ejecutar(int idExp)
+    public List<object> Ejecutar(int idExp)
     {
-        repo.ConsultaTodos(idExp);
+        return repo.ConsultaTodos(idExp);
     }
 }
