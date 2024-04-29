@@ -99,7 +99,6 @@ public class RepositorioExpediente : IExpedienteRepositorio
             if (exp.Id == nuevoExp.Id)
             {
                 exp.Caratula = nuevoExp.Caratula;
-                exp.FechayHoraMod = DateTime.Now;
                 exp.Estado = nuevoExp.Estado;
                 exp.IdUser = idUser;
                 CopiarExpediente(exp, sw);

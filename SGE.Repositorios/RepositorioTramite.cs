@@ -1,5 +1,6 @@
 ﻿namespace SGE.Repositorios;
 
+using System.ComponentModel;
 using System.Linq.Expressions;
 using SGE.Aplicacion;
 
@@ -58,7 +59,7 @@ public class RepositorioTramite : ITramiteRepositorio
         sw.WriteLine(tra.Contenido);
         sw.WriteLine(tra.FechayHoraCr);
         sw.WriteLine(tra.FechayHoraMod);
-        sw.WriteLine(tra.IdUltMod);
+        sw.WriteLine(tra.IdUser);
       }
     }
   }
@@ -77,25 +78,25 @@ public class RepositorioTramite : ITramiteRepositorio
         sw.WriteLine(nuevoTramite.Etiqueta);
         sw.WriteLine(nuevoTramite.Contenido);
         sw.WriteLine(t.FechayHoraCr);
-        sw.WriteLine(DateTime.Now);
+        sw.WriteLine(t.FechayHoraMod);
         sw.WriteLine(idUser);
         sw.Close();
       }
       else
       {
-        AltaTramite(t);
+        AltaTramite(t, idUser);
       }
     }
   }
 
-  public Tramite ConsultaPorEtiqueta(EtiquetaTramite etiqueta)
+  public List<Tramite> ConsultaPorEtiqueta(EtiquetaTramite etiqueta)
   {
-    Tramite resultado = new();
+    List<Tramite> resultado = [];
     List<Tramite> lista = ListarTramites();
     foreach (Tramite t in lista)
     {
       if (t.Etiqueta == etiqueta)
-        resultado = t;
+        resultado.Add(t);
     }
     return resultado;
   }

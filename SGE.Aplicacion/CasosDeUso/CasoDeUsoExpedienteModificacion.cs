@@ -7,7 +7,17 @@ public class CasoDeUsoExpedienteModificacion(IExpedienteRepositorio repo)
         ServicioAutorizacionProvisiorio val = new();
         if (val.PoseeElPermiso(idUser, Permiso.ExpedienteModificacion))
         {
-            repo.ModificarExpediente(e, idUser);
+            string mensajeError;
+            ExpedienteValidador valid = new();
+            if (valid.esValido(e, out mensajeError))
+            {
+                e.FechayHoraMod = DateTime.Now;
+                repo.ModificarExpediente(e, idUser);
+            }
+            else
+            {
+                throw new ValidacionException(mensajeError);
+            }
         }
         else
         {

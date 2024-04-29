@@ -7,9 +7,18 @@ public class CasoDeUsoExpedienteAlta(IExpedienteRepositorio repo)
         ServicioAutorizacionProvisiorio val = new();
         if (val.PoseeElPermiso(idUser, Permiso.ExpedienteAlta))
         {
-            e.FechayHoraCr = DateTime.Now;
-            e.FechayHoraMod = DateTime.Now;
-            repo.AltaExpediente(e, idUser);
+            string mensajeError;
+            ExpedienteValidador valid = new();
+            if (valid.esValido(e, out mensajeError))
+            {
+                e.FechayHoraCr = DateTime.Now;
+                e.FechayHoraMod = DateTime.Now;
+                repo.AltaExpediente(e, idUser);
+            }
+            else
+            {
+                throw new ValidacionException(mensajeError);
+            }
         }
         else 
         {
