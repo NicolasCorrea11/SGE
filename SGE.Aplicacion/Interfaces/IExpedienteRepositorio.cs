@@ -5,4 +5,5 @@ public interface IExpedienteRepositorio
     public void BajaExpediente(int IdExp);
     public void ModificarExpediente(Expediente e);
     public Expediente ConsultaPorId(int id);
+    public List<object> ConsultaTodos(int idExp);
 }
