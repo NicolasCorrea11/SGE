@@ -39,7 +39,7 @@ public class RepositorioExpediente : IExpedienteRepositorio
         return exp;
     }
 
-    public List<Expediente> ListarExps()
+    public List<Expediente> ListarExpedientes()
     {
         using var sr = new StreamReader(_nomarch);
         List<Expediente> resultado = [];
@@ -53,7 +53,7 @@ public class RepositorioExpediente : IExpedienteRepositorio
 
     public void BajaExpediente(int idExp)
     {
-        List<Expediente> listaExps = ListarExps();
+        List<Expediente> listaExps = ListarExpedientes();
         File.WriteAllText(_nomarch, "");
         using var sw = new StreamWriter(_nomarch, true);
         foreach (Expediente exp in listaExps)
@@ -76,7 +76,7 @@ public class RepositorioExpediente : IExpedienteRepositorio
 
     public void ModificarExpediente(Expediente nuevoExp, int idUser)
     {
-        List<Expediente> lista = ListarExps();
+        List<Expediente> lista = ListarExpedientes();
         File.WriteAllText(_nomarch, "");
         using var sw = new StreamWriter(_nomarch, true);
         foreach (Expediente exp in lista)
@@ -84,9 +84,9 @@ public class RepositorioExpediente : IExpedienteRepositorio
             if (exp.Id == nuevoExp.Id)
             {
                 exp.Caratula = nuevoExp.Caratula;
-                exp.FechayHoraMod = DateTime.Now;
                 exp.Estado = nuevoExp.Estado;
                 exp.IdUser = idUser;
+                exp.FechayHoraMod = DateTime.Now;
                 CopiarExpediente(exp, sw);
             }
             else
@@ -96,7 +96,7 @@ public class RepositorioExpediente : IExpedienteRepositorio
 
     public Expediente? ConsultaPorId(int id)
     {
-        foreach (Expediente exp in ListarExps())
+        foreach (Expediente exp in ListarExpedientes())
         {
             if (id == exp.Id)
                 return exp;

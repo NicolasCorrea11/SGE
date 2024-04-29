@@ -10,9 +10,19 @@ public class CasoDeUsoExpedienteAlta(IExpedienteRepositorio repo, ServicioAutori
         }
         else 
         {
-            e.FechayHoraCr = DateTime.Now;
-            e.FechayHoraMod = DateTime.Now;
-            repo.AltaExpediente(e, idUser);
+            string mensajeError;
+            e.IdUser = idUser;
+            ExpedienteValidador valid = new();
+            if (valid.esValido(e, out mensajeError))
+            {
+                e.FechayHoraCr = DateTime.Now;
+                e.FechayHoraMod = DateTime.Now;
+                repo.AltaExpediente(e, idUser);
+            }
+            else
+            {
+                throw new ValidacionException(mensajeError);
+            }
         }
     }
 }
