@@ -4,18 +4,21 @@ using SGE.Repositorios;
 // Configuro las dependencias
 IExpedienteRepositorio repoExp = new RepositorioExpediente();
 ITramiteRepositorio repoTramite = new RepositorioTramite();
+// Configuro los servicios
+ServicioAutorizacionProvisiorio auth = new();
+ServicioActualizacionEstado act = new(repoExp);
+
 
 // Creo los casos de uso de expedientes
-var altaExp = new CasoDeUsoExpedienteAlta(repoExp);
-var bajaExp = new CasoDeUsoExpedienteBaja(repoExp);
-var modifExp = new CasoDeUsoExpedienteModificacion(repoExp);
+var altaExp = new CasoDeUsoExpedienteAlta(repoExp, auth);
+var bajaExp = new CasoDeUsoExpedienteBaja(repoExp, auth);
+var modifExp = new CasoDeUsoExpedienteModificacion(repoExp, auth);
 var consultaIdExp = new CasoDeUsoExpedienteConsultaPorId(repoExp);
 var consultaTodosExp = new CasoDeUsoExpedienteConsultaTodos(repoExp);
-
 // Creo los casos de uso de tramites
-var altaTramite = new CasoDeUsoTramiteAlta(repoTramite);
-var bajaTramite = new CasoDeUsoTramiteBaja(repoTramite);
-var modifTramite = new CasoDeUsoTramiteModificacion(repoTramite);
+var altaTramite = new CasoDeUsoTramiteAlta(repoTramite, auth, act);
+var bajaTramite = new CasoDeUsoTramiteBaja(repoTramite, auth, act);
+var modifTramite = new CasoDeUsoTramiteModificacion(repoTramite, auth, act);
 var consultaEtiqueta = new CasoDeUsoTramiteConsultaPorEtiqueta(repoTramite);
 
 try
@@ -35,14 +38,24 @@ try
   {
     Console.WriteLine(o);
   }
-  */
-  // altaTramite.Ejecutar(new Tramite() { Id = 1, ExpedienteId = 3, Etiqueta = EtiquetaTramite.Resolucion }, 1);
-  // altaTramite.Ejecutar(new Tramite() { Id = 2, ExpedienteId = 3, Etiqueta = EtiquetaTramite.PaseAEstudio }, 1);
+  
 
-  foreach (object o in consultaTodosExp.Ejecutar(3))
+  altaTramite.Ejecutar(new Tramite() { Id = 1, ExpedienteId = 3, Contenido = "Tramite 1", Etiqueta = EtiquetaTramite.Resolucion }, 1);
+  Console.WriteLine(consultaIdExp.Ejecutar(3)?.Estado);
+  altaTramite.Ejecutar(new Tramite() { Id = 2, ExpedienteId = 3, Contenido = "Tramite 2", Etiqueta = EtiquetaTramite.PaseAEstudio }, 1);
+  Console.WriteLine(consultaIdExp.Ejecutar(3)?.Estado);
+  altaTramite.Ejecutar(new Tramite() { Id = 3, ExpedienteId = 3, Etiqueta = EtiquetaTramite.PaseAlArchivo }, 1);
+  Console.WriteLine(consultaIdExp.Ejecutar(3)?.Estado);
+  
+  Tramite tramite = new() { Id = 3, ExpedienteId = 3, Etiqueta = EtiquetaTramite.Resolucion };
+  modifTramite.Ejecutar(tramite, 1);
+  Console.WriteLine(consultaIdExp.Ejecutar(3)?.Estado);
+  
+  foreach (Tramite t in consultaEtiqueta.Ejecutar(EtiquetaTramite.Resolucion))
   {
-    Console.WriteLine(o);
+    Console.WriteLine(t);
   }
+  */
 }
 catch (Exception ex)
 {

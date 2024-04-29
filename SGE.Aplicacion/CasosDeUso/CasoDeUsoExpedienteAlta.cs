@@ -1,11 +1,14 @@
 ﻿namespace SGE.Aplicacion;
 
-public class CasoDeUsoExpedienteAlta(IExpedienteRepositorio repo)
+public class CasoDeUsoExpedienteAlta(IExpedienteRepositorio repo, ServicioAutorizacionProvisiorio auth)
 {
     public void Ejecutar(Expediente e, int idUser)
     {   
-        ServicioAutorizacionProvisiorio val = new();
-        if (val.PoseeElPermiso(idUser, Permiso.ExpedienteAlta))
+        if (!auth.PoseeElPermiso(idUser, Permiso.ExpedienteAlta))
+        {
+            throw new AutorizacionException("No se tienen los permisos necesarios");
+        }
+        else 
         {
             string mensajeError;
             ExpedienteValidador valid = new();
@@ -19,10 +22,6 @@ public class CasoDeUsoExpedienteAlta(IExpedienteRepositorio repo)
             {
                 throw new ValidacionException(mensajeError);
             }
-        }
-        else 
-        {
-            throw new AutorizacionException("No se tienen los permisos necesarios");
         }
     }
 }

@@ -1,28 +1,17 @@
 ﻿namespace SGE.Aplicacion;
 
-public class CasoDeUsoTramiteModificacion(ITramiteRepositorio repo)
+public class CasoDeUsoTramiteModificacion(ITramiteRepositorio repoTramite, ServicioAutorizacionProvisiorio auth, ServicioActualizacionEstado act)
 {
-  public void Ejecutar(Tramite t, int IdUser)
+  public void Ejecutar(Tramite tramite, int IdUser)
   {
-    ServicioAutorizacionProvisiorio val = new();
-    if (val.PoseeElPermiso(IdUser, Permiso.TramiteModificacion))
-    {
-      string mensajeError;
-      TramiteValidador valid = new();
-      if (valid.esValido(t, out mensajeError))
-      {
-        t.FechayHoraMod = DateTime.Now;
-        repo.ModificacionTramite(t, IdUser);
-      }
-      else
-      {
-        throw new ValidacionException(mensajeError);
-      }
-    }
-    else
+    if (!auth.PoseeElPermiso(IdUser, Permiso.TramiteModificacion))
     {
       throw new AutorizacionException("No se tienen los permisos necesarios");
     }
-    
+    else
+    {
+      repoTramite.ModificacionTramite(tramite, IdUser);
+      act.ActualizarEstado(tramite.ExpedienteId);
+    }
   }
 }

@@ -1,17 +1,16 @@
 ﻿namespace SGE.Aplicacion;
 
-public class CasoDeUsoExpedienteBaja(IExpedienteRepositorio repo)
+public class CasoDeUsoExpedienteBaja(IExpedienteRepositorio repo, ServicioAutorizacionProvisiorio auth)
 {
-    public void Ejecutar(int idExp, int idUser)
+    public void Ejecutar(int id, int idUser)
     {
-        ServicioAutorizacionProvisiorio val = new();
-        if (val.PoseeElPermiso(idUser, Permiso.ExpedienteBaja))
+        if (!auth.PoseeElPermiso(idUser, Permiso.ExpedienteBaja))
         {
-            repo.BajaExpediente(idExp);
+            throw new AutorizacionException("No se tienen los permisos necesarios");
         }   
         else
         {
-            throw new AutorizacionException("No se tienen los permisos necesarios");
+            repo.BajaExpediente(id);
         }
     }
 }
