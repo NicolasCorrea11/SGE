@@ -1,10 +1,4 @@
 ﻿namespace SGE.Repositorios;
-<<<<<<< HEAD
-
-using System.ComponentModel;
-using System.Linq.Expressions;
-=======
->>>>>>> c987ec2c7c698de088ef621f5e5b04f0d1ee06bc
 using SGE.Aplicacion;
 
 public class RepositorioTramite : ITramiteRepositorio
@@ -67,23 +61,10 @@ public class RepositorioTramite : ITramiteRepositorio
     using var sw = new StreamWriter(_nomarch, true);
     foreach (Tramite tramite in lista)
     {
-<<<<<<< HEAD
-      if (tra.Id != IdTram)
-      {
-        sw.WriteLine(tra.Id);
-        sw.WriteLine(tra.ExpedienteId);
-        sw.WriteLine(tra.Etiqueta);
-        sw.WriteLine(tra.Contenido);
-        sw.WriteLine(tra.FechayHoraCr);
-        sw.WriteLine(tra.FechayHoraMod);
-        sw.WriteLine(tra.IdUser);
-      }
-=======
       if (tramite.Id != id)
         CopiarTramite(tramite, sw);
       else
         resultado = tramite.ExpedienteId;
->>>>>>> c987ec2c7c698de088ef621f5e5b04f0d1ee06bc
     }
     return resultado;
   }
@@ -114,18 +95,10 @@ public class RepositorioTramite : ITramiteRepositorio
   public List<Tramite> ConsultaPorEtiqueta(EtiquetaTramite etiqueta)
   {
     List<Tramite> resultado = [];
-<<<<<<< HEAD
-    List<Tramite> lista = ListarTramites();
-    foreach (Tramite t in lista)
-    {
-      if (t.Etiqueta == etiqueta)
-        resultado.Add(t);
-=======
     foreach (Tramite tramite in ListarTramites())
     {
       if (tramite.Etiqueta == etiqueta)
         resultado.Add(tramite);
->>>>>>> c987ec2c7c698de088ef621f5e5b04f0d1ee06bc
     }
     return resultado;
   }

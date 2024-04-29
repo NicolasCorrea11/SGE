@@ -10,10 +10,20 @@ public class CasoDeUsoTramiteAlta(ITramiteRepositorio repoTramite, ServicioAutor
     }
     else
     { 
-      t.FechayHoraCr = DateTime.Now;
-      t.FechayHoraMod = DateTime.Now;
-      repoTramite.AltaTramite(t, idUser);
-      act.ActualizarEstado(t.ExpedienteId);
+      t.IdUser = idUser;
+      string mensajeError;
+      TramiteValidador val = new();
+      if (val.esValido(t, out mensajeError))
+      {
+        t.FechayHoraCr = DateTime.Now;
+        t.FechayHoraMod = DateTime.Now;
+        repoTramite.AltaTramite(t, idUser);
+        act.ActualizarEstado(t.ExpedienteId);
+      }
+      else
+      {
+        throw new ValidacionException(mensajeError);
+      }
     }
   }
 }

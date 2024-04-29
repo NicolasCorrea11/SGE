@@ -7,7 +7,7 @@ public class TramiteValidador
         mensajeError = "";
         if (string.IsNullOrWhiteSpace(t.Contenido))
         {
-            mensajeError += "El contenido no puede ser vacio";
+            mensajeError += "El contenido no puede ser vacio \n";
         }
         if (t.IdUser <= 0)
         {

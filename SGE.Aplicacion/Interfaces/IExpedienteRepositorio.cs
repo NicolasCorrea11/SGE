@@ -6,4 +6,5 @@ public interface IExpedienteRepositorio
     public void ModificarExpediente(Expediente e, int idUser);
     public Expediente? ConsultaPorId(int id);
     public List<object> ConsultaTodos(int idExp);
+    public List<Expediente> ListarExpedientes();
 }

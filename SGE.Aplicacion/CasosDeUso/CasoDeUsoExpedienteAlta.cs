@@ -11,6 +11,7 @@ public class CasoDeUsoExpedienteAlta(IExpedienteRepositorio repo, ServicioAutori
         else 
         {
             string mensajeError;
+            e.IdUser = idUser;
             ExpedienteValidador valid = new();
             if (valid.esValido(e, out mensajeError))
             {
