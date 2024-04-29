@@ -19,29 +19,28 @@ public class RepositorioTramite : ITramiteRepositorio
     sw.WriteLine(t.IdUltMod);
   }
 
-  public void ModificacionTramite(Tramite t)
-  {
-  }
-
   public List<Tramite> ListarTramites()
   {
     using var sr = new StreamReader(_nomarch);
-    var resultado = new List<Tramite>();
+    List<Tramite> resultado = [];
     while (!sr.EndOfStream)
     {
-      var tr = new Tramite();
-      tr.Id = int.Parse(sr.ReadLine() ?? "");
-      tr.ExpedienteId = int.Parse(sr.ReadLine() ?? "");
-      tr.Etiqueta = Enum.Parse<EtiquetaTramite>(sr.ReadLine() ?? ""); 
-      tr.Contenido = sr.ReadLine();
-      tr.FechayHoraCr = DateTime.Parse(sr.ReadLine() ?? "");
-      tr.FechayHoraMod = DateTime.Parse(sr.ReadLine() ?? "");
-      tr.IdUltMod = int.Parse(sr.ReadLine() ?? "");
+      Tramite tr = new()
+      {
+        Id = int.Parse(sr.ReadLine() ?? ""),
+        ExpedienteId = int.Parse(sr.ReadLine() ?? ""),
+        Etiqueta = Enum.Parse<EtiquetaTramite>(sr.ReadLine() ?? ""),
+        Contenido = sr.ReadLine(),
+        FechayHoraCr = DateTime.Parse(sr.ReadLine() ?? ""),
+        FechayHoraMod = DateTime.Parse(sr.ReadLine() ?? ""),
+        IdUltMod = int.Parse(sr.ReadLine() ?? "")
+      };
       resultado.Add(tr);
     }
     return resultado;
 
   }
+  
   public void BajaTramite(int IdTram)
   {
     List<Tramite> lista = ListarTramites();
@@ -49,10 +48,33 @@ public class RepositorioTramite : ITramiteRepositorio
     foreach (Tramite tra in lista)
     {
       if (tra.Id != IdTram)
-      {
         AltaTramite(tra);
-      }   
-    } 
+    }
+  }
+
+  public void ModificacionTramite(Tramite nuevoTramite)
+  {
+    List<Tramite> lista = ListarTramites();
+    File.WriteAllText(_nomarch, "");
+    foreach (Tramite t in lista)
+    {
+      if (nuevoTramite.Id == t.Id)
+        AltaTramite(nuevoTramite);
+      else
+        AltaTramite(t);
+    }
+  }
+
+  public Tramite ConsultaPorEtiqueta(EtiquetaTramite etiqueta)
+  {
+    Tramite resultado = new();
+    List<Tramite> lista = ListarTramites();
+    foreach (Tramite t in lista)
+    {
+      if (t.Etiqueta == etiqueta)
+        resultado = t;
+    }
+    return resultado;
   }
 }
 

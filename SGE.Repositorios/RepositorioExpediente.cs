@@ -1,10 +1,11 @@
-﻿using SGE.Aplicacion;
+﻿namespace SGE.Repositorios;
+using SGE.Aplicacion;
 using System.IO;
-namespace SGE.Repositorios;
 
 public class RepositorioExpediente : IExpedienteRepositorio
 {
     readonly string _nomarch = "expedientes.txt";
+
     public void AltaExpediente(Expediente e)
     {
         string[] lineas = File.ReadAllLines(_nomarch);
@@ -21,15 +22,17 @@ public class RepositorioExpediente : IExpedienteRepositorio
     public List<Expediente> ListarExps()
     {
         using var sr = new StreamReader(_nomarch);
-        var resultado = new List<Expediente>();
+        List<Expediente> resultado = [];
         while (!sr.EndOfStream)
         {
-            var expe = new Expediente();
-            expe.Id = int.Parse(sr.ReadLine() ?? "");
-            expe.Caratula = sr.ReadLine() ?? "";
-            expe.FechayHoraCr = DateTime.Parse(sr.ReadLine() ?? "");
-            expe.FechayHoraMod = DateTime.Parse(sr.ReadLine() ?? "");
-            expe.IdUltMod = int.Parse(sr.ReadLine() ?? "");
+            Expediente expe = new()
+            {
+                Id = int.Parse(sr.ReadLine() ?? ""),
+                Caratula = sr.ReadLine() ?? "",
+                FechayHoraCr = DateTime.Parse(sr.ReadLine() ?? ""),
+                FechayHoraMod = DateTime.Parse(sr.ReadLine() ?? ""),
+                IdUltMod = int.Parse(sr.ReadLine() ?? "")
+            };
             resultado.Add(expe);
         }
         return resultado;
@@ -48,9 +51,10 @@ public class RepositorioExpediente : IExpedienteRepositorio
         }
     }
 
-    public void ModificarExpediente(Expediente e)
+    public void ModificarExpediente(Expediente nuevoExp)
     {
         List<Expediente> lista = ListarExps();
+<<<<<<< HEAD
         int i = 0;
         while (lista[i].Id != e.Id)
         {
@@ -62,21 +66,27 @@ public class RepositorioExpediente : IExpedienteRepositorio
         foreach (Expediente exp in lista)
         {
             AltaExpediente(exp);
+=======
+        foreach (Expediente exp in lista)
+        {
+            if (exp.Id == nuevoExp.Id)
+                AltaExpediente(nuevoExp);
+            else
+                AltaExpediente(exp);
+>>>>>>> 4a407ce8b2a6965e2a776b8a52eefe61f7452cf5
         }
     }
 
     public Expediente ConsultaPorId(int id)
     {
-        var exp = new Expediente();
-        var lista = ListarExps();
-        foreach (Expediente e in lista)
+        Expediente resultado = new();
+        List<Expediente> lista = ListarExps();
+        foreach (Expediente exp in lista)
         {
-            if (id == e.Id)
-            {
-                exp = e;
-            }
+            if (id == exp.Id)
+                resultado = exp;
         }
-        return exp;
+        return resultado;
     }
 
     public List<object> ConsultaTodos(int idExp)
