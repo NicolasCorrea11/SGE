@@ -54,26 +54,12 @@ public class RepositorioExpediente : IExpedienteRepositorio
     public void ModificarExpediente(Expediente nuevoExp)
     {
         List<Expediente> lista = ListarExps();
-<<<<<<< HEAD
-        int i = 0;
-        while (lista[i].Id != e.Id)
-        {
-            i++;
-        }
-        lista[i] = e;
-        File.WriteAllText(_nomarch, "");
-        using var sw = new StreamWriter(_nomarch, true);
-        foreach (Expediente exp in lista)
-        {
-            AltaExpediente(exp);
-=======
         foreach (Expediente exp in lista)
         {
             if (exp.Id == nuevoExp.Id)
                 AltaExpediente(nuevoExp);
             else
                 AltaExpediente(exp);
->>>>>>> 4a407ce8b2a6965e2a776b8a52eefe61f7452cf5
         }
     }
 
