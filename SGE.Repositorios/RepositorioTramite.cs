@@ -1,4 +1,6 @@
 ﻿namespace SGE.Repositorios;
+
+using System.Linq.Expressions;
 using SGE.Aplicacion;
 
 public class RepositorioTramite : ITramiteRepositorio
@@ -45,10 +47,19 @@ public class RepositorioTramite : ITramiteRepositorio
   {
     List<Tramite> lista = ListarTramites();
     File.WriteAllText(_nomarch, "");
+    using var sw = new StreamWriter(_nomarch, true);
     foreach (Tramite tra in lista)
     {
       if (tra.Id != IdTram)
-        AltaTramite(tra);
+      {
+        sw.WriteLine(tra.Id);
+        sw.WriteLine(tra.ExpedienteId);
+        sw.WriteLine(tra.Etiqueta);
+        sw.WriteLine(tra.Contenido);
+        sw.WriteLine(tra.FechayHoraCr);
+        sw.WriteLine(tra.FechayHoraMod);
+        sw.WriteLine(tra.IdUltMod);
+      }
     }
   }
 
@@ -58,10 +69,22 @@ public class RepositorioTramite : ITramiteRepositorio
     File.WriteAllText(_nomarch, "");
     foreach (Tramite t in lista)
     {
-      if (nuevoTramite.Id == t.Id)
-        AltaTramite(nuevoTramite);
+      if (t.Id == nuevoTramite.Id)
+      {
+        using var sw = new StreamWriter(_nomarch, true);
+        sw.WriteLine(t.Id);
+        sw.WriteLine(nuevoTramite.ExpedienteId);
+        sw.WriteLine(nuevoTramite.Etiqueta);
+        sw.WriteLine(nuevoTramite.Contenido);
+        sw.WriteLine(t.FechayHoraCr);
+        sw.WriteLine(DateTime.Now);
+        sw.WriteLine(idUser);
+        sw.Close();
+      }
       else
+      {
         AltaTramite(t);
+      }
     }
   }
 

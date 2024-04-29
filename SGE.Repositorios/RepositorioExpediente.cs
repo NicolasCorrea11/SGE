@@ -67,6 +67,26 @@ public class RepositorioExpediente : IExpedienteRepositorio
                 CopiarExpediente(exp, sw);
             }
         }
+        sw.Close();
+        RepositorioTramite rep = new();
+        List<Tramite> listram = rep.ListarTramites();
+        File.WriteAllText("tramites.txt", "");
+        using var stw = new StreamWriter("tramites.txt", true);
+        foreach(Tramite t in listram)
+        {
+            if(t.ExpedienteId != idExp)
+            {
+                stw.WriteLine(t.Id);
+                stw.WriteLine(t.ExpedienteId);
+                stw.WriteLine(t.Etiqueta);
+                stw.WriteLine(t.Contenido);
+                stw.WriteLine(t.FechayHoraCr);
+                stw.WriteLine(t.FechayHoraMod);
+                stw.WriteLine(t.IdUser);
+            }
+        }
+        stw.Close();
+
     }
 
     public void ModificarExpediente(Expediente nuevoExp, int idUser)
