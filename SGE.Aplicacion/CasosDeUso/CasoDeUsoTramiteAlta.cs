@@ -7,6 +7,8 @@ public class CasoDeUsoTramiteAlta(ITramiteRepositorio repo)
     ServicioAutorizacionProvisiorio val = new();
     if (val.PoseeElPermiso(idUser, Permiso.TramiteAlta))
     {
+      t.FechayHoraCr = DateTime.Now;
+      t.FechayHoraMod = DateTime.Now;
       repo.AltaTramite(t);
     }
     else

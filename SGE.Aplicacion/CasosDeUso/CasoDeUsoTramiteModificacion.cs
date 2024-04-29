@@ -2,8 +2,17 @@
 
 public class CasoDeUsoTramiteModificacion(ITramiteRepositorio repo)
 {
-  public void Ejecutar(Tramite t)
+  public void Ejecutar(Tramite t, int IdUser)
   {
-    repo.ModificacionTramite(t);
+    ServicioAutorizacionProvisiorio val = new();
+    if (val.PoseeElPermiso(IdUser, Permiso.TramiteModificacion))
+    {
+      repo.ModificacionTramite(t, IdUser);
+    }
+    else
+    {
+      throw new AutorizacionException("No se tienen los permisos necesarios");
+    }
+    
   }
 }

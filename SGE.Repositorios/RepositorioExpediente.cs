@@ -31,7 +31,8 @@ public class RepositorioExpediente : IExpedienteRepositorio
                 Caratula = sr.ReadLine() ?? "",
                 FechayHoraCr = DateTime.Parse(sr.ReadLine() ?? ""),
                 FechayHoraMod = DateTime.Parse(sr.ReadLine() ?? ""),
-                IdUltMod = int.Parse(sr.ReadLine() ?? "")
+                IdUltMod = int.Parse(sr.ReadLine() ?? ""),
+                Estado = Enum.Parse<EstadoExpediente>(sr.ReadLine() ?? ""),
             };
             resultado.Add(expe);
         }
@@ -42,22 +43,58 @@ public class RepositorioExpediente : IExpedienteRepositorio
     {
         List<Expediente> lista = ListarExps();
         File.WriteAllText(_nomarch, "");
+        using var sw = new StreamWriter(_nomarch, true);
         foreach (Expediente exp in lista)
         {
             if (exp.Id != idExp)
             {
-                AltaExpediente(exp);
+                sw.WriteLine(exp.Id);
+                sw.WriteLine(exp.Caratula);
+                sw.WriteLine(exp.FechayHoraCr);
+                sw.WriteLine(exp.FechayHoraMod);
+                sw.WriteLine(exp.IdUltMod);
+                sw.WriteLine(exp.Estado);
             }
         }
+        sw.Close();
+        RepositorioTramite rep = new();
+        List<Tramite> listram = rep.ListarTramites();
+        File.WriteAllText("tramites.txt", "");
+        using var stw = new StreamWriter("tramites.txt", true);
+        foreach(Tramite t in listram)
+        {
+            if(t.ExpedienteId != idExp)
+            {
+                stw.WriteLine(t.Id);
+                stw.WriteLine(t.ExpedienteId);
+                stw.WriteLine(t.Etiqueta);
+                stw.WriteLine(t.Contenido);
+                stw.WriteLine(t.FechayHoraCr);
+                stw.WriteLine(t.FechayHoraMod);
+                stw.WriteLine(t.IdUltMod);
+            }
+        }
+        stw.Close();
+
     }
 
-    public void ModificarExpediente(Expediente nuevoExp)
+    public void ModificarExpediente(Expediente nuevoExp, int idUser)
     {
         List<Expediente> lista = ListarExps();
+        File.WriteAllText(_nomarch, "");
         foreach (Expediente exp in lista)
         {
             if (exp.Id == nuevoExp.Id)
-                AltaExpediente(nuevoExp);
+            {
+                using var sw = new StreamWriter(_nomarch, true);
+                sw.WriteLine(exp.Id);
+                sw.WriteLine(nuevoExp.Caratula);
+                sw.WriteLine(exp.FechayHoraCr);
+                sw.WriteLine(DateTime.Now);
+                sw.WriteLine(idUser);
+                sw.WriteLine(nuevoExp.Estado);
+                sw.Close();
+            }
             else
                 AltaExpediente(exp);
         }
