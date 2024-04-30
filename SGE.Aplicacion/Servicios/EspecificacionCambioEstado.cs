@@ -1,19 +1,15 @@
 ﻿namespace SGE.Aplicacion;
 
-public static class EspecificacionCambioEstado
+public class EspecificacionCambioEstado
 {
-  public static EstadoExpediente? GetNuevoEstado(EtiquetaTramite tr)
+  public EstadoExpediente? GetEstado(EtiquetaTramite etiqueta)
   {
-    switch (tr)
+    return etiqueta switch
     {
-      case EtiquetaTramite.Resolucion:
-        return EstadoExpediente.ConResolucion;
-      case EtiquetaTramite.PaseAEstudio:
-        return EstadoExpediente.ParaResolver;
-      case EtiquetaTramite.PaseAlArchivo:
-        return EstadoExpediente.Finalizado;
-      default:
-        return null;
-    }
+      EtiquetaTramite.Resolucion => EstadoExpediente.ConResolucion,
+      EtiquetaTramite.PaseAEstudio => EstadoExpediente.ParaResolver,
+      EtiquetaTramite.PaseAlArchivo => EstadoExpediente.Finalizado,
+      _ => null,
+    };
   }
 }

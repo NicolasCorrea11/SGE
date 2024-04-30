@@ -1,26 +1,31 @@
 ﻿using SGE.Aplicacion;
 using SGE.Repositorios;
 
-// Configuro las dependencias
+// Configuro los repositorios
 IExpedienteRepositorio repoExp = new RepositorioExpediente();
 ITramiteRepositorio repoTramite = new RepositorioTramite();
+// Configuro la especificacion de actualizacion de estado
+EspecificacionCambioEstado espec = new();
 // Configuro los servicios
-ServicioAutorizacionProvisiorio auth = new();
-ServicioActualizacionEstado act = new(repoExp);
-
+IServicioAutorizacion auth = new ServicioAutorizacionProvisiorio();
+IServicioActualizacionEstado act = new ServicioActualizacionEstado(repoExp, espec);
+// Configuros los validadores
+ExpedienteValidador valExp = new();
+TramiteValidador valTramite = new();
+RepositorioExpValidador repoValExp = new(repoExp);
+RepositorioTramiteValidador repoValTramite = new(repoExp);
 
 // Creo los casos de uso de expedientes
-var altaExp = new CasoDeUsoExpedienteAlta(repoExp, auth);
-var bajaExp = new CasoDeUsoExpedienteBaja(repoExp, auth);
-var modifExp = new CasoDeUsoExpedienteModificacion(repoExp, auth);
+var altaExp = new CasoDeUsoExpedienteAlta(repoExp, auth, valExp);
+var bajaExp = new CasoDeUsoExpedienteBaja(repoExp, auth, repoValExp);
+var modifExp = new CasoDeUsoExpedienteModificacion(repoExp, auth, repoValExp);
 var consultaIdExp = new CasoDeUsoExpedienteConsultaPorId(repoExp);
 var consultaTodosExp = new CasoDeUsoExpedienteConsultaTodos(repoExp);
 // Creo los casos de uso de tramites
-var altaTramite = new CasoDeUsoTramiteAlta(repoTramite, auth, act);
-var bajaTramite = new CasoDeUsoTramiteBaja(repoTramite, auth, act);
-var modifTramite = new CasoDeUsoTramiteModificacion(repoTramite, auth, act);
+var altaTramite = new CasoDeUsoTramiteAlta(repoTramite, auth, act, valTramite);
+var bajaTramite = new CasoDeUsoTramiteBaja(repoTramite, auth, act, repoValTramite);
+var modifTramite = new CasoDeUsoTramiteModificacion(repoTramite, auth, act, repoValTramite);
 var consultaEtiqueta = new CasoDeUsoTramiteConsultaPorEtiqueta(repoTramite);
-
 
 //altaExp.Ejecutar(new Expediente() { Caratula = "Prueba 1", Estado = EstadoExpediente.RecienIniciado }, 1);
 //altaExp.Ejecutar(new Expediente() { Caratula = "Prueba 2", Estado = EstadoExpediente.RecienIniciado }, 1);

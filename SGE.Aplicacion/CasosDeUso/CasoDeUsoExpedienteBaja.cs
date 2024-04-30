@@ -1,6 +1,6 @@
 ﻿namespace SGE.Aplicacion;
 
-public class CasoDeUsoExpedienteBaja(IExpedienteRepositorio repo, ServicioAutorizacionProvisiorio auth)
+public class CasoDeUsoExpedienteBaja(IExpedienteRepositorio repo, IServicioAutorizacion auth, RepositorioExpValidador validador)
 {
     public void Ejecutar(int id, int idUser)
     {
@@ -10,7 +10,14 @@ public class CasoDeUsoExpedienteBaja(IExpedienteRepositorio repo, ServicioAutori
         }   
         else
         {
-            repo.BajaExpediente(id);
+            if (!validador.EsValido(id, out string msg))
+            {
+                throw new RepositorioException(msg);
+            }
+            else
+            {
+                repo.BajaExpediente(id);
+            }
         }
     }
 }

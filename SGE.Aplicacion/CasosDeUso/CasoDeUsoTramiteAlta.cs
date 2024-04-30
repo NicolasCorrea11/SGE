@@ -1,6 +1,6 @@
 ﻿namespace SGE.Aplicacion;
 
-public class CasoDeUsoTramiteAlta(ITramiteRepositorio repoTramite, ServicioAutorizacionProvisiorio auth, ServicioActualizacionEstado act)
+public class CasoDeUsoTramiteAlta(ITramiteRepositorio repoTramite, IServicioAutorizacion auth, IServicioActualizacionEstado act, TramiteValidador validador)
 {
   public void Ejecutar(Tramite t, int idUser)
   {
@@ -9,20 +9,18 @@ public class CasoDeUsoTramiteAlta(ITramiteRepositorio repoTramite, ServicioAutor
       throw new AutorizacionException("No se tienen los permisos necesarios");
     }
     else
-    { 
+    {
       t.IdUser = idUser;
-      string mensajeError;
-      TramiteValidador val = new();
-      if (val.esValido(t, out mensajeError))
+      if (!validador.esValido(t, out string mensajeError))
       {
-        t.FechayHoraCr = DateTime.Now;
-        t.FechayHoraMod = DateTime.Now;
-        repoTramite.AltaTramite(t, idUser);
-        act.ActualizarEstado(t.ExpedienteId);
+        throw new ValidacionException(mensajeError);
       }
       else
       {
-        throw new ValidacionException(mensajeError);
+        t.FechayHoraCr = DateTime.Now;
+        t.FechayHoraMod = DateTime.Now;
+        repoTramite.AltaTramite(t);
+        act.ActualizarEstado(t.ExpedienteId);
       }
     }
   }

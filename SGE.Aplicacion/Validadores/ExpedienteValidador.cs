@@ -2,17 +2,17 @@
 
 public class ExpedienteValidador
 {
-    public bool esValido(Expediente e, out string mensajeError)
+    public bool EsValido(Expediente e, out string msg)
     {
-        mensajeError = "";
+        msg = "";
         if (string.IsNullOrWhiteSpace(e.Caratula))
         {
-            mensajeError += "La caratula no puede estar vacia \n";
+            msg += "La caratula no puede estar vacia \n";
         }
         if (e.IdUser <= 0)
         {
-            mensajeError += "Id de usuario invalido \n";
+            msg += "Id de usuario invalido \n";
         }
-        return mensajeError == "";
+        return msg == "";
     }
 }

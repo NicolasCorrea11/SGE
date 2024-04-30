@@ -1,6 +1,6 @@
 ﻿namespace SGE.Aplicacion;
 
-public class CasoDeUsoExpedienteAlta(IExpedienteRepositorio repo, ServicioAutorizacionProvisiorio auth)
+public class CasoDeUsoExpedienteAlta(IExpedienteRepositorio repo, IServicioAutorizacion auth, ExpedienteValidador validador)
 {
     public void Ejecutar(Expediente e, int idUser)
     {   
@@ -10,18 +10,16 @@ public class CasoDeUsoExpedienteAlta(IExpedienteRepositorio repo, ServicioAutori
         }
         else 
         {
-            string mensajeError;
             e.IdUser = idUser;
-            ExpedienteValidador valid = new();
-            if (valid.esValido(e, out mensajeError))
+            if (!validador.EsValido(e, out string msg))
             {
-                e.FechayHoraCr = DateTime.Now;
-                e.FechayHoraMod = DateTime.Now;
-                repo.AltaExpediente(e, idUser);
+                throw new ValidacionException(msg);
             }
             else
             {
-                throw new ValidacionException(mensajeError);
+                e.FechayHoraCr = DateTime.Now;
+                e.FechayHoraMod = DateTime.Now;
+                repo.AltaExpediente(e);
             }
         }
     }

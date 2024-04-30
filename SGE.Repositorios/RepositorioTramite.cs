@@ -3,31 +3,30 @@ using SGE.Aplicacion;
 
 public class RepositorioTramite : ITramiteRepositorio
 {
-  readonly string _nomarch = "tramites.txt";
+  readonly string _nombreArch = "tramites.txt";
 
-  public void AltaTramite(Tramite tramite, int idUser)
+  public void AltaTramite(Tramite t)
   {
-    string[] lineas = File.ReadAllLines(_nomarch);
-    tramite.Id = (lineas.Length / 7) + 1;
-    tramite.IdUser = idUser;
-    using var sw = new StreamWriter(_nomarch, true);
-    CopiarTramite(tramite, sw);
+    string[] lineas = File.ReadAllLines(_nombreArch);
+    t.Id = (lineas.Length / 7) + 1;
+    using var sw = new StreamWriter(_nombreArch, true);
+    CopiarTramite(t, sw);
   }
 
-  public void CopiarTramite(Tramite tramite, StreamWriter sw)
+  public void CopiarTramite(Tramite t, StreamWriter sw)
   {
-    sw.WriteLine(tramite.Id);
-    sw.WriteLine(tramite.ExpedienteId);
-    sw.WriteLine(tramite.Etiqueta.ToString());
-    sw.WriteLine(tramite.Contenido);
-    sw.WriteLine(tramite.FechayHoraCr);
-    sw.WriteLine(tramite.FechayHoraMod);
-    sw.WriteLine(tramite.IdUser);
+    sw.WriteLine(t.Id);
+    sw.WriteLine(t.ExpedienteId);
+    sw.WriteLine(t.Etiqueta);
+    sw.WriteLine(t.Contenido);
+    sw.WriteLine(t.FechayHoraCr);
+    sw.WriteLine(t.FechayHoraMod);
+    sw.WriteLine(t.IdUser);
   }
 
   public Tramite LeerTramite(StreamReader sr)
   {
-    Tramite tramite = new()
+    Tramite t = new()
       {
         Id = int.Parse(sr.ReadLine() ?? ""),
         ExpedienteId = int.Parse(sr.ReadLine() ?? ""),
@@ -37,17 +36,17 @@ public class RepositorioTramite : ITramiteRepositorio
         FechayHoraMod = DateTime.Parse(sr.ReadLine() ?? ""),
         IdUser = int.Parse(sr.ReadLine() ?? "")
       };
-    return tramite;
+    return t;
   }
 
   public List<Tramite> ListarTramites()
   {
-    using var sr = new StreamReader(_nomarch);
+    using var sr = new StreamReader(_nombreArch);
     List<Tramite> resultado = [];
     while (!sr.EndOfStream)
     {
-      Tramite tramite = LeerTramite(sr);
-      resultado.Add(tramite);
+      Tramite t = LeerTramite(sr);
+      resultado.Add(t);
     }
     return resultado;
 
@@ -55,10 +54,10 @@ public class RepositorioTramite : ITramiteRepositorio
 
   public int BajaTramite(int id)
   {
-    List<Tramite> lista = ListarTramites();
     int resultado = -1;
-    File.WriteAllText(_nomarch, "");
-    using var sw = new StreamWriter(_nomarch, true);
+    List<Tramite> lista = ListarTramites();
+    File.WriteAllText(_nombreArch, "");
+    using var sw = new StreamWriter(_nombreArch, true);
     foreach (Tramite tramite in lista)
     {
       if (tramite.Id != id)
@@ -69,11 +68,23 @@ public class RepositorioTramite : ITramiteRepositorio
     return resultado;
   }
 
+  public void BajaTramiteIdExp(int idExp)
+  {
+    List<Tramite> lista = ListarTramites();
+    File.WriteAllText(_nombreArch, "");
+    using var sw = new StreamWriter(_nombreArch, true);
+    foreach (Tramite t in lista)
+    {
+      if (t.ExpedienteId != idExp)
+        CopiarTramite(t, sw);
+    }
+  }
+
   public void ModificacionTramite(Tramite nuevoTramite, int idUser)
   {
     List<Tramite> lista = ListarTramites();
-    File.WriteAllText(_nomarch, "");
-    using var sw = new StreamWriter(_nomarch);
+    File.WriteAllText(_nombreArch, "");
+    using var sw = new StreamWriter(_nombreArch);
     foreach (Tramite tramite in lista)
     {
       if (tramite.Id != nuevoTramite.Id)
@@ -99,6 +110,17 @@ public class RepositorioTramite : ITramiteRepositorio
     {
       if (tramite.Etiqueta == etiqueta)
         resultado.Add(tramite);
+    }
+    return resultado;
+  }
+
+  public List<Tramite> ConsultaPorExpedienteId(int idExp)
+  {
+    List<Tramite> resultado = [];
+    foreach (Tramite t in ListarTramites())
+    {
+      if (t.ExpedienteId == idExp)
+        resultado.Add(t);
     }
     return resultado;
   }

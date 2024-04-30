@@ -1,6 +1,6 @@
 ﻿namespace SGE.Aplicacion;
 
-public class CasoDeUsoExpedienteModificacion(IExpedienteRepositorio repo, ServicioAutorizacionProvisiorio auth)
+public class CasoDeUsoExpedienteModificacion(IExpedienteRepositorio repo, IServicioAutorizacion auth, RepositorioExpValidador validador)
 {
     public void Ejecutar(Expediente e, int idUser) 
     {
@@ -10,7 +10,14 @@ public class CasoDeUsoExpedienteModificacion(IExpedienteRepositorio repo, Servic
         }
         else
         {
-            repo.ModificarExpediente(e, idUser);
+            if (!validador.EsValido(e.Id, out string msg))
+            {
+                throw new RepositorioException(msg);
+            }
+            else
+            {
+                repo.ModificarExpediente(e, idUser);
+            }
         }
     }
 }

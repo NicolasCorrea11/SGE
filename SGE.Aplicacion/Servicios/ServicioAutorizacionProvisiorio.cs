@@ -2,11 +2,8 @@
 
 public class ServicioAutorizacionProvisiorio: IServicioAutorizacion
 {
-    public bool PoseeElPermiso(int IdUsuario, Permiso permiso)
+    public bool PoseeElPermiso(int idUser, Permiso p)
     {
-        if (IdUsuario == 1)
-            return true;
-        else
-            return false;
+        return idUser == 1;
     }
 }
