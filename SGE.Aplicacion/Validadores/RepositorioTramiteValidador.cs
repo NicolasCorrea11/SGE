@@ -1,20 +1,24 @@
 ﻿namespace SGE.Aplicacion;
 
-public class RepositorioTramiteValidador(IExpedienteRepositorio repo)
+public class RepositorioTramiteValidador(IExpedienteRepositorio repoExp, ITramiteRepositorio repoTramite)
 {
   public bool EsValido(int id, out string msg)
   {
     msg = "";
     bool existe = false;
-    List<object> lista = repo.ConsultaTodos(1);  // SIN IMPLEMENTAR
-    for (int i = 1; i < lista.Count && !existe; i++)
+    Tramite? tramite = repoTramite.ConsultaPorId(id);
+    if (tramite != null)
     {
-      if (lista[i] is Tramite actual && actual.Id == id)
+      List<object> lista = repoExp.ConsultaTodos(tramite.ExpedienteId);
+      for (int i = 1; i < lista.Count && !existe; i++)
       {
-        existe = true;
+        if (lista[i] is Tramite actual && actual.Id == id)
+        {
+          existe = true;
+        }
       }
     }
-    if (existe)
+    if (!existe)
     {
       msg += "El tramite no existe";
     }

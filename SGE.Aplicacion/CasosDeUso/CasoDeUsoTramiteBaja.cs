@@ -1,6 +1,6 @@
 ﻿namespace SGE.Aplicacion;
 
-public class CasoDeUsoTramiteBaja(ITramiteRepositorio repoTramite, IServicioAutorizacion auth, IServicioActualizacionEstado act, RepositorioTramiteValidador validador)
+public class CasoDeUsoTramiteBaja(ITramiteRepositorio repo, IServicioAutorizacion auth, IServicioActualizacionEstado act, RepositorioTramiteValidador validador)
 {
     public void Ejecutar(int id, int idUser)
     {
@@ -10,14 +10,15 @@ public class CasoDeUsoTramiteBaja(ITramiteRepositorio repoTramite, IServicioAuto
         }
         else
         {
-            if (!validador.EsValido(id, out string msg)) // MAL IMPLEMENTADO
+            if (!validador.EsValido(id, out string msg))
             {
                 throw new RepositorioException(msg);
             }
             else
             {
-                int idExp = repoTramite.BajaTramite(id);
-                act.ActualizarEstado(idExp);
+                Tramite? t = repo.ConsultaPorId(id);
+                repo.BajaTramite(id);
+                act.ActualizarEstado(t.ExpedienteId);
             }
         }
     }

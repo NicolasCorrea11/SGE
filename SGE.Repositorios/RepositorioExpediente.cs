@@ -2,7 +2,7 @@
 using SGE.Aplicacion;
 using System.IO;
 
-public class RepositorioExpediente : IExpedienteRepositorio
+public class RepositorioExpediente(ITramiteRepositorio repoTramite) : IExpedienteRepositorio
 {
     readonly string _nombreArch = "expedientes.txt";
 
@@ -101,13 +101,12 @@ public class RepositorioExpediente : IExpedienteRepositorio
         List<object> resultado = [];
         Expediente? e = ConsultaPorId(id);
         if (e != null)
-            resultado.Add(e);
-        using var sr = new StreamReader("tramites.txt");
-        RepositorioTramite repo = new();
-        foreach (Tramite t in repo.ListarTramites())
         {
-            if (t.ExpedienteId == id)
+            resultado.Add(e);
+            foreach (Tramite t in repoTramite.ConsultaPorExpedienteId(id))
+            {
                 resultado.Add(t);
+            }
         }
         return resultado;
     }

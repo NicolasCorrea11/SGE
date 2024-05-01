@@ -52,9 +52,8 @@ public class RepositorioTramite : ITramiteRepositorio
 
   }
 
-  public int BajaTramite(int id)
+  public void BajaTramite(int id)
   {
-    int resultado = -1;
     List<Tramite> lista = ListarTramites();
     File.WriteAllText(_nombreArch, "");
     using var sw = new StreamWriter(_nombreArch, true);
@@ -62,10 +61,7 @@ public class RepositorioTramite : ITramiteRepositorio
     {
       if (tramite.Id != id)
         CopiarTramite(tramite, sw);
-      else
-        resultado = tramite.ExpedienteId;
     }
-    return resultado;
   }
 
   public void BajaTramiteIdExp(int idExp)
@@ -112,6 +108,16 @@ public class RepositorioTramite : ITramiteRepositorio
         resultado.Add(tramite);
     }
     return resultado;
+  }
+
+  public Tramite? ConsultaPorId(int id)
+  {
+    foreach (Tramite t in ListarTramites())
+    {
+      if (t.Id == id)
+        return t;
+    }
+    return null;
   }
 
   public List<Tramite> ConsultaPorExpedienteId(int idExp)
