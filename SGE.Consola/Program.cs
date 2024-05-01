@@ -19,8 +19,9 @@ RepositorioTramiteValidador repoValTramite = new(repoExp, repoTramite);
 var altaExp = new CasoDeUsoExpedienteAlta(repoExp, auth, valExp);
 var bajaExp = new CasoDeUsoExpedienteBaja(repoExp, auth, repoValExp);
 var modifExp = new CasoDeUsoExpedienteModificacion(repoExp, auth, repoValExp);
-var consultaIdExp = new CasoDeUsoExpedienteConsultaPorId(repoExp);
-var consultaTodosExp = new CasoDeUsoExpedienteConsultaTodos(repoExp);
+var consultaIdExp = new CasoDeUsoExpedienteConsultaPorId(repoExp, repoValExp);
+var consultaTodosExp = new CasoDeUsoExpedienteConsultaTodos(repoExp, repoValExp);
+var consultaExpSinTramites = new CasoDeUsoExpedientesSinTramites(repoExp);
 // Creo los casos de uso de tramites
 var altaTramite = new CasoDeUsoTramiteAlta(repoTramite, auth, act, valTramite);
 var bajaTramite = new CasoDeUsoTramiteBaja(repoTramite, auth, act, repoValTramite);

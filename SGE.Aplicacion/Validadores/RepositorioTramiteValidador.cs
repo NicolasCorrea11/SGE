@@ -20,7 +20,7 @@ public class RepositorioTramiteValidador(IExpedienteRepositorio repoExp, ITramit
     }
     if (!existe)
     {
-      msg += "El tramite no existe";
+      msg += "La entidad que se intenta eliminar, modificar o acceder no existe en el repositorio";
     }
     return msg == "";
   }
