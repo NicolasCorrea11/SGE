@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\ASUS\\Desktop\\Development\\C#\\Facultad\\sge-proy-dnet-camper\\SGE.Aplicacion\\SGE.Aplicacion.csproj",
+      "projectUniqueName": "C:\\Users\\ASUS\\Desktop\\Development\\C#\\Facultad\\SGE\\SGE.Aplicacion\\SGE.Aplicacion.csproj",
       "projectName": "SGE.Aplicacion",
-      "projectPath": "C:\\Users\\ASUS\\Desktop\\Development\\C#\\Facultad\\sge-proy-dnet-camper\\SGE.Aplicacion\\SGE.Aplicacion.csproj",
+      "projectPath": "C:\\Users\\ASUS\\Desktop\\Development\\C#\\Facultad\\SGE\\SGE.Aplicacion\\SGE.Aplicacion.csproj",
       "packagesPath": "C:\\Users\\ASUS\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\ASUS\\Desktop\\Development\\C#\\Facultad\\sge-proy-dnet-camper\\SGE.Aplicacion\\obj\\",
+      "outputPath": "C:\\Users\\ASUS\\Desktop\\Development\\C#\\Facultad\\SGE\\SGE.Aplicacion\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ASUS\\AppData\\Roaming\\NuGet\\NuGet.Config"
