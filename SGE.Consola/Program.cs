@@ -19,46 +19,58 @@ RepositorioTramiteValidador repoValTramite = new(repoExp, repoTramite);
 var altaExp = new CasoDeUsoExpedienteAlta(repoExp, auth, valExp);
 var bajaExp = new CasoDeUsoExpedienteBaja(repoExp, auth, repoValExp);
 var modifExp = new CasoDeUsoExpedienteModificacion(repoExp, auth, repoValExp);
-var consultaIdExp = new CasoDeUsoExpedienteConsultaPorId(repoExp);
-var consultaTodosExp = new CasoDeUsoExpedienteConsultaTodos(repoExp);
+var consultaIdExp = new CasoDeUsoExpedienteConsultaPorId(repoExp, repoValExp);
+var consultaTodosExp = new CasoDeUsoExpedienteConsultaTodos(repoExp, repoValExp);
+var consultaExpSinTramites = new CasoDeUsoExpedientesSinTramites(repoExp);
 // Creo los casos de uso de tramites
 var altaTramite = new CasoDeUsoTramiteAlta(repoTramite, auth, act, valTramite);
 var bajaTramite = new CasoDeUsoTramiteBaja(repoTramite, auth, act, repoValTramite);
 var modifTramite = new CasoDeUsoTramiteModificacion(repoTramite, auth, act, repoValTramite);
 var consultaEtiqueta = new CasoDeUsoTramiteConsultaPorEtiqueta(repoTramite);
 
-/*
-altaExp.Ejecutar(new Expediente() { Caratula = "Expediente 1", Estado = EstadoExpediente.RecienIniciado }, 1);
-altaExp.Ejecutar(new Expediente() { Caratula = "Expediente 2", Estado = EstadoExpediente.RecienIniciado }, 1);
-altaExp.Ejecutar(new Expediente() { Caratula = "Expediente 3", Estado = EstadoExpediente.RecienIniciado }, 1);
+//altaExp.Ejecutar(new Expediente() { Caratula = "Expediente 1", Estado = EstadoExpediente.RecienIniciado }, 1);
 
-altaTramite.Ejecutar(new Tramite() { ExpedienteId = 1, Contenido = "Tramite 1, Expediente 1", Etiqueta = EtiquetaTramite.Resolucion }, 1);
-altaTramite.Ejecutar(new Tramite() { ExpedienteId = 1, Contenido = "Tramite 2, Expediente 1", Etiqueta = EtiquetaTramite.PaseAEstudio }, 1);
-altaTramite.Ejecutar(new Tramite() { ExpedienteId = 3, Contenido = "Tramite 3, Expediente 3", Etiqueta = EtiquetaTramite.PaseAlArchivo }, 1);
-/*
-Console.WriteLine(consultaIdExp.Ejecutar(1));
+//altaTramite.Ejecutar(new Tramite() { ExpedienteId = 1, Contenido = "Tramite 1", Etiqueta = EtiquetaTramite.Despacho }, 1);
+//altaTramite.Ejecutar(new Tramite() { ExpedienteId = 1, Contenido = "Tramite 2", Etiqueta = EtiquetaTramite.Despacho }, 1);
+//altaTramite.Ejecutar(new Tramite() { ExpedienteId = 1, Contenido = "Tramite 3", Etiqueta = EtiquetaTramite.Despacho }, 1);
 
-foreach (object o in consultaTodosExp.Ejecutar(1))
+
+//Console.WriteLine(consultaIdExp.Ejecutar(15));
+
+/*
+foreach (object o in consultaTodosExp.Ejecutar(15))
 {
   Console.WriteLine(o);
 }
+
 
 foreach (Tramite t in consultaEtiqueta.Ejecutar(EtiquetaTramite.PaseAEstudio))
 {
   Console.WriteLine(t);
 }
 
-foreach (Expediente e in repoExp.ListarExpedientes())
+*/
+
+foreach(Expediente e in consultaExpSinTramites.Ejecutar())
 {
   Console.WriteLine(e);
 }
 
-bajaExp.Ejecutar(3, 1);
-bajaTramite.Ejecutar(2, 1);
+/*
 
-modifExp.Ejecutar(new Expediente() { Id = 3, Caratula = "Prueba 3 mod", Estado = EstadoExpediente.ParaResolver }, 1);
-modifTramite.Ejecutar(new Tramite() { Id = 1, ExpedienteId = 1, Contenido = "Tramite 1", Etiqueta = EtiquetaTramite.PaseAlArchivo }, 1);
 */
+
+//Console.WriteLine(consultaIdExp.Ejecutar(3)?.Estado);
+
+//bajaExp.Ejecutar(15, 1);
+
+//bajaTramite.Ejecutar(3, 1);
+
+//modifExp.Ejecutar(new Expediente() { Id = 15, Caratula = "Prueba 3 mod", Estado = EstadoExpediente.ParaResolver }, 1);
+
+//modifTramite.Ejecutar(new Tramite() { Id = 2, ExpedienteId = 1, Contenido = "Tramite 2", Etiqueta = EtiquetaTramite.PaseAEstudio }, 1);
+//modifTramite.Ejecutar(new Tramite() { Id = 3, ExpedienteId = 1, Contenido = "Tramite 3", Etiqueta = EtiquetaTramite.PaseAlArchivo }, 1);
+
 
 
 try

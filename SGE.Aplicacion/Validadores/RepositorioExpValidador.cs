@@ -7,7 +7,7 @@ public class RepositorioExpValidador(IExpedienteRepositorio repo)
     msg = "";
     if (repo.ConsultaPorId(id) == null)
     {
-      msg += "El expediente no existe";
+      msg += "La entidad que se intenta eliminar, modificar o acceder no existe en el repositorio";
     }
     return msg == "";
   }
