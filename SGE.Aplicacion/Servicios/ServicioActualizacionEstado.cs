@@ -5,9 +5,9 @@ public class ServicioActualizacionEstado(IExpedienteRepositorio repo, IEspecific
   public void ActualizarEstado(int id)
   {
     List<object> lista = repo.ConsultaTodos(id);
-    if (lista[lista.Count - 1] is Tramite t)
+    if (lista[^1] is Tramite t) // LAST INDEX
     {
-      Expediente? e = repo.ConsultaPorId(id);
+      Expediente e = (Expediente)lista[0];
       EstadoExpediente? nuevoEstado = espec.GetEstado(t.Etiqueta);
       if (e != null && nuevoEstado != null)
       {

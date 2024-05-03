@@ -4,15 +4,15 @@ namespace SGE.Aplicacion;
 
 public class CasoDeUsoExpedienteConsultaTodos(IExpedienteRepositorio repo, RepositorioExpValidador validador)
 {
-    public List<object> Ejecutar(int idExp)
+    public List<object> Ejecutar(int id)
     {
-        if (!validador.EsValido(idExp, out string msg))
+        if (!validador.EsValido(id, out string msg))
         {
             throw new RepositorioException(msg);
         }
         else
         {
-            return repo.ConsultaTodos(idExp);
+            return repo.ConsultaTodos(id);
         }
     }
 }
