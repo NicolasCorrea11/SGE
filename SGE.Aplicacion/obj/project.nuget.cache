@@ -1,15 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "9l6k7LcS4tjEhCM+5UFX99yaQBh2Z9GI7I2UnlIf64ajfAceGaI2vIS1TD9r2/vYh4CLWB+FKTlLzXfMNcIDgA==",
+  "dgSpecHash": "P1kJFKl+iKQ5oLw12FhRqNHbJkxdL9WXKLASVEa1YO+oQB3KkVTu7aDNFo+H19Z/fMx6PoqEMQ2j9XLUhVOChg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ASUS\\Desktop\\Development\\C#\\Facultad\\SGE\\SGE.Aplicacion\\SGE.Aplicacion.csproj",
+  "projectFilePath": "C:\\Users\\Acer\\Desktop\\Proyecto DotNet\\SGE\\SGE.Aplicacion\\SGE.Aplicacion.csproj",
   "expectedPackageFiles": [],
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problema al leer el archivo de caché C:\\Users\\ASUS\\Desktop\\Development\\C#\\Facultad\\SGE\\SGE.Aplicacion\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  "logs": []
 }

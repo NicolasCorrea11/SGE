@@ -1,15 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "2E4j5ueRx4+zpgsldmPCidwrg0qSr15VYIc+AtpmY2Sn6+UIpdLP/uflWjshbyBiGDoGK61txUYBm2/f+gMnRg==",
+  "dgSpecHash": "sZZF1H4wqkDYp3LAQ6wP9C/7IYEEKlCJ2D+Dq2XAozA+WK36vunK1VhoiPjVjArXfDgQd+58eIeQ1e2p4B6cBA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ASUS\\Desktop\\Development\\C#\\Facultad\\SGE\\SGE.Consola\\SGE.Consola.csproj",
+  "projectFilePath": "C:\\Users\\Acer\\Desktop\\Proyecto DotNet\\SGE\\SGE.Consola\\SGE.Consola.csproj",
   "expectedPackageFiles": [],
-  "logs": [
-    {
-      "code": "Undefined",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Problema al leer el archivo de caché C:\\Users\\ASUS\\Desktop\\Development\\C#\\Facultad\\SGE\\SGE.Consola\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
-    }
-  ]
+  "logs": []
 }

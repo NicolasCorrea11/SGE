@@ -8,9 +8,24 @@ public class RepositorioTramite : ITramiteRepositorio
   public void AltaTramite(Tramite t)
   {
     string[] lineas = File.ReadAllLines(_nombreArch);
-    t.Id = (lineas.Length / 7) + 1;
-    using var sw = new StreamWriter(_nombreArch, true);
-    CopiarTramite(t, sw);
+    if (lineas.Length == 0)
+    {
+      using var sw = new StreamWriter(_nombreArch, true);
+      t.Id = 1;
+      CopiarTramite(t, sw);
+    }
+    else 
+    {
+      using var sr = new StreamReader(_nombreArch);
+      for (int i = 0; i<lineas.Length - 7; i++)
+      {
+        sr.ReadLine();
+      }
+      t.Id = int.Parse(sr.ReadLine() ?? "") + 1;
+      sr.Close();
+      using var sw = new StreamWriter(_nombreArch, true);
+      CopiarTramite(t, sw);
+    }
   }
 
   public void CopiarTramite(Tramite t, StreamWriter sw)

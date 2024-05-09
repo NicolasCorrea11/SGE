@@ -9,9 +9,24 @@ public class RepositorioExpediente(ITramiteRepositorio repoTramite) : IExpedient
     public void AltaExpediente(Expediente e)
     {
         string[] lineas = File.ReadAllLines(_nombreArch);
-        e.Id = (lineas.Length / 6) + 1;
-        using var sw = new StreamWriter(_nombreArch, true);
-        CopiarExpediente(e, sw);
+        if (lineas.Length == 0) 
+        {
+            e.Id = 1;
+            using var sw = new StreamWriter(_nombreArch, true);
+            CopiarExpediente(e, sw);
+        }
+        else
+        {
+            using var sr = new StreamReader(_nombreArch);
+            for (int i = 0; i<lineas.Length - 6; i++)
+            {
+                sr.ReadLine();
+            }
+            e.Id = int.Parse(sr.ReadLine() ?? "") + 1;
+            sr.Close();
+            using var sw = new StreamWriter(_nombreArch, true);
+            CopiarExpediente(e, sw);
+        }
     }
 
     public void CopiarExpediente(Expediente e, StreamWriter sw)
