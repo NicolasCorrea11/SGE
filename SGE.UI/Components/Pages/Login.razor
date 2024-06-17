@@ -1,0 +1,22 @@
+﻿@rendermode InteractiveServer
+@inject CasoDeUsoLogin CasoDeUsoLogin
+@inject Usuario user
+<h3>Login</h3>
+
+<input placeholder="Email" @bind="em" /><br>
+<input placeholder="Contraseña" @bind="pw" /><br>
+<button @onclick="iniciar">Iniciar</button>
+
+@user.Nombre, @user.Apellido
+
+@code {
+
+    string? em;
+    string? pw;
+
+    public void iniciar()
+    {
+        user = CasoDeUsoLogin.Ejecutar(em, pw);
+    }
+
+}

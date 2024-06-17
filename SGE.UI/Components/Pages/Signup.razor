@@ -1,0 +1,17 @@
+﻿@page "/signup"
+@rendermode InteractiveServer
+@inject CasoDeUsoSignup CasoDeUsoSignup
+<h3>Signup</h3>
+<input placeholder="Nombre" @bind="u.Nombre" /><br>
+<input placeholder="Apellido" @bind="u.Apellido" /><br>
+<input placeholder="Email" @bind="u.Email" /><br>
+<input placeholder="Contraseña" @bind="u.Contraseña" /><br>
+<button @onclick="Agregar">Agregar</button>
+@code {
+    Usuario u = new Usuario();
+    public void Agregar()
+    {
+        CasoDeUsoSignup.Ejecutar(u);
+    }
+
+}

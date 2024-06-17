@@ -1,128 +1,80 @@
-﻿namespace SGE.Repositorios;
+﻿using Microsoft.EntityFrameworkCore;
 using SGE.Aplicacion;
-using System.IO;
+namespace SGE.Repositorios;
 
-public class RepositorioExpediente(ITramiteRepositorio repoTramite) : IExpedienteRepositorio
+public class RepositorioExpediente: IExpedienteRepositorio
 {
-    readonly string _nombreArch = "expedientes.txt";
-
-    public void AltaExpediente(Expediente e)
+    public void AltaExpediente(Expediente e) 
     {
-        string[] lineas = File.ReadAllLines(_nombreArch);
-        if (lineas.Length == 0) 
+        using var context = new BaseContext();
         {
-            e.Id = 1;
-            using var sw = new StreamWriter(_nombreArch, true);
-            CopiarExpediente(e, sw);
+            context.Expedientes.Add(e);
+            context.SaveChanges();
         }
-        else
+    }
+
+    public void BajaExpediente(int id)
+    {
+        using var context = new BaseContext();
         {
-            using var sr = new StreamReader(_nombreArch);
-            for (int i = 0; i<lineas.Length - 6; i++)
+            Expediente? b = context.Expedientes.Where(x => x.Id == id).SingleOrDefault();
+            if (b != null) 
             {
-                sr.ReadLine();
+                context.Expedientes.Remove(b);
             }
-            e.Id = int.Parse(sr.ReadLine() ?? "") + 1;
-            sr.Close();
-            using var sw = new StreamWriter(_nombreArch, true);
-            CopiarExpediente(e, sw);
+            var trams = context.Tramites.Where(x => x.ExpedienteId == id).ToList();
+            context.Tramites.RemoveRange(trams);
+            context.SaveChanges();
         }
     }
-
-    public void CopiarExpediente(Expediente e, StreamWriter sw)
+    
+    public void ModificarExpediente(Expediente e, int id) 
     {
-        sw.WriteLine(e.Id);
-        sw.WriteLine(e.Caratula);
-        sw.WriteLine(e.FechayHoraCr);
-        sw.WriteLine(e.FechayHoraMod);
-        sw.WriteLine(e.IdUser);
-        sw.WriteLine(e.Estado);
-    }
-
-    public Expediente LeerExpediente(StreamReader sr)
-    {
-        Expediente e = new()
+        using var context = new BaseContext();
         {
-            Id = int.Parse(sr.ReadLine() ?? ""),
-            Caratula = sr.ReadLine() ?? "",
-            FechayHoraCr = DateTime.Parse(sr.ReadLine() ?? ""),
-            FechayHoraMod = DateTime.Parse(sr.ReadLine() ?? ""),
-            IdUser = int.Parse(sr.ReadLine() ?? ""),
-            Estado = Enum.Parse<EstadoExpediente>(sr.ReadLine() ?? "")
-        };
-        return e;
-    }
-
-    public List<Expediente> ListarExpedientes()
-    {
-        List<Expediente> resultado = [];
-        using var sr = new StreamReader(_nombreArch);
-        while (!sr.EndOfStream)
-        {
-            Expediente e = LeerExpediente(sr);
-            resultado.Add(e);
-        }
-        return resultado;
-    }
-
-    public void BajaExpediente(int idExp)
-    {
-        List<Expediente> listaExps = ListarExpedientes();
-        File.WriteAllText(_nombreArch, "");
-        using var sw = new StreamWriter(_nombreArch, true);
-        foreach (Expediente e in listaExps)
-        {
-            if (e.Id != idExp)
+            var expmod = context.Expedientes.Where(x => x.Id == e.Id).SingleOrDefault();
+            if (expmod != null)
             {
-                CopiarExpediente(e, sw);
+                if (expmod.Caratula != e.Caratula && e.Caratula!= "")
+                    expmod.Caratula = e.Caratula;
+                if (expmod.Estado != e.Estado && e.Estado.Equals(""))
+                    expmod.Estado = e.Estado;
+                expmod.FechayHoraMod = DateTime.Now;
+                expmod.IdUser = id;
             }
-        }
-        RepositorioTramite repo = new();
-        repo.BajaTramiteIdExp(idExp);
-    }
-
-    public void ModificarExpediente(Expediente nuevoExp, int idUser)
-    {
-        List<Expediente> lista = ListarExpedientes();
-        File.WriteAllText(_nombreArch, "");
-        using var sw = new StreamWriter(_nombreArch, true);
-        foreach (Expediente e in lista)
-        {
-            if (e.Id == nuevoExp.Id)
-            {
-                e.Caratula = nuevoExp.Caratula;
-                e.Estado = nuevoExp.Estado;
-                e.IdUser = idUser;
-                e.FechayHoraMod = DateTime.Now;
-                CopiarExpediente(e, sw);
-            }
-            else
-                CopiarExpediente(e, sw);
+            context.SaveChanges();
         }
     }
 
-    public Expediente? ConsultaPorId(int id)
+    public Expediente? ConsultaPorId(int idb) 
     {
-        foreach (Expediente e in ListarExpedientes())
+        using var context = new BaseContext();
         {
-            if (id == e.Id)
-                return e;
+            Expediente? dev = context.Expedientes.Where(x => x.Id == idb).SingleOrDefault();
+            return dev;
         }
-        return null;
     }
 
     public List<object> ConsultaTodos(int id)
     {
-        List<object> resultado = [];
-        Expediente? e = ConsultaPorId(id);
-        if (e != null)
+        using var context = new BaseContext();
         {
-            resultado.Add(e);
-            foreach (Tramite t in repoTramite.ConsultaPorExpedienteId(id))
-            {
-                resultado.Add(t);
-            }
+            List<object> dev = new();
+            var exp = context.Expedientes.Where(x => x.Id == id).SingleOrDefault();
+            if (exp != null)
+                dev.Add(exp);
+            var trams = context.Tramites.Where(x => x.ExpedienteId == id).ToList();
+            dev.AddRange(trams);
+            return dev;
         }
-        return resultado;
+    }
+
+    public List<Expediente> ListarExpedientes() 
+    {
+        using var context = new BaseContext();
+        {
+            var dev = context.Expedientes.ToList();
+            return dev;
+        }
     }
 }

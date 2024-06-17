@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Acer\\Desktop\\Proyecto DotNet\\SGE\\SGE.Aplicacion\\SGE.Aplicacion.csproj",
+      "projectUniqueName": "C:\\Users\\Acer\\Desktop\\SGE-copy\\SGE.Aplicacion\\SGE.Aplicacion.csproj",
       "projectName": "SGE.Aplicacion",
-      "projectPath": "C:\\Users\\Acer\\Desktop\\Proyecto DotNet\\SGE\\SGE.Aplicacion\\SGE.Aplicacion.csproj",
+      "projectPath": "C:\\Users\\Acer\\Desktop\\SGE-copy\\SGE.Aplicacion\\SGE.Aplicacion.csproj",
       "packagesPath": "C:\\Users\\Acer\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Acer\\Desktop\\Proyecto DotNet\\SGE\\SGE.Aplicacion\\obj\\",
+      "outputPath": "C:\\Users\\Acer\\Desktop\\SGE-copy\\SGE.Aplicacion\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Acer\\AppData\\Roaming\\NuGet\\NuGet.Config"

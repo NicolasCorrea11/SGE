@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SGE.Aplicacion", "SGE.Aplic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SGE.Repositorios", "SGE.Repositorios\SGE.Repositorios.csproj", "{D35D3BE7-61B0-41B2-800B-7A5A7CE661CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SGE.Consola", "SGE.Consola\SGE.Consola.csproj", "{278A7136-2692-4B7B-8B46-E2C90C5A7AA9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SGE.UI", "SGE.UI\SGE.UI.csproj", "{ABC8681B-CBED-4741-B63E-F6BFFDE82B31}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,9 +26,9 @@ Global
 		{D35D3BE7-61B0-41B2-800B-7A5A7CE661CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D35D3BE7-61B0-41B2-800B-7A5A7CE661CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D35D3BE7-61B0-41B2-800B-7A5A7CE661CF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{278A7136-2692-4B7B-8B46-E2C90C5A7AA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{278A7136-2692-4B7B-8B46-E2C90C5A7AA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{278A7136-2692-4B7B-8B46-E2C90C5A7AA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{278A7136-2692-4B7B-8B46-E2C90C5A7AA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABC8681B-CBED-4741-B63E-F6BFFDE82B31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABC8681B-CBED-4741-B63E-F6BFFDE82B31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABC8681B-CBED-4741-B63E-F6BFFDE82B31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABC8681B-CBED-4741-B63E-F6BFFDE82B31}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
