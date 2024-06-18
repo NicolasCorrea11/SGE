@@ -22,8 +22,8 @@ public class RepositorioExpediente: IExpedienteRepositorio
             {
                 context.Expedientes.Remove(b);
             }
-            var trams = context.Tramites.Where(x => x.ExpedienteId == id).ToList();
-            context.Tramites.RemoveRange(trams);
+            //var trams = context.Tramites.Where(x => x.ExpedienteId == id).ToList();
+            //context.Tramites.RemoveRange(trams);
             context.SaveChanges();
         }
     }

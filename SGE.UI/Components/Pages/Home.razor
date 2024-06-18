@@ -5,8 +5,10 @@
 <h3>Sistema de gestion de expedientes</h3>
 
 Bienvenido @user.Nombre @user.Apellido
-
+<br>
 <NavLink href="@($"/AltaExp/{user.Id}")">Haga click para dar de alta un expediente</NavLink>
+<br>
+<NavLink href="@($"/BajaExp/{user.Id}")">Haga click para dar de baja un expediente</NavLink>
 
 
 @code {

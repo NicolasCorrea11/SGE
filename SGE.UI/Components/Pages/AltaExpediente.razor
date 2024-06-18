@@ -23,15 +23,11 @@
     int stat;
     string error;
 
-    public void AplicarEst()
-    {
-        e.Estado = (EstadoExpediente)stat;
-        StateHasChanged();
-    }
     public void Agregar(Expediente e)
     {
         try
         {
+            e.Estado = EstadoExpediente.RecienIniciado;
             CasoDeUsoExpedienteAlta.Ejecutar(e, user);
             Navigation.NavigateTo($"/home/{user.Id}");
         }

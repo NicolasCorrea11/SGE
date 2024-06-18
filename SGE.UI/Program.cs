@@ -11,6 +11,11 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 builder.Services.AddTransient<CasoDeUsoExpedienteAlta>()
+    .AddTransient<CasoDeUsoExpedienteBaja>()
+    .AddTransient<CasoDeUsoExpedienteModificacion>()
+    .AddTransient<CasoDeUsoExpedienteConsultaTodos>()
+    .AddTransient<CasoDeUsoListarExpedientes>()
+    .AddTransient<CasoDeUsoConsultaExpedienteId>()
     .AddTransient<CasoDeUsoSignup>()
     .AddTransient<CasoDeUsoLogin>()
     .AddTransient<CasoDeUsoConsultaUsuarioId>()
