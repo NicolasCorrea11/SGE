@@ -1,11 +1,17 @@
-﻿@page "/home"
+﻿@page "/home/{Id:int}"
 @rendermode InteractiveServer
-@inject Usuario user
+@inject CasoDeUsoConsultaUsuarioId CasoDeUsoConsultaUsuarioId
 <h3>Sistema de gestion de expedientes</h3>
 
-Bienvenido, @user.Nombre
-
+Bienvenido @user.Nombre @user.Apellido
 
 @code {
-
+    [Parameter] public int Id {get; set;}
+    
+    Usuario user = new Usuario();
+    
+    protected override void OnInitialized()
+    {
+        user = CasoDeUsoConsultaUsuarioId.Ejecutar(Id);
+    }
 }

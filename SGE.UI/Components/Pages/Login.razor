@@ -1,6 +1,6 @@
 ﻿@rendermode InteractiveServer
 @inject CasoDeUsoLogin CasoDeUsoLogin
-@inject Usuario user
+@inject NavigationManager Navigation
 <h3>Login</h3>
 
 <input placeholder="Email" @bind="em" /><br>
@@ -10,6 +10,7 @@
 @user.Nombre, @user.Apellido
 
 @code {
+    Usuario user = new Usuario();
 
     string? em;
     string? pw;
@@ -17,6 +18,7 @@
     public void iniciar()
     {
         user = CasoDeUsoLogin.Ejecutar(em, pw);
+        Navigation.NavigateTo($"/home/{user.Id}");
     }
 
 }

@@ -46,6 +46,17 @@ public class RepositorioUsuarios: IUsuarioRepositorio
         }
     }
 
+    public Usuario? ConsultaPorId(int id)
+    {
+        Usuario? dev = new Usuario();
+        using var context = new BaseContext();
+        {
+            dev = context.Usuarios.Where(x => x.Id == id).SingleOrDefault();
+        }
+        return dev;
+
+    }
+
     public List<Usuario> ListarUsuarios()
     {
         using var context = new BaseContext();

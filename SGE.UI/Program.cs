@@ -13,9 +13,9 @@ builder.Services.AddRazorComponents()
 builder.Services.AddTransient<CasoDeUsoExpedienteAlta>()
     .AddTransient<CasoDeUsoSignup>()
     .AddTransient<CasoDeUsoLogin>()
+    .AddTransient<CasoDeUsoConsultaUsuarioId>()
     .AddScoped<IUsuarioRepositorio, RepositorioUsuarios>()
-    .AddScoped<IExpedienteRepositorio, RepositorioExpediente>()
-    .AddSingleton<Usuario>();
+    .AddScoped<IExpedienteRepositorio, RepositorioExpediente>();
 
 
 var app = builder.Build();

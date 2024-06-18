@@ -1,6 +1,7 @@
 ﻿@page "/signup"
 @rendermode InteractiveServer
 @inject CasoDeUsoSignup CasoDeUsoSignup
+@inject NavigationManager NavigationManager
 <h3>Signup</h3>
 <input placeholder="Nombre" @bind="u.Nombre" /><br>
 <input placeholder="Apellido" @bind="u.Apellido" /><br>
@@ -12,6 +13,8 @@
     public void Agregar()
     {
         CasoDeUsoSignup.Ejecutar(u);
+        NavigationManager.NavigateTo("/");
+
     }
 
 }
