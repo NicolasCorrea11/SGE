@@ -2,8 +2,16 @@
 
 public class CasoDeUsoConsultaUsuarioId(IUsuarioRepositorio urep)
 {
-    public Usuario? Ejecutar(int id)
+    public Usuario Ejecutar(int id)
     {
-        return urep.ConsultaPorId(id);
+        Usuario? user = urep.ConsultaPorId(id);
+        if (user == null)
+        {
+            throw new UsuarioException("");
+        }
+        else
+        {
+            return user;
+        }
     }
 }

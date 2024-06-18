@@ -1,6 +1,6 @@
 ﻿namespace SGE.Aplicacion;
 
-public class ServicioAutorizacionProvisiorio: IServicioAutorizacion
+public class ServicioAutorizacion: IServicioAutorizacion
 {
     public bool PoseeElPermiso(Usuario user, Permiso p)
     {

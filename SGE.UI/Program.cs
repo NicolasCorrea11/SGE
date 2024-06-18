@@ -14,8 +14,10 @@ builder.Services.AddTransient<CasoDeUsoExpedienteAlta>()
     .AddTransient<CasoDeUsoSignup>()
     .AddTransient<CasoDeUsoLogin>()
     .AddTransient<CasoDeUsoConsultaUsuarioId>()
+    .AddScoped<ExpedienteValidador>()
     .AddScoped<IUsuarioRepositorio, RepositorioUsuarios>()
-    .AddScoped<IExpedienteRepositorio, RepositorioExpediente>();
+    .AddScoped<IExpedienteRepositorio, RepositorioExpediente>()
+    .AddScoped<IServicioAutorizacion, ServicioAutorizacion>();
 
 
 var app = builder.Build();

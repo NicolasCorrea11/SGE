@@ -7,18 +7,28 @@
 <input placeholder="Contraseña" @bind="pw" /><br>
 <button @onclick="iniciar">Iniciar</button>
 
-@user.Nombre, @user.Apellido
+@Error
 
 @code {
     Usuario user = new Usuario();
 
     string? em;
     string? pw;
+    
+    string Error = "";
 
     public void iniciar()
     {
-        user = CasoDeUsoLogin.Ejecutar(em, pw);
-        Navigation.NavigateTo($"/home/{user.Id}");
+        try 
+        {
+            user = CasoDeUsoLogin.Ejecutar(em, pw);
+            Navigation.NavigateTo($"/home/{user.Id}");
+        }
+        catch (Exception e)
+        {
+            Error = "Email o contraseña invalidos";
+            StateHasChanged();
+        }
     }
 
 }
