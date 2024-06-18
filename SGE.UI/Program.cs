@@ -13,15 +13,26 @@ builder.Services.AddRazorComponents()
 builder.Services.AddTransient<CasoDeUsoExpedienteAlta>()
     .AddTransient<CasoDeUsoExpedienteBaja>()
     .AddTransient<CasoDeUsoExpedienteModificacion>()
+<<<<<<< HEAD
     .AddTransient<CasoDeUsoExpedienteConsultaTodos>()
     .AddTransient<CasoDeUsoListarExpedientes>()
+=======
+>>>>>>> 228340a21adc5c01f6de9834932e071aab8ed81a
     .AddTransient<CasoDeUsoConsultaExpedienteId>()
     .AddTransient<CasoDeUsoSignup>()
     .AddTransient<CasoDeUsoLogin>()
     .AddTransient<CasoDeUsoConsultaUsuarioId>()
+    .AddTransient<CasoDeUsoTramiteAlta>()
+    .AddTransient<CasoDeUsoTramiteBaja>()
+    .AddTransient<CasoDeUsoTramiteModificacion>()
+    .AddTransient<CasoDeUsoTramiteConsultaEtiqueta>()
+    .AddTransient<CasoDeUsoTramiteConsultaId>()
+    .AddTransient<CasoDeUsoConsultaPorExpedienteId>()
     .AddScoped<ExpedienteValidador>()
+    .AddScoped<TramiteValidador>()
     .AddScoped<IUsuarioRepositorio, RepositorioUsuarios>()
     .AddScoped<IExpedienteRepositorio, RepositorioExpediente>()
+    .AddScoped<ITramiteRepositorio, RepositorioTramite>()
     .AddScoped<IServicioAutorizacion, ServicioAutorizacion>();
 
 

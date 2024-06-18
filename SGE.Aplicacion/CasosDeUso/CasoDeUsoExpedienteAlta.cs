@@ -4,22 +4,21 @@ public class CasoDeUsoExpedienteAlta(IExpedienteRepositorio repo, IServicioAutor
 {
     public void Ejecutar(Expediente e, Usuario user)
     {
-        string msg;
-        e.FechayHoraCr = DateTime.Now;
-        e.FechayHoraMod = DateTime.Now;
-        e.IdUser = user.Id;
         if (!auth.PoseeElPermiso(user, Permiso.ExpedienteAlta))
         {
             throw new AutorizacionException();
         }
         else
         {
-            if (!validador.EsValido(e, out msg))
+            if (!validador.EsValido(e, out string msg))
             {
                 throw new ValidacionException(msg);
             }
             else
             {
+                e.FechayHoraCr = DateTime.Now;
+                e.FechayHoraMod = DateTime.Now;
+                e.IdUser = user.Id;
                 repo.AltaExpediente(e);
             }
         }

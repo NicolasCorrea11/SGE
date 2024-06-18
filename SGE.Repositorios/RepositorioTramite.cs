@@ -8,8 +8,8 @@ public class RepositorioTramite: ITramiteRepositorio
         using var context = new BaseContext();
         {
             context.Tramites.Add(t);
+            context.SaveChanges();
         }
-        context.SaveChanges();
     }
 
     public void BajaTramite(int id)
@@ -19,23 +19,23 @@ public class RepositorioTramite: ITramiteRepositorio
             Tramite? b = context.Tramites.Where(x => x.Id == id).SingleOrDefault();
             if (b != null)
                 context.Tramites.Remove(b);
+            context.SaveChanges();
         }
-        context.SaveChanges();
     }
 
     public void ModificacionTramite(Tramite t, int idUser) 
     {
         using var context = new BaseContext();
         {
-            Tramite? trammod = context.Tramites.Where(x => x.Id == t.Id).SingleOrDefault();
-            if (trammod != null) 
+            Tramite? modificado = context.Tramites.Where(x => x.Id == t.Id).SingleOrDefault();
+            if (modificado != null) 
             {
-                if (trammod.Contenido != t.Contenido && t.Contenido != "")
-                    trammod.Contenido = t.Contenido;
-                if (trammod.Etiqueta != t.Etiqueta && t.Etiqueta.Equals(""))
-                    trammod.Etiqueta = t.Etiqueta;
-                trammod.FechayHoraMod = DateTime.Now;
-                trammod.IdUser = idUser;
+                if (modificado.Contenido != t.Contenido && t.Contenido != "")
+                    modificado.Contenido = t.Contenido;
+                if (modificado.Etiqueta != t.Etiqueta && t.Etiqueta.Equals(""))
+                    modificado.Etiqueta = t.Etiqueta;
+                modificado.FechayHoraMod = DateTime.Now;
+                modificado.IdUser = idUser;
             }
             context.SaveChanges();
         }
@@ -45,8 +45,7 @@ public class RepositorioTramite: ITramiteRepositorio
     {
         using var context = new BaseContext();
         {
-            var dev = context.Tramites.Where(x => x.Etiqueta == e).ToList();
-            return dev;
+            return context.Tramites.Where(x => x.Etiqueta == e).ToList();
         }
     }
 
@@ -54,17 +53,15 @@ public class RepositorioTramite: ITramiteRepositorio
     {
         using var context = new BaseContext();
         {
-            Tramite? dev = context.Tramites.Where(x => x.Id == id).SingleOrDefault();
-            return dev;
+            return context.Tramites.Where(x => x.Id == id).SingleOrDefault();
         }
     }
 
-    public List<Tramite> ConsultaPorExpedienteId(int ExpId)
+    public List<Tramite> ConsultaPorExpedienteId(int expId)
     {
         using var context = new BaseContext();
         {
-            var dev = context.Tramites.Where(x => x.ExpedienteId == ExpId).ToList();
-            return dev;
+            return context.Tramites.Where(x => x.ExpedienteId == expId).ToList();
         }
     }
 
