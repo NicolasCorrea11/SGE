@@ -1,17 +1,17 @@
 ﻿namespace SGE.Aplicacion;
 
-public class CasoDeUsoConsultaExpedienteId(IExpedienteRepositorio repo)
+public class CasoDeUsoConsultaExpedienteId(IExpedienteRepositorio repoExp)
 {
     public Expediente Ejecutar(int id)
     {
-        Expediente? exp = repo.ConsultaPorId(id);
-        if (exp != null)
+        Expediente? exp = repoExp.ConsultaPorId(id);
+        if (exp == null)
         {
-            return exp;
+            throw new RepositorioException("El expediente no existe");
         }
         else
         {
-            throw new RepositorioException("El expediente no existe");
+            return exp;
         }
     }
 }

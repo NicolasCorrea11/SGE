@@ -2,7 +2,7 @@
 
 public class TramiteValidador
 {
-    public bool esValido(Tramite t, out string msg)
+    public bool EsValido(Tramite t, out string msg)
     {
         msg = "";
         if (string.IsNullOrWhiteSpace(t.Contenido))

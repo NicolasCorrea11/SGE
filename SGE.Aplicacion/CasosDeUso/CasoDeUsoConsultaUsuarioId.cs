@@ -4,10 +4,7 @@ public class CasoDeUsoConsultaUsuarioId(IUsuarioRepositorio repoUser)
 {
     public Usuario Ejecutar(int id)
     {
-<<<<<<< HEAD
-        return repoUser.ConsultaPorId(id);
-=======
-        Usuario? user = urep.ConsultaPorId(id);
+        Usuario? user = repoUser.ConsultaPorId(id);
         if (user == null)
         {
             throw new UsuarioException("");
@@ -16,6 +13,5 @@ public class CasoDeUsoConsultaUsuarioId(IUsuarioRepositorio repoUser)
         {
             return user;
         }
->>>>>>> ca588a10249609ca6e8dec06fdccdb7acbb96f76
     }
 }
