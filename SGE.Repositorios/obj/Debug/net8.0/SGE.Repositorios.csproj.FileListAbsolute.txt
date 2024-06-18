@@ -62,3 +62,6 @@ C:\Users\Acer\Desktop\SGE-copy\SGE.Repositorios\obj\Debug\net8.0\SGE.Repositorio
 C:\Users\Acer\Desktop\SGE-copy\SGE.Repositorios\obj\Debug\net8.0\refint\SGE.Repositorios.dll
 C:\Users\Acer\Desktop\SGE-copy\SGE.Repositorios\obj\Debug\net8.0\SGE.Repositorios.pdb
 C:\Users\Acer\Desktop\SGE-copy\SGE.Repositorios\obj\Debug\net8.0\ref\SGE.Repositorios.dll
+C:\Users\ASUS\Desktop\Development\C#\Facultad\SGE\SGE.Repositorios\obj\Debug\net8.0\SGE.Repositorios.dll
+C:\Users\ASUS\Desktop\Development\C#\Facultad\SGE\SGE.Repositorios\obj\Debug\net8.0\refint\SGE.Repositorios.dll
+C:\Users\ASUS\Desktop\Development\C#\Facultad\SGE\SGE.Repositorios\obj\Debug\net8.0\SGE.Repositorios.pdb
