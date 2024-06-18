@@ -54,3 +54,7 @@ C:\Users\ASUS\Desktop\Development\C#\Facultad\SGE\SGE.Aplicacion\obj\Debug\net8.
 C:\Users\ASUS\Desktop\Development\C#\Facultad\SGE\SGE.Aplicacion\obj\Debug\net8.0\SGE.Aplicacion.dll
 C:\Users\ASUS\Desktop\Development\C#\Facultad\SGE\SGE.Aplicacion\obj\Debug\net8.0\refint\SGE.Aplicacion.dll
 C:\Users\ASUS\Desktop\Development\C#\Facultad\SGE\SGE.Aplicacion\obj\Debug\net8.0\SGE.Aplicacion.pdb
+C:\Users\ASUS\Desktop\Development\C#\Facultad\SGE\SGE.Aplicacion\bin\Debug\net8.0\SGE.Aplicacion.deps.json
+C:\Users\ASUS\Desktop\Development\C#\Facultad\SGE\SGE.Aplicacion\bin\Debug\net8.0\SGE.Aplicacion.dll
+C:\Users\ASUS\Desktop\Development\C#\Facultad\SGE\SGE.Aplicacion\bin\Debug\net8.0\SGE.Aplicacion.pdb
+C:\Users\ASUS\Desktop\Development\C#\Facultad\SGE\SGE.Aplicacion\obj\Debug\net8.0\ref\SGE.Aplicacion.dll

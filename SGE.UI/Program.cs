@@ -11,12 +11,23 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 builder.Services.AddTransient<CasoDeUsoExpedienteAlta>()
+    .AddTransient<CasoDeUsoExpedienteBaja>()
+    .AddTransient<CasoDeUsoExpedienteModificacion>()
+    .AddTransient<CasoDeUsoConsultaExpedienteId>()
     .AddTransient<CasoDeUsoSignup>()
     .AddTransient<CasoDeUsoLogin>()
     .AddTransient<CasoDeUsoConsultaUsuarioId>()
+    .AddTransient<CasoDeUsoTramiteAlta>()
+    .AddTransient<CasoDeUsoTramiteBaja>()
+    .AddTransient<CasoDeUsoTramiteModificacion>()
+    .AddTransient<CasoDeUsoTramiteConsultaEtiqueta>()
+    .AddTransient<CasoDeUsoTramiteConsultaId>()
+    .AddTransient<CasoDeUsoConsultaPorExpedienteId>()
     .AddScoped<ExpedienteValidador>()
+    .AddScoped<TramiteValidador>()
     .AddScoped<IUsuarioRepositorio, RepositorioUsuarios>()
     .AddScoped<IExpedienteRepositorio, RepositorioExpediente>()
+    .AddScoped<ITramiteRepositorio, RepositorioTramite>()
     .AddScoped<IServicioAutorizacion, ServicioAutorizacion>();
 
 
