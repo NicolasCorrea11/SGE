@@ -1,15 +1,19 @@
 ﻿@page "/home/{Id:int}"
 @rendermode InteractiveServer
 @inject CasoDeUsoConsultaUsuarioId CasoDeUsoConsultaUsuarioId
+@inject NavigationManager Navigation
 <h3>Sistema de gestion de expedientes</h3>
 
 Bienvenido @user.Nombre @user.Apellido
+
+<NavLink href="@($"/AltaExp/{user.Id}")">Haga click para dar de alta un expediente</NavLink>
+
 
 @code {
     [Parameter] public int Id {get; set;}
     
     Usuario user = new Usuario();
-    
+
     protected override void OnInitialized()
     {
         user = CasoDeUsoConsultaUsuarioId.Ejecutar(Id);

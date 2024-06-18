@@ -1,0 +1,45 @@
+﻿@page "/AltaExp/{Id:int}"
+@rendermode InteractiveServer
+@inject CasoDeUsoExpedienteAlta CasoDeUsoExpedienteAlta
+@inject CasoDeUsoConsultaUsuarioId CasoDeUsoConsultaUsuarioId
+@inject NavigationManager Navigation
+<h3>Alta de Expediente</h3>
+
+<input placeholder="Caratula" @bind="e.Caratula" /><br>
+<button @onclick="() => Agregar(e)">Iniciar</button>
+
+@error
+
+@code {
+    [Parameter] public int Id {get;set;}
+    Expediente e = new Expediente();
+    Usuario? user = new Usuario();
+
+    protected override void OnInitialized()
+    {
+        user = CasoDeUsoConsultaUsuarioId.Ejecutar(Id);
+        StateHasChanged();
+    }
+    int stat;
+    string error;
+
+    public void AplicarEst()
+    {
+        e.Estado = (EstadoExpediente)stat;
+        StateHasChanged();
+    }
+    public void Agregar(Expediente e)
+    {
+        try
+        {
+            CasoDeUsoExpedienteAlta.Ejecutar(e, user);
+            Navigation.NavigateTo($"/home/{user.Id}");
+        }
+        catch (Exception er)
+        {
+            error = er.Message;
+        }
+       
+    }
+
+}
