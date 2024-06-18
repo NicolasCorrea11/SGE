@@ -15,7 +15,7 @@ public class RepositorioUsuarios: IUsuarioRepositorio
             using SHA256 mySHA = SHA256.Create();
             byte[] bytes = mySHA.ComputeHash(Encoding.UTF8.GetBytes(u.Contraseña));
             var sb = new StringBuilder();
-            for (int i=0;i<bytes.Length;i++)
+            for (int i = 0; i < bytes.Length; i++)
             {
                 sb.Append(bytes[i].ToString());
             }
@@ -33,7 +33,7 @@ public class RepositorioUsuarios: IUsuarioRepositorio
             using SHA256 mySHA = SHA256.Create();
             byte[] bytes = mySHA.ComputeHash(Encoding.UTF8.GetBytes(contraseña));
             var sb = new StringBuilder();
-            for (int i=0;i<bytes.Length;i++)
+            for (int i = 0; i < bytes.Length; i++)
             {
                 sb.Append(bytes[i].ToString());
             }
@@ -48,7 +48,7 @@ public class RepositorioUsuarios: IUsuarioRepositorio
 
     public Usuario? ConsultaPorId(int id)
     {
-        Usuario? dev = new Usuario();
+        Usuario? dev = new();
         using var context = new BaseContext();
         {
             dev = context.Usuarios.Where(x => x.Id == id).SingleOrDefault();

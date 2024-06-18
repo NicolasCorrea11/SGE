@@ -1,9 +1,9 @@
 ﻿namespace SGE.Aplicacion;
 
-public class CasoDeUsoLogin(IUsuarioRepositorio urep)
+public class CasoDeUsoLogin(IUsuarioRepositorio repoUser)
 {
-    public Usuario Ejecutar(string email, string contraseña)
+    public Usuario? Ejecutar(string email, string contraseña)
     {
-        return urep.InicioSesion(email, contraseña);
+        return repoUser.InicioSesion(email, contraseña);
     }
 }

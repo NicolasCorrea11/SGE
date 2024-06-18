@@ -1,9 +1,9 @@
 ﻿namespace SGE.Aplicacion;
 
-public class CasoDeUsoSignup(IUsuarioRepositorio urep)
+public class CasoDeUsoSignup(IUsuarioRepositorio repoUser)
 {
     public void Ejecutar(Usuario user)
     {
-        urep.AltaUsuario(user);
+        repoUser.AltaUsuario(user);
     }
 }

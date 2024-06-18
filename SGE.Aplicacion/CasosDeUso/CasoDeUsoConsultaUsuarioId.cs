@@ -1,9 +1,9 @@
 ﻿namespace SGE.Aplicacion;
 
-public class CasoDeUsoConsultaUsuarioId(IUsuarioRepositorio urep)
+public class CasoDeUsoConsultaUsuarioId(IUsuarioRepositorio repoUser)
 {
     public Usuario? Ejecutar(int id)
     {
-        return urep.ConsultaPorId(id);
+        return repoUser.ConsultaPorId(id);
     }
 }
