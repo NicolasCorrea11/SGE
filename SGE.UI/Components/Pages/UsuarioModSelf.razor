@@ -1,0 +1,35 @@
+﻿@page "/usermodself/{Id:int}"
+@rendermode InteractiveServer
+@inject CasoDeUsoUsuarioModificacion CasoDeUsoUsuarioModificacion 
+@inject CasoDeUsoConsultaUsuarioId UsuarioConsulta
+@inject NavigationManager Navigation
+<h3>UsuarioMod</h3>
+<br>
+<input placeholder="Nombre" @bind="u.Nombre" class="mt-3 form-control" /><br>
+<input placeholder="Apellido" @bind="u.Apellido" class="mt-3 form-control" /><br>
+<input placeholder="Mail" @bind="u.Email" class="mt-3 form-control" /><br>
+<button class="btn btn-primary" @onclick="() => Guardar(u, u)">Guardar cambios</button><br>
+@code {
+    [Parameter] public int Id {get; set;}
+    Usuario u = new();
+    string error = "";
+    public void Guardar(Usuario userg, Usuario userp)
+    {
+        try
+        {
+            CasoDeUsoUsuarioModificacion.Ejecutar(userg, userp);
+            Navigation.NavigateTo($"/home/{Id}");
+        }
+        catch (Exception e)
+        {
+            error = e.Message;
+        }
+    }
+
+    protected override void OnInitialized()
+    {
+        u = UsuarioConsulta.Ejecutar(Id);
+        StateHasChanged();
+    }
+
+}

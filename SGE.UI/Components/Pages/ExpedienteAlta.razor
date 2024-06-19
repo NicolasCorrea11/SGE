@@ -7,15 +7,20 @@
 <h3>Alta de Expediente</h3>
 
 <input class="mt-3 form-control" placeholder="Caratula" @bind="e.Caratula" /><br>
+<p>0: Recien iniciado, 1: Para resolver, 2: Con resolucion, 3: En Notificacion, 4: Finalizado </p>
+<input class="mt-3 form-control" placeholder="Estado" @bind="stat" /><br>
 <button class="btn btn-primary" @onclick="() => Agregar(e)">Aceptar</button>
-
+<br>
 @error
+<br>
+<button class="btn btn-secondary mt-2" @onclick="Volver">Volver al menu</button>
 
 @code {
     [Parameter] public int Id { get; set; }
     Expediente e = new();
     Usuario user = new();
     string error = "";
+    int stat;
     
     protected override void OnInitialized()
     {
@@ -25,7 +30,7 @@
 
     public void Agregar(Expediente e)
     {
-        e.Estado = EstadoExpediente.RecienIniciado; // NO IMPLEMENTADO
+        e.Estado = (EstadoExpediente)stat;
         try
         {
             CasoAlta.Ejecutar(e, user);
@@ -36,6 +41,11 @@
             error = ex.Message;
         }
 
+    }
+
+    public void Volver()
+    {
+        Navigation.NavigateTo($"home/{Id}");
     }
 
 }
