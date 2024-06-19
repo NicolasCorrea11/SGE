@@ -9,6 +9,16 @@ Bienvenido @user.Nombre @user.Apellido
 <NavLink href="@($"/AltaExp/{user.Id}")">Haga click para dar de alta un expediente</NavLink>
 <br>
 <NavLink href="@($"/BajaExp/{user.Id}")">Haga click para dar de baja un expediente</NavLink>
+<br>
+<NavLink href="@($"/Consultaexpid/{user.Id}")">Haga click para cosultar un expediente por su id</NavLink>
+<br>
+<NavLink href="@($"/Listarexp/{user.Id}")">Haga click para lsitar los expedientes</NavLink>
+<br>
+<br>
+<br>
+<br>
+<NavLink href="/">Haga click cerrar sesion</NavLink>
+
 
 
 @code {

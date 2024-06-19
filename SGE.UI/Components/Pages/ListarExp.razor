@@ -1,0 +1,28 @@
+﻿@page "/Listarexp/{Id:int}"
+@rendermode InteractiveServer
+@inject CasoDeUsoListarExpedientes CasoDeUsoListarExpedientes
+@inject CasoDeUsoConsultaUsuarioId CasoDeUsoConsultaUsuarioId
+@inject NavigationManager Navigation
+<h3>ListarExp</h3>
+@foreach (var exp in listexp)
+{
+    <p>id: @exp.Id <br> Caratula: @exp.Caratula<br> Estado: @exp.Estado<br> Fecha creacion: @exp.FechayHoraCr<br> Fecha modificacion: @exp.FechayHoraMod<br>Ultimo usuario que modifico: @exp.IdUser</p> <br>
+}
+<button @onclick="Volver">Volver al menu</button>
+@code {
+    [Parameter] public int Id {get; set;}
+    Usuario user = new Usuario();
+    
+    List<Expediente> listexp = new();
+    protected override void OnInitialized() {
+        listexp = CasoDeUsoListarExpedientes.Ejecutar();
+        user = CasoDeUsoConsultaUsuarioId.Ejecutar(Id);
+        StateHasChanged();
+    }
+
+    public void Volver()
+    {
+        Navigation.NavigateTo($"home/{user.Id}");
+    }
+
+}

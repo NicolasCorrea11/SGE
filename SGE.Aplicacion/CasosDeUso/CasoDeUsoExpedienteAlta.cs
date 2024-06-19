@@ -10,6 +10,7 @@ public class CasoDeUsoExpedienteAlta(IExpedienteRepositorio repo, IServicioAutor
         }
         else
         {
+            e.IdUser = user.Id;
             if (!validador.EsValido(e, out string msg))
             {
                 throw new ValidacionException(msg);
@@ -18,7 +19,6 @@ public class CasoDeUsoExpedienteAlta(IExpedienteRepositorio repo, IServicioAutor
             {
                 e.FechayHoraCr = DateTime.Now;
                 e.FechayHoraMod = DateTime.Now;
-                e.IdUser = user.Id;
                 repo.AltaExpediente(e);
             }
         }

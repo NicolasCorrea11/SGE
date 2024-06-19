@@ -25,14 +25,15 @@
 
     public void Agregar(Expediente e)
     {
+        e.Estado = EstadoExpediente.RecienIniciado;
         try
         {
-            e.Estado = EstadoExpediente.RecienIniciado;
             CasoDeUsoExpedienteAlta.Ejecutar(e, user);
             Navigation.NavigateTo($"/home/{user.Id}");
         }
         catch (Exception er)
         {
+            Console.WriteLine("erroraro");
             error = er.Message;
         }
        

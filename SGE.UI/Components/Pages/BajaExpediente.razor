@@ -5,11 +5,9 @@
 @inject NavigationManager Navigation
 <h3>BajaExpediente</h3>
 <label for="barra">Id de expediente a eliminar</label>
-<input placeholder="Caratula" @bind="idexp" class="barra"/><br>
+<input placeholder="Id" @bind="idexp" class="barra"/><br>
 <button @onclick="() => Eliminar(idexp)">Eliminar</button>
 @error
-
-
 
 @code {
     [Parameter] public int Id {get; set;}
@@ -19,19 +17,14 @@
 
     public void Eliminar(int idexp)
     {
-        Console.WriteLine("Entra a eliminar");
         try
         {
-            Console.WriteLine("entra al try");
             CasoDeUsoExpedienteBaja.Ejecutar(idexp, user);
-            Console.WriteLine("Borra (no)");
             Navigation.NavigateTo($"/home/{user.Id}");
-            Console.WriteLine("navega (no)");
             StateHasChanged();
         }
         catch (Exception e)
         {
-            Console.WriteLine("Entra al catch");
             error = e.Message;
             StateHasChanged();
         }
