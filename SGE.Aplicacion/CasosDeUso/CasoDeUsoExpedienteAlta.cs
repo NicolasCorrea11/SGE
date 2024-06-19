@@ -4,6 +4,9 @@ public class CasoDeUsoExpedienteAlta(IExpedienteRepositorio repo, IServicioAutor
 {
     public void Ejecutar(Expediente e, Usuario user)
     {
+        e.FechayHoraCr = DateTime.Now;
+        e.FechayHoraMod = DateTime.Now;
+        e.IdUser = user.Id;
         if (!auth.PoseeElPermiso(user, Permiso.ExpedienteAlta))
         {
             throw new AutorizacionException();
@@ -16,9 +19,6 @@ public class CasoDeUsoExpedienteAlta(IExpedienteRepositorio repo, IServicioAutor
             }
             else
             {
-                e.FechayHoraCr = DateTime.Now;
-                e.FechayHoraMod = DateTime.Now;
-                e.IdUser = user.Id;
                 repo.AltaExpediente(e);
             }
         }

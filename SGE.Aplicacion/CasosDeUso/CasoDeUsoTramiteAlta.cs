@@ -10,6 +10,7 @@ public class CasoDeUsoTramiteAlta(ITramiteRepositorio repoTram, IServicioAutoriz
     }
     else
     {
+      t.IdUser = user.Id;
       if (!validador.EsValido(t, out string msg))
       {
         throw new ValidacionException(msg);
@@ -18,7 +19,6 @@ public class CasoDeUsoTramiteAlta(ITramiteRepositorio repoTram, IServicioAutoriz
       {
         t.FechayHoraCr = DateTime.Now;
         t.FechayHoraMod = DateTime.Now;
-        t.IdUser = user.Id;
         repoTram.AltaTramite(t);
       }
     }

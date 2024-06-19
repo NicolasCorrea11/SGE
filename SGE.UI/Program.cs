@@ -13,11 +13,6 @@ builder.Services.AddRazorComponents()
 builder.Services.AddTransient<CasoDeUsoExpedienteAlta>()
     .AddTransient<CasoDeUsoExpedienteBaja>()
     .AddTransient<CasoDeUsoExpedienteModificacion>()
-<<<<<<< HEAD
-    .AddTransient<CasoDeUsoExpedienteConsultaTodos>()
-    .AddTransient<CasoDeUsoListarExpedientes>()
-=======
->>>>>>> 228340a21adc5c01f6de9834932e071aab8ed81a
     .AddTransient<CasoDeUsoConsultaExpedienteId>()
     .AddTransient<CasoDeUsoSignup>()
     .AddTransient<CasoDeUsoLogin>()

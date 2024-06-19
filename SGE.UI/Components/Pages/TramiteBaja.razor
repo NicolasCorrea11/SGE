@@ -1,0 +1,39 @@
+﻿@page "/TramiteBaja/{Id:int}"
+@rendermode InteractiveServer
+@inject CasoDeUsoTramiteBaja CasoDeUsoTramiteBaja
+@inject CasoDeUsoConsultaUsuarioId CasoDeUsoConsultaUsuarioId
+@inject NavigationManager Navigation
+<h3>Baja de Tramite</h3>
+<label for="barra">Id de tramite a eliminar</label>
+<input placeholder="Id" @bind="idTram" class="barra" /><br>
+<button @onclick="() => Eliminar(idTram)">Eliminar</button>
+@error
+
+@code {
+  [Parameter] public int Id { get; set; }
+  Usuario user;
+  int idTram;
+  string error = "";
+
+  protected override void OnInitialized()
+  {
+    user = CasoDeUsoConsultaUsuarioId.Ejecutar(Id);
+    StateHasChanged();
+  }
+
+  public void Eliminar(int idTram)
+  {
+    try
+    {
+      CasoDeUsoTramiteBaja.Ejecutar(idTram, user);
+      Navigation.NavigateTo($"/home/{user.Id}");
+      StateHasChanged();
+    }
+    catch (Exception ex)
+    {
+      Console.WriteLine("Entra al catch");
+      error = ex.Message;
+      StateHasChanged();
+    }
+  }
+}

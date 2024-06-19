@@ -31,9 +31,9 @@
             CasoDeUsoExpedienteAlta.Ejecutar(e, user);
             Navigation.NavigateTo($"/home/{user.Id}");
         }
-        catch (Exception er)
+        catch (Exception ex)
         {
-            error = er.Message;
+            error = ex.Message;
         }
        
     }
