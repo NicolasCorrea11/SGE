@@ -2,6 +2,7 @@ using SGE.UI.Components;
 using SGE.Repositorios;
 using SGE.Aplicacion;
 
+
 BaseSqlite.Inicializar();
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,7 +21,10 @@ builder.Services
     .AddTransient<CasoDeUsoSignup>()
     .AddTransient<CasoDeUsoLogin>()
     .AddTransient<CasoDeUsoUsuarioModificacion>()
+    .AddTransient<CasoDeUsoUsuarioDarPermiso>()
+    .AddTransient<CasoDeUsoUsuarioQuitarPermiso>()
     .AddTransient<CasoDeUsoConsultaUsuarioId>()
+    .AddTransient<CasoDeUsoListarUsuarios>()
     .AddTransient<CasoDeUsoTramiteAlta>()
     .AddTransient<CasoDeUsoTramiteBaja>()
     .AddTransient<CasoDeUsoTramiteModificacion>()
@@ -33,7 +37,9 @@ builder.Services
     .AddScoped<IUsuarioRepositorio, RepositorioUsuarios>()
     .AddScoped<IExpedienteRepositorio, RepositorioExpediente>()
     .AddScoped<ITramiteRepositorio, RepositorioTramite>()
-    .AddScoped<IServicioAutorizacion, ServicioAutorizacion>();
+    .AddScoped<IServicioAutorizacion, ServicioAutorizacion>()
+    .AddScoped<IServicioActualizacionEstado, ServicioActualizacionEstado>()
+    .AddScoped<IEspecificacionCambioEstado, EspecificacionCambioEstado>();
 
 var app = builder.Build();
 

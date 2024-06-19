@@ -1,6 +1,6 @@
 ﻿namespace SGE.Aplicacion;
 
-public class CasoDeUsoTramiteAlta(ITramiteRepositorio repoTram, IServicioAutorizacion auth, TramiteValidador validador)
+public class CasoDeUsoTramiteAlta(ITramiteRepositorio repoTram, IServicioAutorizacion auth, TramiteValidador validador, IServicioActualizacionEstado actEstado)
 {
   public void Ejecutar(Tramite t, Usuario user)
   {
@@ -20,6 +20,7 @@ public class CasoDeUsoTramiteAlta(ITramiteRepositorio repoTram, IServicioAutoriz
         t.FechayHoraCr = DateTime.Now;
         t.FechayHoraMod = DateTime.Now;
         repoTram.AltaTramite(t);
+        actEstado.ActualizarEstado(t.Id ,user.Id);
       }
     }
   }

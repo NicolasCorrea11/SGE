@@ -1,6 +1,5 @@
 ﻿namespace SGE.Aplicacion;
 
-public interface IServicioActualizacionEstado
-{
-  public void ActualizarEstado(int id);
+public interface IServicioActualizacionEstado {
+  public void ActualizarEstado(int id, int IdUser);
 }

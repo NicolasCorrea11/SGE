@@ -24,6 +24,14 @@ public class RepositorioUsuarios : IUsuarioRepositorio
         context.SaveChanges();
     }
 
+    public void BajaUsuario(int id)
+    {
+        using var context = new BaseContext();
+        Usuario user = context.Usuarios.Where(x => x.Id == id).SingleOrDefault();
+        context.Usuarios.Remove(user);
+        context.SaveChanges();
+    }
+
     public Usuario? InicioSesion(string email, string contraseña)
     {
         using var context = new BaseContext();
@@ -75,7 +83,7 @@ public class RepositorioUsuarios : IUsuarioRepositorio
         Usuario? user = context.Usuarios.Where(u => u.Id == id).SingleOrDefault();
         if (user != null)
         {
-            // user.Permisos[(int)p] = true;
+            user.Permisos.Add(p);
         }
         context.SaveChanges();
     }
@@ -86,7 +94,7 @@ public class RepositorioUsuarios : IUsuarioRepositorio
         Usuario? user = context.Usuarios.Where(u => u.Id == id).SingleOrDefault();
         if (user != null)
         {
-
+            user.Permisos.Remove(p);
         }
         context.SaveChanges();
     }
