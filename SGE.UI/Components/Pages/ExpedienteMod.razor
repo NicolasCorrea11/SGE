@@ -1,0 +1,49 @@
+﻿@page "/expmod/{Id:int}"
+@rendermode InteractiveServer
+@inject CasoDeUsoExpedienteModificacion CasoDeUsoExpedienteModificacion
+@inject NavigationManager Navigation
+@inject CasoDeUsoConsultaUsuarioId UsuarioConsulta
+<h3>ExpedienteMod</h3>
+
+<input class="mt-3 form-control" placeholder="Id" @bind="e.Id" /><br>
+<input class="mt-3 form-control" placeholder="Caratula" @bind="e.Caratula" /><br>
+<p>0: Recien iniciado, 1: Para resolver, 2: Con resolucion, 3: En Notificacion, 4: Finalizado </p>
+<input class="mt-3 form-control" placeholder="Estado" @bind="stat" /><br>
+<button class="btn btn-primary" @onclick="() => Modificar(e)">Aceptar</button>
+<br>
+<button class="btn btn-secondary mt-2" @onclick="Volver">Volver al menu</button>
+
+
+@code {
+    [Parameter] public int Id {get; set;}
+    string error = "";
+    Expediente e = new();
+    Usuario user = new();
+    int stat;
+
+    public void Modificar(Expediente ex)
+    {
+        ex.Estado = (EstadoExpediente)stat;
+        try
+        {
+            CasoDeUsoExpedienteModificacion.Ejecutar(e, user);
+            Navigation.NavigateTo($"/home/{Id}");
+            StateHasChanged();
+        }
+        catch (Exception e)
+        {
+            error = e.Message;
+            StateHasChanged();
+        }
+    }
+    protected override void OnInitialized()
+    {
+        user = UsuarioConsulta.Ejecutar(Id);
+        StateHasChanged();
+    }
+    public void Volver()
+    {
+        Navigation.NavigateTo($"home/{Id}");
+    }
+
+}

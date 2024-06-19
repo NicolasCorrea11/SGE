@@ -8,7 +8,8 @@
 <input placeholder="Apellido" @bind="u.Apellido" /><br>
 <input placeholder="Email" @bind="u.Email" /><br>
 <input placeholder="Contraseña" @bind="u.Contraseña" /><br>
-<button @onclick="Agregar">Agregar</button>
+<button @onclick="Agregar">Registrarse</button><br>
+<button class="btn btn-secondary mt-2" @onclick="Volver">Volver al menu</button>
 @code {
     Usuario u = new Usuario();
     public void Agregar()
@@ -16,6 +17,11 @@
         CasoDeUsoSignup.Ejecutar(u);
         NavigationManager.NavigateTo("/");
 
+    }
+
+    public void Volver()
+    {
+        NavigationManager.NavigateTo($"/");
     }
 
 }

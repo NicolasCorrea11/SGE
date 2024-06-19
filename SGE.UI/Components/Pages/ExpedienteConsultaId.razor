@@ -2,7 +2,6 @@
 @rendermode InteractiveServer
 @inject NavigationManager Navigation
 @inject CasoDeUsoExpedienteConsultaId CasoConsulta
-@inject CasoDeUsoConsultaUsuarioId UsuarioConsulta
 <PageTitle>SGE | Expediente</PageTitle>
 
 <h3>Consulta de Expediente por ID</h3>
@@ -37,7 +36,6 @@
 
 @code {
     [Parameter] public int Id { get; set; }
-    Usuario user = new();
     int idExp;
     string error = "";
     Expediente e = new();
@@ -45,7 +43,7 @@
 
     public void Volver()
     {
-        Navigation.NavigateTo($"home/{user.Id}");
+        Navigation.NavigateTo($"home/{Id}");
     }
 
     public void Consultar(int idExp)
@@ -60,11 +58,4 @@
             error = e.Message;
         }
     }
-
-    protected override void OnInitialized()
-    {
-        user = UsuarioConsulta.Ejecutar(Id);
-        StateHasChanged();
-    }
-
 }

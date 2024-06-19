@@ -13,6 +13,5 @@ public class BaseSqlite
         using var command = connection.CreateCommand();
         command.CommandText = "PRAGMA journal_mode=DELETE;";
         command.ExecuteNonQuery();
-
     }
 }

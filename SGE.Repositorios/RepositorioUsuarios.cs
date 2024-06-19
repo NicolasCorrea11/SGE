@@ -43,6 +43,21 @@ public class RepositorioUsuarios : IUsuarioRepositorio
         return null;
     }
 
+    public void ModificarUsuario(Usuario u)
+    {
+        using var context = new BaseContext();
+        {
+            var user = context.Usuarios.Where(x => x.Id == u.Id).SingleOrDefault();
+            if (user != null)
+            {
+                user.Apellido = u.Apellido;
+                user.Nombre = u.Nombre;
+                user.Email = u.Email;
+            }
+            context.SaveChanges();
+        }
+    }
+
     public Usuario? ConsultaPorId(int id)
     {
         using var context = new BaseContext();

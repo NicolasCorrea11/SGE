@@ -7,7 +7,11 @@
 <h3>Baja de Expediente</h3>
 <input placeholder="ID a eliminar" @bind="idExp" class="mt-3 form-control" /><br>
 <button class="btn btn-primary" @onclick="() => Eliminar(idExp)">Aceptar</button>
+<br>
 @error
+<br>
+<button class="btn btn-secondary mt-2" @onclick="Volver">Volver al menu</button>
+
 
 @code {
     [Parameter] public int Id { get; set; }
@@ -32,5 +36,10 @@
         {
             error = e.Message;
         }
+    }
+
+    public void Volver()
+    {
+        Navigation.NavigateTo($"home/{Id}");
     }
 }

@@ -15,7 +15,11 @@
 <br>
 <NavLink href="@($"/tramitebaja/{user.Id}")">Dar de baja un tramite</NavLink>
 <br>
+<NavLink href="@($"/expmod/{user.Id}")">Modificar un expediente</NavLink>
+<br>
 <NavLink href="@($"/expconsultaid/{user.Id}")">Consultar un expediente por su id</NavLink>
+<br>
+<NavLink href="@($"/expcontram/{user.Id}")">Consultar un expediente con sus tramites</NavLink>
 <br>
 <NavLink href="@($"/explistar/{user.Id}")">Listar los expedientes</NavLink>
 <br>
@@ -23,6 +27,13 @@
 <br>
 <NavLink href="@($"/tramiteconsultaid/{user.Id}")">Consultar tramite por su ID</NavLink>
 <br><br><br>
+<NavLink href="@($"/usermodself/{user.Id}")">Modificar mi usuario</NavLink>
+<br>
+@if (Id == 1)
+{
+    <NavLink href="@($"/usermod/{user.Id}")">Modificar un usuario</NavLink>
+    <br>
+}
 <NavLink href="/">Cerrar sesion</NavLink>
 
 @code {
