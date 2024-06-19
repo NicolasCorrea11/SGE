@@ -2,7 +2,7 @@
 
 public class CasoDeUsoLogin(IUsuarioRepositorio repoUser)
 {
-    public Usuario? Ejecutar(string email, string contraseña)
+    public Usuario Ejecutar(string email, string contraseña)
     {
         Usuario? user = repoUser.InicioSesion(email, contraseña);
         if (user == null)

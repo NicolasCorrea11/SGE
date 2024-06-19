@@ -1,36 +1,36 @@
 ﻿@page "/home/{Id:int}"
 @rendermode InteractiveServer
-@inject CasoDeUsoConsultaUsuarioId CasoDeUsoConsultaUsuarioId
+@inject CasoDeUsoConsultaUsuarioId ConsultaUsuario
 @inject NavigationManager Navigation
-<h3>Sistema de gestion de expedientes</h3>
+<PageTitle>SGE</PageTitle>
+<h3>Sistema de Gestion de Expedientes</h3>
 
-Bienvenido @user.Nombre @user.Apellido
+<h5>Bienvenido @user.Nombre @user.Apellido</h5>
 <br>
-<NavLink href="@($"/AltaExp/{user.Id}")">Haga click para dar de alta un expediente</NavLink>
+<NavLink href="@($"/expalta/{user.Id}")">Dar de alta un expediente</NavLink>
 <br>
-<NavLink href="@($"/BajaExp/{user.Id}")">Haga click para dar de baja un expediente</NavLink>
+<NavLink href="@($"/expbaja/{user.Id}")">Dar de baja un expediente</NavLink>
 <br>
-<NavLink href="@($"/AltaTramite/{user.Id}")">Haga click para dar de alta un tramite</NavLink>
+<NavLink href="@($"/tramitealta/{user.Id}")">Dar de alta un tramite</NavLink>
 <br>
-<NavLink href="@($"/TramiteBaja/{user.Id}")">Haga click para dar de baja un tramite</NavLink>
-<NavLink href="@($"/Consultaexpid/{user.Id}")">Haga click para cosultar un expediente por su id</NavLink>
+<NavLink href="@($"/tramitebaja/{user.Id}")">Dar de baja un tramite</NavLink>
 <br>
-<NavLink href="@($"/Listarexp/{user.Id}")">Haga click para lsitar los expedientes</NavLink>
+<NavLink href="@($"/expconsultaid/{user.Id}")">Consultar un expediente por su id</NavLink>
 <br>
+<NavLink href="@($"/explistar/{user.Id}")">Listar los expedientes</NavLink>
 <br>
+<NavLink href="@($"/tramitemodificacion/{user.Id}")">Modificar tramite</NavLink>
 <br>
-<br>
-<NavLink href="/">Haga click cerrar sesion</NavLink>
-
-
+<NavLink href="@($"/tramiteconsultaid/{user.Id}")">Consultar tramite por su ID</NavLink>
+<br><br><br>
+<NavLink href="/">Cerrar sesion</NavLink>
 
 @code {
-    [Parameter] public int Id {get; set;}
-    
-    Usuario user = new Usuario();
+    [Parameter] public int Id { get; set; }
+    Usuario user = new();
 
     protected override void OnInitialized()
     {
-        user = CasoDeUsoConsultaUsuarioId.Ejecutar(Id);
+        user = ConsultaUsuario.Ejecutar(Id);
     }
 }

@@ -1,0 +1,36 @@
+﻿@page "/expbaja/{Id:int}"
+@rendermode InteractiveServer
+@inject CasoDeUsoExpedienteBaja CasoBaja
+@inject CasoDeUsoConsultaUsuarioId UsuarioConsulta
+@inject NavigationManager Navigation
+<PageTitle>SGE | Expediente</PageTitle>
+<h3>Baja de Expediente</h3>
+<input placeholder="ID a eliminar" @bind="idExp" class="mt-3 form-control" /><br>
+<button class="btn btn-primary" @onclick="() => Eliminar(idExp)">Aceptar</button>
+@error
+
+@code {
+    [Parameter] public int Id { get; set; }
+    Usuario user = new();
+    int idExp;
+    string error = "";
+
+    protected override void OnInitialized()
+    {
+        user = UsuarioConsulta.Ejecutar(Id);
+        StateHasChanged();
+    }
+    
+    public void Eliminar(int idExp)
+    {
+        try
+        {
+            CasoBaja.Ejecutar(idExp, user);
+            Navigation.NavigateTo($"/home/{user.Id}");
+        }
+        catch (Exception e)
+        {
+            error = e.Message;
+        }
+    }
+}

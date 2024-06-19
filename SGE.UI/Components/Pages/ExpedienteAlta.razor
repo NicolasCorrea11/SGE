@@ -1,0 +1,41 @@
+﻿@page "/expalta/{Id:int}"
+@rendermode InteractiveServer
+@inject CasoDeUsoExpedienteAlta CasoAlta
+@inject CasoDeUsoConsultaUsuarioId UsuarioConsulta
+@inject NavigationManager Navigation
+<PageTitle>SGE | Expediente</PageTitle>
+<h3>Alta de Expediente</h3>
+
+<input class="mt-3 form-control" placeholder="Caratula" @bind="e.Caratula" /><br>
+<button class="btn btn-primary" @onclick="() => Agregar(e)">Aceptar</button>
+
+@error
+
+@code {
+    [Parameter] public int Id { get; set; }
+    Expediente e = new();
+    Usuario user = new();
+    string error = "";
+    
+    protected override void OnInitialized()
+    {
+        user = UsuarioConsulta.Ejecutar(Id);
+        StateHasChanged();
+    }
+
+    public void Agregar(Expediente e)
+    {
+        e.Estado = EstadoExpediente.RecienIniciado; // NO IMPLEMENTADO
+        try
+        {
+            CasoAlta.Ejecutar(e, user);
+            Navigation.NavigateTo($"/home/{user.Id}");
+        }
+        catch (Exception ex)
+        {
+            error = ex.Message;
+        }
+
+    }
+
+}

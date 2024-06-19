@@ -1,33 +1,32 @@
 ﻿@rendermode InteractiveServer
-@inject CasoDeUsoLogin CasoDeUsoLogin
+@inject CasoDeUsoLogin CasoLogin
 @inject NavigationManager Navigation
+<PageTitle>SGE | Login</PageTitle>
 <h3>Login</h3>
 
-<input placeholder="Email" @bind="em" /><br>
-<input placeholder="Contraseña" @bind="pw" /><br>
-<button @onclick="iniciar">Iniciar</button>
+<input placeholder="Email" @bind="email" /><br>
+<input placeholder="Contraseña" @bind="pass" /><br>
+<button @onclick="Iniciar">Iniciar</button>
 
 @Error
 
 @code {
-    Usuario user = new Usuario();
-
-    string? em;
-    string? pw;
+    Usuario user = new();
+    string email = "";
+    string pass = "";
     
     string Error = "";
 
-    public void iniciar()
+    public void Iniciar()
     {
         try 
         {
-            user = CasoDeUsoLogin.Ejecutar(em, pw);
+            user = CasoLogin.Ejecutar(email, pass);
             Navigation.NavigateTo($"/home/{user.Id}");
         }
-        catch (Exception e)
+        catch (Exception ex)
         {
-            Error = "Email o contraseña invalidos";
-            StateHasChanged();
+            Error = ex.Message;
         }
     }
 

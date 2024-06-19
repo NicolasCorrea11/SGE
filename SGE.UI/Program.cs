@@ -10,10 +10,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-builder.Services.AddTransient<CasoDeUsoExpedienteAlta>()
+builder.Services
+    .AddTransient<CasoDeUsoExpedienteAlta>()
     .AddTransient<CasoDeUsoExpedienteBaja>()
     .AddTransient<CasoDeUsoExpedienteModificacion>()
-    .AddTransient<CasoDeUsoConsultaExpedienteId>()
+    .AddTransient<CasoDeUsoListarExpedientes>()
+    .AddTransient<CasoDeUsoExpedienteConsultaId>()
     .AddTransient<CasoDeUsoSignup>()
     .AddTransient<CasoDeUsoLogin>()
     .AddTransient<CasoDeUsoConsultaUsuarioId>()
@@ -22,14 +24,13 @@ builder.Services.AddTransient<CasoDeUsoExpedienteAlta>()
     .AddTransient<CasoDeUsoTramiteModificacion>()
     .AddTransient<CasoDeUsoTramiteConsultaEtiqueta>()
     .AddTransient<CasoDeUsoTramiteConsultaId>()
-    .AddTransient<CasoDeUsoConsultaPorExpedienteId>()
+    .AddTransient<CasoDeUsoTramiteConsultaExpId>()
     .AddScoped<ExpedienteValidador>()
     .AddScoped<TramiteValidador>()
     .AddScoped<IUsuarioRepositorio, RepositorioUsuarios>()
     .AddScoped<IExpedienteRepositorio, RepositorioExpediente>()
     .AddScoped<ITramiteRepositorio, RepositorioTramite>()
     .AddScoped<IServicioAutorizacion, ServicioAutorizacion>();
-
 
 var app = builder.Build();
 

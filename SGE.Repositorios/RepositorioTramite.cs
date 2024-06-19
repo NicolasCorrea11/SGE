@@ -1,68 +1,56 @@
 ﻿using SGE.Aplicacion;
 namespace SGE.Repositorios;
 
-public class RepositorioTramite: ITramiteRepositorio
+public class RepositorioTramite : ITramiteRepositorio
 {
     public void AltaTramite(Tramite t)
     {
         using var context = new BaseContext();
-        {
-            context.Tramites.Add(t);
-            context.SaveChanges();
-        }
+        context.Tramites.Add(t);
+        context.SaveChanges();
     }
 
     public void BajaTramite(int id)
     {
         using var context = new BaseContext();
+        Tramite? t = context.Tramites.Where(t => t.Id == id).SingleOrDefault();
+        if (t != null)
         {
-            Tramite? b = context.Tramites.Where(x => x.Id == id).SingleOrDefault();
-            if (b != null)
-                context.Tramites.Remove(b);
-            context.SaveChanges();
+            context.Tramites.Remove(t);
         }
+        context.SaveChanges();
     }
 
-    public void ModificacionTramite(Tramite t, int idUser) 
+    public void ModificacionTramite(Tramite nuevoT, int idUser)
     {
         using var context = new BaseContext();
+        Tramite? t = context.Tramites.Where(t => t.Id == nuevoT.Id).SingleOrDefault();
+        if (t != null)
         {
-            Tramite? modificado = context.Tramites.Where(x => x.Id == t.Id).SingleOrDefault();
-            if (modificado != null) 
-            {
-                if (modificado.Contenido != t.Contenido && t.Contenido != "")
-                    modificado.Contenido = t.Contenido;
-                if (modificado.Etiqueta != t.Etiqueta && t.Etiqueta.Equals(""))
-                    modificado.Etiqueta = t.Etiqueta;
-                modificado.FechayHoraMod = DateTime.Now;
-                modificado.IdUser = idUser;
-            }
-            context.SaveChanges();
+            t.Contenido = nuevoT.Contenido;
+            t.Etiqueta = nuevoT.Etiqueta;
+            t.FechayHoraMod = DateTime.Now;
+            t.IdUser = idUser;
         }
+        context.SaveChanges();
     }
 
     public List<Tramite> ConsultaPorEtiqueta(EtiquetaTramite e)
     {
         using var context = new BaseContext();
-        {
-            return context.Tramites.Where(x => x.Etiqueta == e).ToList();
-        }
+        return context.Tramites.Where(t => t.Etiqueta == e).ToList();
     }
 
     public Tramite? ConsultaPorId(int id)
     {
         using var context = new BaseContext();
-        {
-            return context.Tramites.Where(x => x.Id == id).SingleOrDefault();
-        }
+        return context.Tramites.Where(t => t.Id == id).SingleOrDefault();
     }
 
     public List<Tramite> ConsultaPorExpedienteId(int expId)
     {
         using var context = new BaseContext();
-        {
-            return context.Tramites.Where(x => x.ExpedienteId == expId).ToList();
-        }
+        return context.Tramites.Where(t => t.ExpedienteId == expId).ToList();
     }
 
 }

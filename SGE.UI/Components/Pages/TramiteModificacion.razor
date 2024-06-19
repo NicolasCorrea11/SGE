@@ -1,0 +1,40 @@
+﻿@page "/tramitemodificacion/{Id:int}"
+@rendermode InteractiveServer
+@inject CasoDeUsoTramiteModificacion CasoModificacion
+@inject CasoDeUsoConsultaUsuarioId UsuarioConsulta
+@inject NavigationManager Navigation
+<PageTitle>SGE | Tramite</PageTitle>
+<h3>Modificacion de Tramite</h3>
+
+<input class="mt-3 form-control" placeholder="ID a modificar" @bind="t.Id"><br>
+<input class="form-control" placeholder="Contenido" @bind="t.Contenido"><br>
+<input class="form-control" placeholder="Etiqueta" @bind="t.Etiqueta">
+<button class="btn btn-primary" @onclick="() => Modificar(t)">Aceptar</button>
+
+@error
+
+@code {
+  [Parameter] public int Id { get; set; }
+  Tramite t = new();
+  Usuario user = new();
+  string error = "";
+
+  protected override void OnInitialized()
+  {
+    user = UsuarioConsulta.Ejecutar(Id);
+    StateHasChanged();
+  }
+
+  public void Modificar(Tramite t)
+  {
+    try
+    {
+      CasoModificacion.Ejecutar(t, user);
+      Navigation.NavigateTo($"/home/{user.Id}");
+    }
+    catch (Exception ex)
+    {
+      error = ex.Message;
+    }
+  }
+}
