@@ -7,5 +7,5 @@ public class Usuario
     public string Apellido {get; set;} = "";
     public string Email {get; set;} = "";
     public string Contraseña {get; set;} = "";
-    public bool[]? Permisos {get; set;} = new bool[6];
+    public List<Permiso> Permisos {get; set;} = [];
 }

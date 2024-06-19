@@ -4,24 +4,30 @@
 @inject CasoDeUsoConsultaUsuarioId UsuarioConsulta
 @inject NavigationManager Navigation
 <PageTitle>SGE | Expediente</PageTitle>
-<h3>Alta de Expediente</h3>
 
-<input class="mt-3 form-control" placeholder="Caratula" @bind="e.Caratula" /><br>
-<p>0: Recien iniciado, 1: Para resolver, 2: Con resolucion, 3: En Notificacion, 4: Finalizado </p>
-<input class="mt-3 form-control" placeholder="Estado" @bind="stat" /><br>
-<button class="btn btn-primary" @onclick="() => Agregar(e)">Aceptar</button>
-<br>
+<h3>Alta de Expediente</h3>
+<form>
+    <input class="mt-3 form-control" placeholder="Caratula" @bind="e.Caratula" /><br>
+    <select class="form-control" @bind="strEstado">
+        <option value="" disabled selected>Seleccione un estado</option>
+        <option>RecienIniciado</option>
+        <option>ParaResolver</option>
+        <option>ConResolucion</option>
+        <option>EnNotificacion</option>
+        <option>Finalizado</option>
+    </select><br>
+</form>
 @error
-<br>
+<button class="btn btn-primary" @onclick="() => Agregar(e)">Aceptar</button><br>
 <button class="btn btn-secondary mt-2" @onclick="Volver">Volver al menu</button>
 
 @code {
     [Parameter] public int Id { get; set; }
     Expediente e = new();
     Usuario user = new();
+    string strEstado = "";
     string error = "";
-    int stat;
-    
+
     protected override void OnInitialized()
     {
         user = UsuarioConsulta.Ejecutar(Id);
@@ -30,9 +36,9 @@
 
     public void Agregar(Expediente e)
     {
-        e.Estado = (EstadoExpediente)stat;
         try
         {
+            e.Estado = (EstadoExpediente)Enum.Parse(typeof(EstadoExpediente), strEstado);
             CasoAlta.Ejecutar(e, user);
             Navigation.NavigateTo($"/home/{user.Id}");
         }

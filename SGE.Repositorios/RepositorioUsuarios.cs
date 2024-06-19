@@ -35,7 +35,7 @@ public class RepositorioUsuarios : IUsuarioRepositorio
             sb.Append(bytes[i].ToString());
         }
         string pass = sb.ToString();
-        Usuario? user = context.Usuarios.Where(x => x.Email == email && x.Contraseña == pass).SingleOrDefault();
+        Usuario? user = context.Usuarios.Where(u => u.Email == email && u.Contraseña == pass).SingleOrDefault();
         if (user != null)
         {
             return user;
@@ -43,25 +43,23 @@ public class RepositorioUsuarios : IUsuarioRepositorio
         return null;
     }
 
-    public void ModificarUsuario(Usuario u)
+    public void ModificarUsuario(Usuario nuevoU)
     {
         using var context = new BaseContext();
+        var user = context.Usuarios.Where(u => u.Id == nuevoU.Id).SingleOrDefault();
+        if (user != null)
         {
-            var user = context.Usuarios.Where(x => x.Id == u.Id).SingleOrDefault();
-            if (user != null)
-            {
-                user.Apellido = u.Apellido;
-                user.Nombre = u.Nombre;
-                user.Email = u.Email;
-            }
-            context.SaveChanges();
+            user.Apellido = nuevoU.Apellido;
+            user.Nombre = nuevoU.Nombre;
+            user.Email = nuevoU.Email;
         }
+        context.SaveChanges();
     }
 
     public Usuario? ConsultaPorId(int id)
     {
         using var context = new BaseContext();
-        return context.Usuarios.Where(x => x.Id == id).SingleOrDefault();
+        return context.Usuarios.Where(u => u.Id == id).SingleOrDefault();
 
     }
 
@@ -71,11 +69,25 @@ public class RepositorioUsuarios : IUsuarioRepositorio
         return context.Usuarios.ToList();
     }
 
-    public void DarPermiso(int id, Permiso p)
+    public void OtorgarPermiso(int id, Permiso p)
     {
         using var context = new BaseContext();
-        Usuario? user = context.Usuarios.Where(x => x.Id == id).SingleOrDefault();
-        user.Permisos[(int)p] = true;
+        Usuario? user = context.Usuarios.Where(u => u.Id == id).SingleOrDefault();
+        if (user != null)
+        {
+            // user.Permisos[(int)p] = true;
+        }
+        context.SaveChanges();
+    }
+
+    public void QuitarPermiso(int id, Permiso p)
+    {
+        using var context = new BaseContext();
+        Usuario? user = context.Usuarios.Where(u => u.Id == id).SingleOrDefault();
+        if (user != null)
+        {
+
+        }
         context.SaveChanges();
     }
 }

@@ -3,37 +3,44 @@
 @inject CasoDeUsoExpedienteModificacion CasoDeUsoExpedienteModificacion
 @inject NavigationManager Navigation
 @inject CasoDeUsoConsultaUsuarioId UsuarioConsulta
-<h3>ExpedienteMod</h3>
+<PageTitle>SGE | Expedientes</PageTitle>
 
-<input class="mt-3 form-control" placeholder="Id" @bind="e.Id" /><br>
-<input class="mt-3 form-control" placeholder="Caratula" @bind="e.Caratula" /><br>
-<p>0: Recien iniciado, 1: Para resolver, 2: Con resolucion, 3: En Notificacion, 4: Finalizado </p>
-<input class="mt-3 form-control" placeholder="Estado" @bind="stat" /><br>
-<button class="btn btn-primary" @onclick="() => Modificar(e)">Aceptar</button>
-<br>
+<h3>Modificacion de Expediente</h3>
+<form>
+    <input class="mt-3 form-control" placeholder="Id del expediente" @bind="e.Id"><br>
+    <input class="form-control" placeholder="Caratula" @bind="e.Caratula"><br>
+    <select class="form-control" @bind="strEstado">
+        <option value="" disabled selected>Seleccione un estado</option>
+        <option>RecienIniciado</option>
+        <option>ParaResolver</option>
+        <option>ConResolucion</option>
+        <option>EnNotificacion</option>
+        <option>Finalizado</option>
+    </select><br>
+</form>
+@error
+<button class="btn btn-primary" @onclick="() => Modificar(e)">Aceptar</button><br>
 <button class="btn btn-secondary mt-2" @onclick="Volver">Volver al menu</button>
 
 
 @code {
-    [Parameter] public int Id {get; set;}
+    [Parameter] public int Id { get; set; }
     string error = "";
     Expediente e = new();
     Usuario user = new();
-    int stat;
+    string strEstado = "";
 
     public void Modificar(Expediente ex)
     {
-        ex.Estado = (EstadoExpediente)stat;
         try
         {
+            e.Estado = (EstadoExpediente)Enum.Parse(typeof(EstadoExpediente), strEstado);
             CasoDeUsoExpedienteModificacion.Ejecutar(e, user);
             Navigation.NavigateTo($"/home/{Id}");
-            StateHasChanged();
         }
         catch (Exception e)
         {
             error = e.Message;
-            StateHasChanged();
         }
     }
     protected override void OnInitialized()
