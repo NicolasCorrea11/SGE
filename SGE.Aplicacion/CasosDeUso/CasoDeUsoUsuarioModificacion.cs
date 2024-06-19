@@ -1,17 +1,9 @@
 ﻿namespace SGE.Aplicacion;
 
-public class CasoDeUsoUsuarioModificacion(IUsuarioRepositorio urep)
+public class CasoDeUsoUsuarioModificacion(IUsuarioRepositorio repoUser)
 {
-    public void Ejecutar(Usuario user, Usuario u)
+    public void Ejecutar(Usuario user)
     {
-        if (user.Id == u.Id || u.Id == 1)
-        {
-            urep.ModificarUsuario(user);
-        }
-        else
-        {
-            throw new AutorizacionException();
-        }
-        
+        repoUser.ModificarUsuario(user);
     }
 }

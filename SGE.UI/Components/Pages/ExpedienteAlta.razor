@@ -1,7 +1,7 @@
 ﻿@page "/expalta/{Id:int}"
 @rendermode InteractiveServer
 @inject CasoDeUsoExpedienteAlta CasoAlta
-@inject CasoDeUsoConsultaUsuarioId UsuarioConsulta
+@inject CasoDeUsoUsuarioConsultaId UsuarioConsulta
 @inject NavigationManager Navigation
 <PageTitle>SGE | Expediente</PageTitle>
 
@@ -17,7 +17,7 @@
         <option>Finalizado</option>
     </select><br>
 </form>
-@error
+@error<br>
 <button class="btn btn-primary" @onclick="() => Agregar(e)">Aceptar</button><br>
 <button class="btn btn-secondary mt-2" @onclick="Volver">Volver al menu</button>
 

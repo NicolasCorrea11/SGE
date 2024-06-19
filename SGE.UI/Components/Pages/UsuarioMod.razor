@@ -1,45 +1,38 @@
 ﻿@page "/usermod/{Id:int}"
 @rendermode InteractiveServer
-@inject CasoDeUsoUsuarioModificacion CasoDeUsoUsuarioModificacion 
-@inject CasoDeUsoConsultaUsuarioId UsuarioConsulta
+@inject CasoDeUsoUsuarioModificacion CasoDeUsoUsuarioModificacion
+@inject CasoDeUsoUsuarioConsultaId UsuarioConsulta
 @inject NavigationManager Navigation
-<h3>UsuarioMod</h3>
-<input placeholder="Id de usuario a modificar" @bind="idus" class="mt-3 form-control" /><br>
-<button class="btn btn-primary" @onclick="() => Consultar(idus)">Buscar</button><br>
-<br>
-@error
-<br>
-<input placeholder="Nombre" @bind="u.Nombre" class="mt-3 form-control" /><br>
-<input placeholder="Apellido" @bind="u.Apellido" class="mt-3 form-control" /><br>
-<input placeholder="Mail" @bind="u.Email" class="mt-3 form-control" /><br>
-<button class="btn btn-primary" @onclick="() => Guardar(u, user)">Guardar cambios</button><br>
+<PageTitle>SGE | Usuarios</PageTitle>
+
+<h3>Modificacion de Usuario</h3>
+<h5>Ingresar nuevos datos para @user.Nombre @user.Apellido</h5>
+<input placeholder="Nombre" @bind="user.Nombre" class="form-control"><br>
+<input placeholder="Apellido" @bind="user.Apellido" class="form-control"><br>
+<input placeholder="Mail" @bind="user.Email" class="form-control"><br>
+<button class="btn btn-primary" @onclick="() => Modificar(user)">Guardar cambios</button><br>
+<br>@error<br>
+
 @code {
-    [Parameter] public int Id {get; set;}
-    Usuario u = new();
+    [Parameter] public int Id { get; set; }
     Usuario user = new();
-    int idus;
     string error = "";
-    public void Consultar(int idu)
-    {
-        u = UsuarioConsulta.Ejecutar(idu);
-    }
-    public void Guardar(Usuario userg, Usuario userp)
-    {
-        try
-        {
-            CasoDeUsoUsuarioModificacion.Ejecutar(userg, userp);
-            Navigation.NavigateTo($"/home/{Id}");
-        }
-        catch (Exception e)
-        {
-            error = e.Message;
-        }
-    }
 
     protected override void OnInitialized()
     {
         user = UsuarioConsulta.Ejecutar(Id);
         StateHasChanged();
     }
-
+    public void Modificar(Usuario user)
+    {
+        try
+        {
+            CasoDeUsoUsuarioModificacion.Ejecutar(user);
+            Navigation.NavigateTo($"/home/{user.Id}");
+        }
+        catch (Exception ex)
+        {
+            error = ex.Message;
+        }
+    }
 }

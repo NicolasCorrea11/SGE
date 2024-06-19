@@ -8,7 +8,7 @@ namespace SGE.Repositorios;
 
 public class RepositorioUsuarios : IUsuarioRepositorio
 {
-    public void AltaUsuario(Usuario u)
+    public void Signup(Usuario u)
     {
         using var context = new BaseContext();
         using SHA256 mySHA = SHA256.Create();
@@ -24,7 +24,7 @@ public class RepositorioUsuarios : IUsuarioRepositorio
         context.SaveChanges();
     }
 
-    public Usuario? InicioSesion(string email, string contraseña)
+    public Usuario? Login(string email, string contraseña)
     {
         using var context = new BaseContext();
         using SHA256 mySHA = SHA256.Create();
@@ -75,7 +75,7 @@ public class RepositorioUsuarios : IUsuarioRepositorio
         Usuario? user = context.Usuarios.Where(u => u.Id == id).SingleOrDefault();
         if (user != null)
         {
-            // user.Permisos[(int)p] = true;
+            user.Permisos.Add(p);
         }
         context.SaveChanges();
     }
@@ -86,7 +86,7 @@ public class RepositorioUsuarios : IUsuarioRepositorio
         Usuario? user = context.Usuarios.Where(u => u.Id == id).SingleOrDefault();
         if (user != null)
         {
-
+            user.Permisos.Remove(p);
         }
         context.SaveChanges();
     }

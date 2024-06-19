@@ -1,0 +1,50 @@
+﻿@page "/gestion/1"
+@rendermode InteractiveServer
+@inject CasoDeUsoUsuarioListar UsuarioListar
+@inject CasoDeUsoUsuarioConsultaId UsuarioConsulta
+@inject NavigationManager Navigation
+<PageTitle>SGE | Gestion</PageTitle>
+
+<h3>Gestion de Usuarios</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Email</th>
+            <th>Accion</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Usuario u in usuarios)
+        {
+            <tr>
+                <td>@u.Id</td>
+                <td>@u.Nombre</td>
+                <td>@u.Apellido</td>
+                <td>@u.Email</td>
+                <td>
+                  <button class="btn btn-primary"><NavLink class="nav-link text-white" href="@($"/usermod/{u.Id}")">Editar</NavLink></button>
+                  @if (u.Id != 1)
+                  {
+                    <button class="btn btn-success"><NavLink class="nav-link text-white" href="@($"/adminperm/{u.Id}")">Permisos</NavLink></button>
+                    <button class="btn btn-danger"><NavLink class="nav-link text-white">Eliminar</NavLink></button>
+                  }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+@code {
+    [Parameter] public int Id {get; set;}
+    List<Usuario> usuarios = [];
+    
+    protected override void OnInitialized()
+    {
+        usuarios = UsuarioListar.Ejecutar();
+    }
+
+}

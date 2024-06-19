@@ -1,11 +1,11 @@
 ﻿@page "/home/{Id:int}"
 @rendermode InteractiveServer
-@inject CasoDeUsoConsultaUsuarioId ConsultaUsuario
+@inject CasoDeUsoUsuarioConsultaId UsuarioConsulta
 @inject NavigationManager Navigation
 <PageTitle>SGE | Home</PageTitle>
 
 <h3>Bienvenido @user.Nombre @user.Apellido</h3>
-<h5>Debajo se encuentran las funcionalidades disponibles para los expedientes y tramites</h5>
+<h5>Debajo se encuentran las funcionalidades disponibles para los expedientes y tramites</h5><br>
 <table class="table">
     <thead>
         <tr>
@@ -44,8 +44,16 @@
         </tr>
     </tbody>
 </table>
+@if (Id == 1)
+{
+    <button class="btn btn-primary"><NavLink class="nav-link text-white" href="/gestion/1">Gestion de Usuarios</NavLink></button>
+}
+else
+{
+    <button class="btn btn-primary"><NavLink class="nav-link text-white" href="@($"/usermod/{user.Id}")">Cambiar datos personales</NavLink></button>
+}
 <br>
-<button class="btn btn-primary"><NavLink class="nav-link text-white" href="/">Cerrar Sesion</NavLink></button>
+<button class="btn btn-danger mt-2"><NavLink class="nav-link text-white" href="/">Cerrar Sesion</NavLink></button>
 
 @code {
     [Parameter] public int Id { get; set; }
@@ -53,6 +61,6 @@
 
     protected override void OnInitialized()
     {
-        user = ConsultaUsuario.Ejecutar(Id);
+        user = UsuarioConsulta.Ejecutar(Id);
     }
 }

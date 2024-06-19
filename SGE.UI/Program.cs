@@ -11,16 +11,14 @@ builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
 builder.Services
+    // CASOS DE EXPEDIENTE
     .AddTransient<CasoDeUsoExpedienteAlta>()
     .AddTransient<CasoDeUsoExpedienteBaja>()
     .AddTransient<CasoDeUsoExpedienteModificacion>()
-    .AddTransient<CasoDeUsoListarExpedientes>()
+    .AddTransient<CasoDeUsoExpedienteListar>()
     .AddTransient<CasoDeUsoExpedienteConsultaId>()
     .AddTransient<CasoDeUsoExpedienteConsultaTodos>()
-    .AddTransient<CasoDeUsoSignup>()
-    .AddTransient<CasoDeUsoLogin>()
-    .AddTransient<CasoDeUsoUsuarioModificacion>()
-    .AddTransient<CasoDeUsoConsultaUsuarioId>()
+    // CASOS DE TRAMITE
     .AddTransient<CasoDeUsoTramiteAlta>()
     .AddTransient<CasoDeUsoTramiteBaja>()
     .AddTransient<CasoDeUsoTramiteModificacion>()
@@ -28,11 +26,20 @@ builder.Services
     .AddTransient<CasoDeUsoTramiteConsultaEtiqueta>()
     .AddTransient<CasoDeUsoTramiteConsultaId>()
     .AddTransient<CasoDeUsoTramiteConsultaExpId>()
+    // CASOS DE USUARIO
+    .AddTransient<CasoDeUsoUsuarioSignup>()
+    .AddTransient<CasoDeUsoUsuarioLogin>()
+    .AddTransient<CasoDeUsoUsuarioModificacion>()
+    .AddTransient<CasoDeUsoUsuarioConsultaId>()
+    .AddTransient<CasoDeUsoUsuarioListar>()
+    // VALIDADORES
     .AddScoped<ExpedienteValidador>()
     .AddScoped<TramiteValidador>()
+    // REPOSITORIOS
     .AddScoped<IUsuarioRepositorio, RepositorioUsuarios>()
     .AddScoped<IExpedienteRepositorio, RepositorioExpediente>()
     .AddScoped<ITramiteRepositorio, RepositorioTramite>()
+    // SERVICIOS
     .AddScoped<IServicioAutorizacion, ServicioAutorizacion>();
 
 var app = builder.Build();

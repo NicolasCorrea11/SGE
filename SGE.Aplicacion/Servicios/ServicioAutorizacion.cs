@@ -10,7 +10,7 @@ public class ServicioAutorizacion: IServicioAutorizacion
         }
         else 
         {
-            return user.Permisos[(int)p] == true;
+            return user.Permisos.Any(x => x == p);
         }
     }
 }
