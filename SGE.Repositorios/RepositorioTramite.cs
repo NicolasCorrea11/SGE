@@ -35,6 +35,12 @@ public class RepositorioTramite : ITramiteRepositorio
         context.SaveChanges();
     }
 
+    public List<Tramite> ListarTramites()
+    {
+        using var context = new BaseContext();
+        return context.Tramites.ToList();
+    }
+
     public List<Tramite> ConsultaPorEtiqueta(EtiquetaTramite e)
     {
         using var context = new BaseContext();

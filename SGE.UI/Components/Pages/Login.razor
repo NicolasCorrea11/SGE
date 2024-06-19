@@ -4,9 +4,11 @@
 <PageTitle>SGE | Login</PageTitle>
 <h3>Login</h3>
 
-<input placeholder="Email" @bind="email" /><br>
-<input placeholder="Contraseña" @bind="pass" /><br>
-<button @onclick="Iniciar">Iniciar</button>
+<form>
+    <input class="form-control" type="email" placeholder="Email" @bind="email"><br>
+    <input class="form-control" type="password" placeholder="Contraseña" @bind="pass"><br>
+</form>
+<button class="btn btn-primary" @onclick="Ingresar">Ingresar</button>
 
 @Error
 
@@ -14,12 +16,11 @@
     Usuario user = new();
     string email = "";
     string pass = "";
-    
     string Error = "";
 
-    public void Iniciar()
+    public void Ingresar()
     {
-        try 
+        try
         {
             user = CasoLogin.Ejecutar(email, pass);
             Navigation.NavigateTo($"/home/{user.Id}");

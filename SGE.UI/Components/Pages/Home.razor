@@ -2,27 +2,49 @@
 @rendermode InteractiveServer
 @inject CasoDeUsoConsultaUsuarioId ConsultaUsuario
 @inject NavigationManager Navigation
-<PageTitle>SGE</PageTitle>
-<h3>Sistema de Gestion de Expedientes</h3>
+<PageTitle>SGE | Home</PageTitle>
 
-<h5>Bienvenido @user.Nombre @user.Apellido</h5>
+<h3>Bienvenido @user.Nombre @user.Apellido</h3>
+<h5>Debajo se encuentran las funcionalidades disponibles para los expedientes y tramites</h5>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Expediente</th>
+            <th>Tramite</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr> 
+            <td><NavLink href="@($"/expalta/{user.Id}")">Agregar expediente</NavLink></td>
+            <td><NavLink href="@($"/tramitealta/{user.Id}")">Agregar tramite</NavLink></td>
+        </tr>
+        <tr> 
+            <td><NavLink href="@($"/expbaja/{user.Id}")">Eliminar expediente</NavLink></td>
+            <td><NavLink href="@($"/tramitebaja/{user.Id}")">Eliminar tramite</NavLink></td>
+        </tr>
+        <tr> 
+            <td></td>
+            <td><NavLink href="@($"/tramitemodificacion/{user.Id}")">Modificar tramite</NavLink></td>
+        </tr>
+        <tr>
+            <td><NavLink href="@($"/explistar/{user.Id}")">Lista de expedientes</NavLink></td>
+            <td><NavLink href="@($"/tramitelistar/{user.Id}")">Lista de tramites</NavLink></td>
+        </tr>
+        <tr>
+            <td><NavLink href="@($"/expconsultaid/{user.Id}")">Consultar expediente con ID</NavLink></td>
+            <td><NavLink href="@($"/tramiteconsultaid/{user.Id}")">Consultar tramite con ID</NavLink></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><NavLink href="@($"/tramiteconsultaetiqueta/{user.Id}")">Consultar tramites por etiqueta</NavLink></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><NavLink href="@($"/tramiteconsultaexpid/{user.Id}")">Consultar tramites por ID de expediente</NavLink></td>
+        </tr>
+    </tbody>
+</table>
 <br>
-<NavLink href="@($"/expalta/{user.Id}")">Dar de alta un expediente</NavLink>
-<br>
-<NavLink href="@($"/expbaja/{user.Id}")">Dar de baja un expediente</NavLink>
-<br>
-<NavLink href="@($"/tramitealta/{user.Id}")">Dar de alta un tramite</NavLink>
-<br>
-<NavLink href="@($"/tramitebaja/{user.Id}")">Dar de baja un tramite</NavLink>
-<br>
-<NavLink href="@($"/expconsultaid/{user.Id}")">Consultar un expediente por su id</NavLink>
-<br>
-<NavLink href="@($"/explistar/{user.Id}")">Listar los expedientes</NavLink>
-<br>
-<NavLink href="@($"/tramitemodificacion/{user.Id}")">Modificar tramite</NavLink>
-<br>
-<NavLink href="@($"/tramiteconsultaid/{user.Id}")">Consultar tramite por su ID</NavLink>
-<br><br><br>
 <NavLink href="/">Cerrar sesion</NavLink>
 
 @code {

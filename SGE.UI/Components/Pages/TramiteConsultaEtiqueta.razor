@@ -1,0 +1,86 @@
+﻿@page "/tramiteconsultaetiqueta/{Id:int}"
+@rendermode InteractiveServer
+@inject CasoDeUsoTramiteConsultaEtiqueta CasoConsulta
+@inject CasoDeUsoConsultaUsuarioId UsuarioConsulta
+@inject NavigationManager Navigation
+<PageTitle>SGE | Tramites</PageTitle>
+
+<h3>Consulta de Tramite por etiqueta</h3>
+<select class="form-control mt-3" @bind="strEtiqueta">
+  <option value="" disabled selected>Seleccione una etiqueta</option>
+  <option>EscritoPresentado</option>
+  <option>PaseAEstudio</option>
+  <option>Despacho</option>
+  <option>Resolucion</option>
+  <option>Notificacion</option>
+  <option>PaseAlArchivo</option>
+</select>
+@* <input placeholder="Etiqueta a consultar" @bind="etiqueta" class="mt-3 form-control"><br> *@
+<button class="btn btn-primary" @onclick="() => Consultar(strEtiqueta)">Aceptar</button><br>
+@if (visible)
+{
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>ID del expediente</th>
+        <th>Etiqueta</th>
+        <th>Contenido</th>
+        <th>Fecha de creacion</th>
+        <th>Fecha de modificacion</th>
+        <th>Ultimo usuario en modificarlo</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach (Tramite t in tramites)
+      {
+        <tr>
+          <td>@t.Id</td>
+          <td>@t.ExpedienteId</td>
+          <td>@t.Etiqueta</td>
+          <td>@t.Contenido</td>
+          <td>@t.FechayHoraCr</td>
+          <td>@t.FechayHoraMod</td>
+          <td>@t.IdUser</td>
+        </tr>
+      }
+    </tbody>
+  </table>
+}
+<button class="btn btn-secondary mt-2" @onclick="Volver">Volver al menu</button>
+
+@error
+
+@code {
+  [Parameter] public int Id { get; set; }
+  Usuario user = new();
+  List<Tramite> tramites = new();
+  string strEtiqueta = "";
+  string error = "";
+  bool visible = false;
+
+  protected override void OnInitialized()
+  {
+    user = UsuarioConsulta.Ejecutar(Id);
+    StateHasChanged();
+  }
+
+  public void Consultar(string strEtiqueta)
+  {
+    try
+    {
+      var etiqueta = (EtiquetaTramite) Enum.Parse(typeof(EtiquetaTramite), strEtiqueta);
+      tramites = CasoConsulta.Ejecutar(etiqueta);
+      visible = true;
+    }
+    catch (Exception ex)
+    {
+      error = ex.Message;
+    }
+  }
+
+  public void Volver()
+  {
+    Navigation.NavigateTo($"home/{user.Id}");
+  }
+}

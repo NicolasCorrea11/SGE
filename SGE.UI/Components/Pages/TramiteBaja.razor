@@ -5,9 +5,9 @@
 @inject NavigationManager Navigation
 <PageTitle>SGE | Tramite</PageTitle>
 <h3>Baja de Tramite</h3>
-<label for="barra">Id de tramite a eliminar</label>
-<input placeholder="Id" @bind="idTram" class="barra" /><br>
-<button @onclick="() => Eliminar(idTram)">Eliminar</button>
+<input placeholder="ID a eliminar" @bind="idTram" class="form-control"><br>
+<button class="btn btn-primary" @onclick="() => Eliminar(idTram)">Eliminar</button><br>
+<button class="btn btn-secondary mt-2" @onclick="Volver">Volver al menu</button>
 @error
 
 @code {
@@ -27,14 +27,17 @@
     try
     {
       CasoBaja.Ejecutar(idTram, user);
-      Navigation.NavigateTo($"/home/{user.Id}");
-      StateHasChanged();
+      Navigation.NavigateTo($"/tramitelistar/{user.Id}");
     }
     catch (Exception ex)
     {
       Console.WriteLine("Entra al catch");
       error = ex.Message;
-      StateHasChanged();
     }
+  }
+
+  public void Volver()
+  {
+    Navigation.NavigateTo($"home/{Id}");
   }
 }

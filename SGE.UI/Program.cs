@@ -22,6 +22,7 @@ builder.Services
     .AddTransient<CasoDeUsoTramiteAlta>()
     .AddTransient<CasoDeUsoTramiteBaja>()
     .AddTransient<CasoDeUsoTramiteModificacion>()
+    .AddTransient<CasoDeUsoTramiteListar>()
     .AddTransient<CasoDeUsoTramiteConsultaEtiqueta>()
     .AddTransient<CasoDeUsoTramiteConsultaId>()
     .AddTransient<CasoDeUsoTramiteConsultaExpId>()

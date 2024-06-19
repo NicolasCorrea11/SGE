@@ -6,10 +6,21 @@
 <PageTitle>SGE | Tramite</PageTitle>
 <h3>Alta de Tramite</h3>
 
-<input class="mt-3 form-control" placeholder="Contenido" @bind="t.Contenido" /><br>
-<input class="form-control" placeholder="Etiqueta" @bind="t.Etiqueta" /><br>
-<input class="form-control" placeholder="Id del expediente" @bind="t.ExpedienteId" /><br>
-<button class="btn btn-primary" @onclick="() => Agregar(t)">Aceptar</button>
+<form>
+  <input class="mt-3 form-control" placeholder="Contenido" @bind="t.Contenido">
+  <select class="form-control mt-3" @bind="strEtiqueta">
+    <option value="" disabled selected>Seleccione una etiqueta</option>
+    <option>EscritoPresentado</option>
+    <option>PaseAEstudio</option>
+    <option>Despacho</option>
+    <option>Resolucion</option>
+    <option>Notificacion</option>
+    <option>PaseAlArchivo</option>
+  </select>
+  <input class="form-control" placeholder="Id del expediente" @bind="t.ExpedienteId"><br>
+</form>
+<button class="btn btn-primary" @onclick="() => Agregar(t)">Aceptar</button><br>
+<button class="btn btn-secondary mt-2" @onclick="Volver">Volver al menu</button>
 
 @error
 
@@ -17,6 +28,7 @@
   [Parameter] public int Id { get; set; }
   Tramite t = new();
   Usuario user = new();
+  string strEtiqueta = "";
   string error = "";
 
   protected override void OnInitialized()
@@ -29,12 +41,17 @@
   {
     try
     {
+      t.Etiqueta = (EtiquetaTramite)Enum.Parse(typeof(EtiquetaTramite), strEtiqueta);
       CasoAlta.Ejecutar(t, user);
-      Navigation.NavigateTo($"/home/{user.Id}"); // NAVIGATE TO LISTA DE TRAMITES
+      Navigation.NavigateTo($"/tramitelistar/{user.Id}");
     }
-    catch(Exception ex)
+    catch (Exception ex)
     {
       error = ex.Message;
     }
+  }
+  public void Volver()
+  {
+    Navigation.NavigateTo($"home/{Id}");
   }
 }

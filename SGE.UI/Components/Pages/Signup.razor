@@ -4,18 +4,19 @@
 @inject NavigationManager NavigationManager
 <PageTitle>SGE | Signup</PageTitle>
 <h3>Signup</h3>
-<input placeholder="Nombre" @bind="u.Nombre" /><br>
-<input placeholder="Apellido" @bind="u.Apellido" /><br>
-<input placeholder="Email" @bind="u.Email" /><br>
-<input placeholder="Contraseña" @bind="u.Contraseña" /><br>
-<button @onclick="Agregar">Agregar</button>
+<form>
+    <input class="form-control" type="text" placeholder="Nombre" @bind="u.Nombre"><br>
+    <input class="form-control" type="text" placeholder="Apellido" @bind="u.Apellido"><br>
+    <input class="form-control" type="email" placeholder="Email" @bind="u.Email"><br>
+    <input class="form-control" type="password" placeholder="Contraseña" @bind="u.Contraseña"><br>
+</form>
+<button class="btn btn-primary mt-2" @onclick="Agregar">Aceptar</button>
+
 @code {
     Usuario u = new Usuario();
     public void Agregar()
     {
         CasoDeUsoSignup.Ejecutar(u);
         NavigationManager.NavigateTo("/");
-
     }
-
 }
