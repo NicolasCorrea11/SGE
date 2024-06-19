@@ -1,0 +1,105 @@
+﻿@page "/adminperm/{Id:int}"
+@rendermode InteractiveServer
+@inject NavigationManager Navigation
+@inject CasoDeUsoUsuarioDarPermiso DarPermiso
+@inject CasoDeUsoListarUsuarios ListarUsuarios
+@inject CasoDeUsoConsultaUsuarioId ConsultaUsuario
+@inject CasoDeUsoUsuarioQuitarPermiso QuitarPerm
+<h3>AdministrarPermisos</h3>
+
+<input placeholder="ID de usuario" @bind="iduser" class="mt-3 form-control" /><br>
+<button class="btn btn-primary" @onclick="() => Consultar(iduser)">Buscar</button><br>
+
+@if (busco)
+{
+    <p> Usuario: <br>
+    Nombre: @u.Nombre <br>
+    Apellido: @u.Apellido <br>
+    Mail: @u.Email <br>
+    Permisos: 
+    Ae <input type="checkbox" @bind="p1" class="AltaE">
+    Be<input type="checkbox" @bind="p2" class="BajaE">
+    Me<input type="checkbox" @bind="p3" class="ModE">
+    At<input type="checkbox" @bind="p4" class="AltaT">
+    Bt<input type="checkbox" @bind="p5" class="BajaT">
+    Mt<input type="checkbox" @bind="p6" class="ModT">
+    <br>
+    </p>
+    <button class="btn btn-primary" @onclick="CambiarPerm">Cambiar permisos</button><br>
+}
+@code {
+    [Parameter] public int Id {get; set;}
+    bool busco = false;
+    bool p1;
+    bool p2;
+    bool p3;
+    bool p4;
+    bool p5;
+    bool p6;
+    int iduser;
+    Usuario u = new();
+    public void CambiarPerm()
+    {
+        if (p1)
+        {
+            DarPermiso.Ejecutar(u.Id,(Permiso)0);
+        }
+        else
+        {
+            QuitarPerm.Ejecutar(u.Id,(Permiso)0);
+        }
+        if (p2)
+        {
+            DarPermiso.Ejecutar(u.Id, (Permiso)1);
+        }
+        else
+        {
+            QuitarPerm.Ejecutar(u.Id,(Permiso)1);
+        }
+        if (p3)
+        {
+            DarPermiso.Ejecutar(u.Id, (Permiso)2);
+        }
+        else
+        {
+            QuitarPerm.Ejecutar(u.Id,(Permiso)2);
+        }
+        if (p4)
+        {
+            DarPermiso.Ejecutar(u.Id, (Permiso)3);
+        }
+        else
+        {
+            QuitarPerm.Ejecutar(u.Id,(Permiso)3);
+        }
+        if (p5)
+        {
+            DarPermiso.Ejecutar(u.Id, (Permiso)4);
+        }
+        else
+        {
+            QuitarPerm.Ejecutar(u.Id,(Permiso)4);
+        }
+        if (p6)
+        {
+            DarPermiso.Ejecutar(u.Id, (Permiso)5);
+        }
+        else
+        {
+            QuitarPerm.Ejecutar(u.Id,(Permiso)5);
+        }
+    }
+    public void Consultar(int id)
+    {
+        u = ConsultaUsuario.Ejecutar(iduser);
+        busco = true;
+        p1 = u.Permisos.Any(x => x == Permiso.ExpedienteAlta);
+        p2 = u.Permisos.Any(x => x == Permiso.ExpedienteBaja);
+        p3 = u.Permisos.Any(x => x == Permiso.ExpedienteModificacion);
+        p4 = u.Permisos.Any(x => x == Permiso.TramiteAlta);
+        p5 = u.Permisos.Any(x => x == Permiso.TramiteBaja);
+        p6 = u.Permisos.Any(x => x == Permiso.TramiteModificacion);
+    }
+
+
+}

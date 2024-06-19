@@ -54,6 +54,19 @@ else
 }
 <br>
 <button class="btn btn-danger mt-2"><NavLink class="nav-link text-white" href="/">Cerrar Sesion</NavLink></button>
+<br>
+<br>
+<br>
+@if (Id == 1) 
+{
+    <NavLink class="nav-link" href="@($"/usermod/{user.Id}")">Editar los datos de un usuario</NavLink>
+    <br>
+    <NavLink class="nav-link" href="@($"/adminperm/{user.Id}")">Administrar permisos</NavLink>
+    <br>
+    <NavLink class="nav-link" href="@($"/listarusers/{user.Id}")">Ver lista de usuarios</NavLink>
+}
+<NavLink class="nav-link" href="@($"/usermodself/{user.Id}")">Editar mis datos de usuario</NavLink>
+<button class="btn btn-primary"><NavLink class="nav-link text-white" href="/">Cerrar Sesion</NavLink></button>
 
 @code {
     [Parameter] public int Id { get; set; }

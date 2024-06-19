@@ -4,6 +4,7 @@ public interface IUsuarioRepositorio
 {
     public void Signup(Usuario u);
     public Usuario? Login(string email, string contraseña);
+    public void EliminarUsuario(int id);
     public void ModificarUsuario(Usuario u);
     public Usuario? ConsultaPorId(int id);
     public List<Usuario> ListarUsuarios();

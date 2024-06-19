@@ -24,6 +24,14 @@ public class RepositorioUsuarios : IUsuarioRepositorio
         context.SaveChanges();
     }
 
+    public void BajaUsuario(int id)
+    {
+        using var context = new BaseContext();
+        Usuario user = context.Usuarios.Where(x => x.Id == id).SingleOrDefault();
+        context.Usuarios.Remove(user);
+        context.SaveChanges();
+    }
+
     public Usuario? Login(string email, string contraseña)
     {
         using var context = new BaseContext();
