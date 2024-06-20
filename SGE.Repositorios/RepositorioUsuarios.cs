@@ -24,11 +24,12 @@ public class RepositorioUsuarios : IUsuarioRepositorio
         context.SaveChanges();
     }
 
-    public void BajaUsuario(int id)
+    public void EliminarUsuario(int id)
     {
         using var context = new BaseContext();
-        Usuario user = context.Usuarios.Where(x => x.Id == id).SingleOrDefault();
-        context.Usuarios.Remove(user);
+        Usuario? user = context.Usuarios.Where(x => x.Id == id).SingleOrDefault();
+        if (user != null)
+            context.Usuarios.Remove(user);
         context.SaveChanges();
     }
 
@@ -54,7 +55,7 @@ public class RepositorioUsuarios : IUsuarioRepositorio
     public void ModificarUsuario(Usuario nuevoU)
     {
         using var context = new BaseContext();
-        var user = context.Usuarios.Where(u => u.Id == nuevoU.Id).SingleOrDefault();
+        Usuario? user = context.Usuarios.Where(u => u.Id == nuevoU.Id).SingleOrDefault();
         if (user != null)
         {
             user.Apellido = nuevoU.Apellido;

@@ -30,10 +30,11 @@ builder.Services
     // CASOS DE USUARIO
     .AddTransient<CasoDeUsoUsuarioSignup>()
     .AddTransient<CasoDeUsoUsuarioLogin>()
+    .AddTransient<CasoDeUsoUsuarioEliminar>()
     .AddTransient<CasoDeUsoUsuarioModificacion>()
     .AddTransient<CasoDeUsoUsuarioConsultaId>()
     .AddTransient<CasoDeUsoUsuarioListar>()
-    .AddTransient<CasoDeUsoUsuarioDarPermiso>()
+    .AddTransient<CasoDeUsoUsuarioOtorgarPermiso>()
     .AddTransient<CasoDeUsoUsuarioQuitarPermiso>()
     // VALIDADORES
     .AddScoped<ExpedienteValidador>()
