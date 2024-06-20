@@ -11,20 +11,11 @@ public class RepositorioUsuarios : IUsuarioRepositorio
     public void Signup(Usuario u)
     {
         using var context = new BaseContext();
-        using SHA256 mySHA = SHA256.Create();
-        byte[] bytes = mySHA.ComputeHash(Encoding.UTF8.GetBytes(u.Contraseña));
-        var sb = new StringBuilder();
-        for (int i = 0; i < bytes.Length; i++)
-        {
-            sb.Append(bytes[i].ToString());
-        }
-        string pass = sb.ToString();
-        u.Contraseña = pass;
         context.Usuarios.Add(u);
         context.SaveChanges();
     }
 
-    public void BajaUsuario(int id)
+    public void EliminarUsuario(int id)
     {
         using var context = new BaseContext();
         Usuario user = context.Usuarios.Where(x => x.Id == id).SingleOrDefault();
@@ -32,17 +23,9 @@ public class RepositorioUsuarios : IUsuarioRepositorio
         context.SaveChanges();
     }
 
-    public Usuario? Login(string email, string contraseña)
+    public Usuario? Login(string email, string pass)
     {
         using var context = new BaseContext();
-        using SHA256 mySHA = SHA256.Create();
-        byte[] bytes = mySHA.ComputeHash(Encoding.UTF8.GetBytes(contraseña));
-        var sb = new StringBuilder();
-        for (int i = 0; i < bytes.Length; i++)
-        {
-            sb.Append(bytes[i].ToString());
-        }
-        string pass = sb.ToString();
         Usuario? user = context.Usuarios.Where(u => u.Email == email && u.Contraseña == pass).SingleOrDefault();
         if (user != null)
         {

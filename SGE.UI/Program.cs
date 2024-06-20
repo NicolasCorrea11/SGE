@@ -45,6 +45,7 @@ builder.Services
     // SERVICIOS
     .AddScoped<IServicioAutorizacion, ServicioAutorizacion>()
     .AddScoped<IServicioActualizacionEstado, ServicioActualizacionEstado>()
+    .AddScoped<IServicioHash, ServicioHash>()
     .AddScoped<IEspecificacionCambioEstado, EspecificacionCambioEstado>();
 
 var app = builder.Build();
