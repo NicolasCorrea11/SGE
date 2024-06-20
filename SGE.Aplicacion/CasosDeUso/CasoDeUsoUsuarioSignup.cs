@@ -1,11 +1,10 @@
 ﻿namespace SGE.Aplicacion;
 
-public class CasoDeUsoUsuarioSignup(IUsuarioRepositorio repoUser, IServicioHash hash)
+public class CasoDeUsoUsuarioSignup(IUsuarioRepositorio repoUser, IServicioHash hashing)
 {
     public void Ejecutar(Usuario user)
     {
-        string pw = hash.HashingPass(user.Contraseña);
-        user.Contraseña = pw;
+        user.Contraseña = hashing.GetHash(user.Contraseña);
         repoUser.Signup(user);
     }
 }

@@ -57,5 +57,6 @@ h1:focus {
 }
 
 .form-control {
-    margin-bottom: 10px;
+    display: inline-block;
+    margin: 5px auto;
 }

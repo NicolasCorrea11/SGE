@@ -4,22 +4,35 @@
 @inject CasoDeUsoExpedienteConsultaId ConsultaIdExp
 @inject CasoDeUsoUsuarioConsultaId UsuarioConsulta
 @inject NavigationManager Navigation
-<PageTitle>SGE | Expediente</PageTitle>
+<PageTitle>SGE | Expedientes</PageTitle>
+
 <h3>Baja de Expediente</h3>
-<input placeholder="ID a eliminar" @bind="idExp" class="mt-3 form-control" /><br>
-<button class="btn btn-primary" @onclick="() => Buscar(idExp)">Buscar</button><br>
-<br>
-<p> Caratula: @e.Caratula <br>
-Estado: @e.Estado <br>
-</p>
-<br>
-@if (busco) {
+@if (!visible)
+{
+    <input placeholder="ID a eliminar" @bind="idExp" class="mt-3 form-control" />
+    <button class="btn btn-primary mt-2" @onclick="() => Buscar(idExp)">Buscar</button>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Caratula</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@e.Caratula</td>
+                <td>@e.Estado</td>
+            </tr>
+        </tbody>
+    </table>
     <button class="btn btn-primary" @onclick="() => Eliminar(idExp)">Eliminar</button>
 }
-@error
 <br>
-
 <button class="btn btn-secondary mt-2" @onclick="Volver">Volver al menu</button>
+<br>@error
 
 
 @code {
@@ -28,7 +41,7 @@ Estado: @e.Estado <br>
     Expediente e = new();
     int idExp;
     string error = "";
-    bool busco = false;
+    bool visible = false;
 
     protected override void OnInitialized()
     {
@@ -39,9 +52,9 @@ Estado: @e.Estado <br>
     public void Buscar(int id)
     {
         e = ConsultaIdExp.Ejecutar(id);
-        busco = true;
+        visible = true;
     }
-    
+
     public void Eliminar(int idExp)
     {
         try

@@ -44,6 +44,7 @@ public class RepositorioUsuarios : IUsuarioRepositorio
             user.Apellido = nuevoU.Apellido;
             user.Nombre = nuevoU.Nombre;
             user.Email = nuevoU.Email;
+            user.Contraseña = nuevoU.Contraseña;
         }
         context.SaveChanges();
     }

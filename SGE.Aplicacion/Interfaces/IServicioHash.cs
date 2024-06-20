@@ -2,5 +2,5 @@
 
 public interface IServicioHash
 {
-    public string HashingPass(string pw);
+    public string GetHash(string pass);
 }

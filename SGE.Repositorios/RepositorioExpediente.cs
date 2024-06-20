@@ -19,12 +19,10 @@ public class RepositorioExpediente : IExpedienteRepositorio
         {
             context.Expedientes.Remove(e);
         }
-        //var trams = context.Tramites.Where(x => x.ExpedienteId == id).ToList();
-        //context.Tramites.RemoveRange(trams);
         context.SaveChanges();
     }
 
-    public void ModificarExpediente(Expediente nuevoE, int id)
+    public void ModificarExpediente(Expediente nuevoE)
     {
         using var context = new BaseContext();
         var e = context.Expedientes.Where(e => e.Id == nuevoE.Id).SingleOrDefault();
@@ -32,8 +30,6 @@ public class RepositorioExpediente : IExpedienteRepositorio
         {
             e.Caratula = nuevoE.Caratula;
             e.Estado = nuevoE.Estado;
-            e.FechayHoraMod = DateTime.Now;
-            e.IdUser = id;
         }
         context.SaveChanges();
     }
@@ -41,8 +37,7 @@ public class RepositorioExpediente : IExpedienteRepositorio
     public Expediente? ConsultaPorId(int id)
     {
         using var context = new BaseContext();
-        Expediente? e = context.Expedientes.Where(e => e.Id == id).SingleOrDefault();
-        return e;
+        return context.Expedientes.Where(e => e.Id == id).SingleOrDefault();
     }
 
     public List<object> ConsultaTodos(int id)

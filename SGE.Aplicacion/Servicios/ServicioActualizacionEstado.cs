@@ -12,7 +12,7 @@ public class ServicioActualizacionEstado(IExpedienteRepositorio repo, IEspecific
       if (e != null && nuevoEstado != null)
       {
         e.Estado = nuevoEstado;
-        repo.ModificarExpediente(e, idUser);
+        repo.ModificarExpediente(e);
       }
     }
   }

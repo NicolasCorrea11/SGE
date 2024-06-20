@@ -1,11 +1,11 @@
 ﻿namespace SGE.Aplicacion;
 
-public class CasoDeUsoUsuarioLogin(IUsuarioRepositorio repoUser, IServicioHash hash)
+public class CasoDeUsoUsuarioLogin(IUsuarioRepositorio repoUser, IServicioHash hashing)
 {
-    public Usuario Ejecutar(string email, string contraseña)
+    public Usuario Ejecutar(string email, string pass)
     {
-        string pw = hash.HashingPass(contraseña);
-        Usuario? user = repoUser.Login(email, pw);
+        string hash = hashing.GetHash(pass);
+        Usuario? user = repoUser.Login(email, hash);
         if (user == null)
         {
             throw new UsuarioException("Usuario no existe");

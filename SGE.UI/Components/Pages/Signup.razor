@@ -3,7 +3,8 @@
 @inject CasoDeUsoUsuarioSignup CasoDeUsoSignup
 @inject NavigationManager NavigationManager
 <PageTitle>SGE | Signup</PageTitle>
-<h3>Signup</h3>
+
+<h3>Ingrese sus datos personales</h3>
 <form>
     <input class="form-control" type="text" placeholder="Nombre" @bind="u.Nombre"><br>
     <input class="form-control" type="text" placeholder="Apellido" @bind="u.Apellido"><br>
@@ -12,15 +13,26 @@
 </form>
 <button class="btn btn-primary mt-2" @onclick="Agregar">Aceptar</button><br>
 <button class="btn btn-secondary mt-2" @onclick="Volver">Volver al inicio</button>
+<br>@error
+
 @code {
     Usuario u = new Usuario();
-    public void Agregar()
+    string error = "";
+
+    private void Agregar()
     {
-        CasoDeUsoSignup.Ejecutar(u);
-        Volver();
+        try
+        {
+            CasoDeUsoSignup.Ejecutar(u);
+            Volver();
+        }
+        catch (Exception ex)
+        {
+            error = ex.Message;
+        }
     }
 
-    public void Volver()
+    private void Volver()
     {
         NavigationManager.NavigateTo($"/");
     }

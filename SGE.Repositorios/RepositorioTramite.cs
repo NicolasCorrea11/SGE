@@ -21,7 +21,7 @@ public class RepositorioTramite : ITramiteRepositorio
         context.SaveChanges();
     }
 
-    public void ModificacionTramite(Tramite nuevoT, int idUser)
+    public void ModificacionTramite(Tramite nuevoT)
     {
         using var context = new BaseContext();
         Tramite? t = context.Tramites.Where(t => t.Id == nuevoT.Id).SingleOrDefault();
@@ -29,8 +29,6 @@ public class RepositorioTramite : ITramiteRepositorio
         {
             t.Contenido = nuevoT.Contenido;
             t.Etiqueta = nuevoT.Etiqueta;
-            t.FechayHoraMod = DateTime.Now;
-            t.IdUser = idUser;
         }
         context.SaveChanges();
     }

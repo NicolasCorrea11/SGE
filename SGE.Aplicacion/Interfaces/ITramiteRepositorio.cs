@@ -4,9 +4,9 @@ public interface ITramiteRepositorio
 {
   public void AltaTramite(Tramite t);
   public void BajaTramite(int id);
-  public void ModificacionTramite(Tramite t, int idUser);
+  public void ModificacionTramite(Tramite t);
   public List<Tramite> ListarTramites();
   public List<Tramite> ConsultaPorEtiqueta(EtiquetaTramite etiqueta);
   public Tramite? ConsultaPorId(int id);
-  public List<Tramite> ConsultaPorExpedienteId(int expedienteId);
+  public List<Tramite> ConsultaPorExpedienteId(int expId);
 }

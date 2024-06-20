@@ -8,8 +8,8 @@
 <table class="table">
     <thead>
         <tr>
-            <th>Expediente</th>
-            <th>Tramite</th>
+            <th>Expedientes</th>
+            <th>Tramites</th>
         </tr>
     </thead>
     <tbody>
@@ -53,14 +53,23 @@ else
 }
 <br>
 <button class="btn btn-danger mt-2"><NavLink class="nav-link text-white" href="/">Cerrar Sesion</NavLink></button>
+<br>@error
 
 
 @code {
     [Parameter] public int Id { get; set; }
     Usuario user = new();
+    string error = "";
 
     protected override void OnInitialized()
     {
-        user = UsuarioConsulta.Ejecutar(Id);
+        try
+        {
+            user = UsuarioConsulta.Ejecutar(Id);
+        }
+        catch (Exception ex)
+        {
+            error = ex.Message;
+        }
     }
 }

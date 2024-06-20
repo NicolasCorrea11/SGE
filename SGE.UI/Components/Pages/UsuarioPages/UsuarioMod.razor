@@ -10,23 +10,33 @@
 <input placeholder="Nombre" @bind="user.Nombre" class="form-control"><br>
 <input placeholder="Apellido" @bind="user.Apellido" class="form-control"><br>
 <input placeholder="Mail" @bind="user.Email" class="form-control"><br>
+<input type="password" placeholder="Contraseña" @bind="pass" class="form-control"><br>
 <button class="btn btn-primary" @onclick="() => Modificar(user)">Guardar cambios</button><br>
 <br>@error<br>
 
 @code {
     [Parameter] public int Id { get; set; }
     Usuario user = new();
+    string pass = "";
     string error = "";
 
     protected override void OnInitialized()
     {
-        user = UsuarioConsulta.Ejecutar(Id);
-        StateHasChanged();
+        try
+        {
+            user = UsuarioConsulta.Ejecutar(Id);
+            StateHasChanged();
+        }
+        catch (Exception ex)
+        {
+            error = ex.Message;
+        }
     }
     public void Modificar(Usuario user)
     {
         try
         {
+            user.Contraseña = pass;
             CasoDeUsoUsuarioModificacion.Ejecutar(user);
             Navigation.NavigateTo($"/home/{user.Id}");
         }
