@@ -1,27 +1,45 @@
 ﻿@page "/expbaja/{Id:int}"
 @rendermode InteractiveServer
 @inject CasoDeUsoExpedienteBaja CasoBaja
+@inject CasoDeUsoExpedienteConsultaId ConsultaIdExp
 @inject CasoDeUsoUsuarioConsultaId UsuarioConsulta
 @inject NavigationManager Navigation
 <PageTitle>SGE | Expediente</PageTitle>
 <h3>Baja de Expediente</h3>
 <input placeholder="ID a eliminar" @bind="idExp" class="mt-3 form-control" /><br>
-<button class="btn btn-primary" @onclick="() => Eliminar(idExp)">Eliminar</button>
+<button class="btn btn-primary" @onclick="() => Buscar(idExp)">Buscar</button><br>
+<br>
+<p> Caratula: @e.Caratula <br>
+Estado: @e.Estado <br>
+</p>
+<br>
+@if (busco) {
+    <button class="btn btn-primary" @onclick="() => Eliminar(idExp)">Eliminar</button>
+}
 @error
 <br>
+
 <button class="btn btn-secondary mt-2" @onclick="Volver">Volver al menu</button>
 
 
 @code {
     [Parameter] public int Id { get; set; }
     Usuario user = new();
+    Expediente e = new();
     int idExp;
     string error = "";
+    bool busco = false;
 
     protected override void OnInitialized()
     {
         user = UsuarioConsulta.Ejecutar(Id);
         StateHasChanged();
+    }
+
+    public void Buscar(int id)
+    {
+        e = ConsultaIdExp.Ejecutar(id);
+        busco = true;
     }
     
     public void Eliminar(int idExp)

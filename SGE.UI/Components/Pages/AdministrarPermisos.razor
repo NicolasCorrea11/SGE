@@ -1,7 +1,7 @@
 ﻿@page "/adminperm/{Id:int}"
 @rendermode InteractiveServer
 @inject NavigationManager Navigation
-@inject CasoDeUsoUsuarioDarPermiso DarPermiso
+@inject CasoDeUsoUsuarioOtorgarPermiso OtorgarPermiso
 @inject CasoDeUsoUsuarioListar ListarUsuarios
 @inject CasoDeUsoUsuarioConsultaId ConsultaUsuario
 @inject CasoDeUsoUsuarioQuitarPermiso QuitarPerm
@@ -31,7 +31,7 @@
     {
         if (p1)
         {
-            DarPermiso.Ejecutar(u.Id, (Permiso)0);
+            OtorgarPermiso.Ejecutar(u.Id, (Permiso)0);
         }
         else
         {
@@ -39,7 +39,7 @@
         }
         if (p2)
         {
-            DarPermiso.Ejecutar(u.Id, (Permiso)1);
+            OtorgarPermiso.Ejecutar(u.Id, (Permiso)1);
         }
         else
         {
@@ -47,7 +47,7 @@
         }
         if (p3)
         {
-            DarPermiso.Ejecutar(u.Id, (Permiso)2);
+            OtorgarPermiso.Ejecutar(u.Id, (Permiso)2);
         }
         else
         {
@@ -55,7 +55,7 @@
         }
         if (p4)
         {
-            DarPermiso.Ejecutar(u.Id, (Permiso)3);
+            OtorgarPermiso.Ejecutar(u.Id, (Permiso)3);
         }
         else
         {
@@ -63,7 +63,7 @@
         }
         if (p5)
         {
-            DarPermiso.Ejecutar(u.Id, (Permiso)4);
+            OtorgarPermiso.Ejecutar(u.Id, (Permiso)4);
         }
         else
         {
@@ -71,7 +71,7 @@
         }
         if (p6)
         {
-            DarPermiso.Ejecutar(u.Id, (Permiso)5);
+            OtorgarPermiso.Ejecutar(u.Id, (Permiso)5);
         }
         else
         {
