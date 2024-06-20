@@ -7,10 +7,14 @@
 
 <h3>Modificacion de Usuario</h3>
 <h5>Ingresar nuevos datos para @user.Nombre @user.Apellido</h5>
-<input placeholder="Nombre" @bind="user.Nombre" class="form-control"><br>
-<input placeholder="Apellido" @bind="user.Apellido" class="form-control"><br>
-<input placeholder="Mail" @bind="user.Email" class="form-control"><br>
-<input type="password" placeholder="Contraseña" @bind="pass" class="form-control"><br>
+<label for="nom">Nombre: </label>
+<input placeholder="Nombre" @bind="user.Nombre" class="form-control" id="nom"><br>
+<label for="ape">Apellido: </label>
+<input placeholder="Apellido" @bind="user.Apellido" class="form-control" id="ape"><br>
+<label for="ema">Email: </label>
+<input placeholder="Mail" @bind="user.Email" class="form-control" id="ema"><br>
+<label for="pw">Contraseña: </label>
+<input type="password" placeholder="" @bind="pass" class="form-control" id="pw"><br>
 <button class="btn btn-primary" @onclick="() => Modificar(user)">Guardar cambios</button><br>
 <br>@error<br>
 
