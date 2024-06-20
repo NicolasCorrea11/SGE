@@ -33,7 +33,7 @@
 {
     error = "Debe seleccionar una etiqueta";
 }
-@error
+<CuadroDialogo @ref=dialogo Mensaje=@error />
 
 @code {
   [Parameter] public int Id { get; set; }
@@ -43,6 +43,7 @@
   int idTram;
   bool visible = false;
   string? strEtiqueta;
+  CuadroDialogo dialogo = null!;
 
   public void consultar(int idTram)
     {
@@ -56,6 +57,7 @@
         {
             error = err.Message;
             visible = false;
+            dialogo.Mostrar();
         }
     }
 
@@ -76,6 +78,7 @@
     catch (Exception ex)
     {
       error = ex.Message;
+      dialogo.Mostrar();
     }
   }
 

@@ -34,10 +34,10 @@ else
     </table>
     <button class="btn btn-primary" @onclick="() => Eliminar(idTram)">Eliminar</button>
 }
+<CuadroDialogo @ref=dialogo Mensaje=@error />
 <br>
 <button class="btn btn-secondary mt-2" @onclick="Volver">Volver al menu</button>
 <br>
-@error
 
 @code {
   [Parameter] public int Id { get; set; }
@@ -46,6 +46,8 @@ else
   int idTram;
   string error = "";
   bool visible = false;
+
+  CuadroDialogo dialogo = null!;
 
   protected override void OnInitialized()
   {
@@ -64,6 +66,7 @@ else
     {
       error = e.Message;
       visible = false;
+      dialogo.Mostrar();
     }
     
   }
@@ -78,6 +81,7 @@ else
     catch (Exception ex)
     {
       error = ex.Message;
+      dialogo.Mostrar();
     }
   }
 

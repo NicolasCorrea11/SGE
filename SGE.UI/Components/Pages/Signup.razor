@@ -12,14 +12,15 @@
     <input class="form-control" type="password" placeholder="Contraseña" @bind="u.Contraseña"><br>
 </form>
 <button class="btn btn-primary mt-2" @onclick="Agregar">Aceptar</button><br>
+<CuadroDialogo @ref=dialogo Mensaje=@error />
 <button class="btn btn-secondary mt-2" @onclick="Volver">Volver al inicio</button>
 <br>
-@error
 
 @code {
     Usuario u = new Usuario();
     string error = "";
 
+    CuadroDialogo dialogo = null!;
     private void Agregar()
     {
         try
@@ -30,6 +31,7 @@
         catch (Exception ex)
         {
             error = ex.Message;
+            dialogo.Mostrar();
         }
     }
 

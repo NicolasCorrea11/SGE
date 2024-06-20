@@ -29,11 +29,7 @@
 }
 <button class="btn btn-secondary mt-2" @onclick="Volver">Volver al menu</button>
 <br>
-@if (@error == "Must specify valid information for parsing in the string. (Parameter 'value')")
-{
-    error = "Debe seleccionar un estado";
-}
-@error
+<CuadroDialogo @ref=dialogo Mensaje=@error />
 
 
 @code {
@@ -44,6 +40,7 @@
     string strEstado = "";
     bool visible = false;
     int idexp;
+    CuadroDialogo dialogo = null!;
 
     public void consultar(int ide)
     {
@@ -56,6 +53,7 @@
         catch (Exception err)
         {
             error = err.Message;
+            dialogo.Mostrar();
             visible = false;
         }
     }
@@ -71,6 +69,11 @@
         catch (Exception e)
         {
             error = e.Message;
+            if (error == "Must specify valid information for parsing in the string. (Parameter 'value')")
+            {
+                error = "Debe seleccionar un estado";
+            }
+            dialogo.Mostrar();
         }
     }
     protected override void OnInitialized()
