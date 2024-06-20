@@ -48,13 +48,15 @@ public class RepositorioExpediente : IExpedienteRepositorio
     public List<object> ConsultaTodos(int id)
     {
         using var context = new BaseContext();
-        List<object> dev = new();
-        var exp = context.Expedientes.Where(e => e.Id == id).SingleOrDefault();
+        List<object> lista = [];
+        Expediente? exp = context.Expedientes.Where(e => e.Id == id).SingleOrDefault();
         if (exp != null)
-            dev.Add(exp);
-        var trams = context.Tramites.Where(t => t.ExpedienteId == id).ToList();
-        dev.AddRange(trams);
-        return dev;
+        {
+            lista.Add(exp);
+            var tramites = context.Tramites.Where(t => t.ExpedienteId == id).ToList();
+            lista.AddRange(tramites);
+        }
+        return lista;
     }
 
     public List<Expediente> ListarExpedientes()
