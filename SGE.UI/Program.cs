@@ -39,6 +39,7 @@ builder.Services
     // VALIDADORES
     .AddScoped<ExpedienteValidador>()
     .AddScoped<TramiteValidador>()
+    .AddScoped<UsuarioValidador>()
     // REPOSITORIOS
     .AddScoped<IUsuarioRepositorio, RepositorioUsuarios>()
     .AddScoped<IExpedienteRepositorio, RepositorioExpediente>()

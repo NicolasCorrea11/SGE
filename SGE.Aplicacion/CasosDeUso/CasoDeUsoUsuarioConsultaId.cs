@@ -7,7 +7,7 @@ public class CasoDeUsoUsuarioConsultaId(IUsuarioRepositorio repoUser)
         Usuario? user = repoUser.ConsultaPorId(id);
         if (user == null)
         {
-            throw new UsuarioException("");
+            throw new UsuarioException("El usuario no existe");
         }
         else
         {

@@ -33,6 +33,8 @@
     </table>
 }
 <button class="btn btn-secondary mt-2" @onclick="Volver">Volver al menu</button>
+<br>
+@error
 
 @code {
     [Parameter] public int Id { get; set; }
@@ -52,10 +54,12 @@
         {
             e = CasoConsulta.Ejecutar(idExp);
             visible = true;
+            error = "";
         }
         catch (Exception e)
         {
             error = e.Message;
+            visible = false;
         }
     }
 }

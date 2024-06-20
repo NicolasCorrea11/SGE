@@ -5,7 +5,8 @@
 <PageTitle>SGE | Tramites</PageTitle>
 
 <h3>Consulta de Tramite por ID</h3>
-<input placeholder="ID a consultar" @bind="idTramite" class="mt-3 form-control"><br>
+<label for="idt">Id de tramite a consultar</label>
+<input placeholder="ID a consultar" @bind="idTramite" class="mt-3 form-control" id="idt"><br>
 <button class="btn btn-primary" @onclick="() => Consultar(idTramite)">Aceptar</button><br>
 @if (visible)
 {
@@ -35,6 +36,8 @@
   </table>
 }
 <button class="btn btn-secondary mt-2" @onclick="Volver">Volver al menu</button>
+<br>
+@error
 
 @code {
   [Parameter] public int Id { get; set; }
@@ -50,9 +53,11 @@
     {
       t = CasoConsulta.Ejecutar(idTramite);
       visible = true;
+      error = "";
     }
     catch (Exception ex)
     {
+      visible = false;
       error = ex.Message;
     }
   }
