@@ -75,12 +75,14 @@
     private void Quitar(int id, Permiso p)
     {
         QuitarPermiso.Ejecutar(id, p);
+        OnInitialized();
         StateHasChanged();
     }
 
     private void Otorgar(int id, Permiso p)
     {
         OtorgarPermiso.Ejecutar(id, p);
+        OnInitialized();
         StateHasChanged();
     }
 

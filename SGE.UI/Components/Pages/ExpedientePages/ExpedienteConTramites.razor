@@ -62,6 +62,7 @@
 }
 <button class="btn btn-primary mt-2" @onclick="() => Consultar(idExp)">Aceptar</button><br>
 <button class="btn btn-secondary mt-2" @onclick="Volver">Volver al menu</button>
+<br>
 @error
 
 @code {
@@ -83,6 +84,7 @@
         catch (Exception ex)
         {
             error = ex.Message;
+            visible = false;
         }
     }
 

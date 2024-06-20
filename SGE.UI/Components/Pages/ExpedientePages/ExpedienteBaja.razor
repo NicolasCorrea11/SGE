@@ -9,7 +9,8 @@
 <h3>Baja de Expediente</h3>
 @if (!visible)
 {
-    <input placeholder="ID a eliminar" @bind="idExp" class="mt-3 form-control" />
+    <label for="inp">Id de expediente a eliminar</label>
+    <input placeholder="ID a eliminar" @bind="idExp" class="mt-3 form-control" id="inp"/>
     <button class="btn btn-primary mt-2" @onclick="() => Buscar(idExp)">Buscar</button>
 }
 else
@@ -17,12 +18,14 @@ else
     <table class="table">
         <thead>
             <tr>
+                <th>Id</th>
                 <th>Caratula</th>
                 <th>Estado</th>
             </tr>
         </thead>
         <tbody>
             <tr>
+                <td>@e.Id</td>
                 <td>@e.Caratula</td>
                 <td>@e.Estado</td>
             </tr>
@@ -32,7 +35,8 @@ else
 }
 <br>
 <button class="btn btn-secondary mt-2" @onclick="Volver">Volver al menu</button>
-<br>@error
+<br>
+@error
 
 
 @code {
@@ -51,8 +55,16 @@ else
 
     public void Buscar(int id)
     {
-        e = ConsultaIdExp.Ejecutar(id);
-        visible = true;
+        try
+        {
+            e = ConsultaIdExp.Ejecutar(id);
+            visible = true;
+            error = "";
+        }
+        catch (Exception err)
+        {
+            error = err.Message;
+        }
     }
 
     public void Eliminar(int idExp)
@@ -62,9 +74,9 @@ else
             CasoBaja.Ejecutar(idExp, user);
             Navigation.NavigateTo($"/home/{user.Id}");
         }
-        catch (Exception e)
+        catch (Exception err)
         {
-            error = e.Message;
+            error = err.Message;
         }
     }
 

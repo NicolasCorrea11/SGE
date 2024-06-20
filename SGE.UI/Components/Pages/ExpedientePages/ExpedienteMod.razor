@@ -1,15 +1,22 @@
 ﻿@page "/expmod/{Id:int}"
 @rendermode InteractiveServer
 @inject CasoDeUsoExpedienteModificacion CasoDeUsoExpedienteModificacion
+@inject CasoDeUsoExpedienteConsultaId ConsultaIdExp
 @inject NavigationManager Navigation
 @inject CasoDeUsoUsuarioConsultaId UsuarioConsulta
 <PageTitle>SGE | Expedientes</PageTitle>
 
 <h3>Modificacion de Expediente</h3>
+<label for="consid">Id del expediente a modificar</label>
+<input class="mt-3 form-control" placeholder="Id del expediente" @bind="idexp" id="consid"><br>
+<button class="btn btn-primary" @onclick="() => consultar(idexp)">Buscar</button><br>
+@if (visible) 
+{
 <form>
-    <input class="mt-3 form-control" placeholder="Id del expediente" @bind="e.Id"><br>
-    <input class="form-control" placeholder="Caratula" @bind="e.Caratula"><br>
-    <select class="form-control" @bind="strEstado">
+    <label for="carat">Caratula: </label>
+    <input class="form-control" placeholder="Caratula" @bind="e.Caratula" id="carat"><br>
+    <label for="est">Estado: </label>
+    <select class="form-control" @bind="strEstado" id="est">
         <option value="" disabled selected>Seleccione un estado</option>
         <option>RecienIniciado</option>
         <option>ParaResolver</option>
@@ -18,9 +25,15 @@
         <option>Finalizado</option>
     </select><br>
 </form>
-@error
-<button class="btn btn-primary" @onclick="() => Modificar(e)">Aceptar</button><br>
+<button class="btn btn-primary" @onclick="() => Modificar(e)">Guardar cambios</button><br>
+}
 <button class="btn btn-secondary mt-2" @onclick="Volver">Volver al menu</button>
+<br>
+@if (@error == "Must specify valid information for parsing in the string. (Parameter 'value')")
+{
+    error = "Debe seleccionar un estado";
+}
+@error
 
 
 @code {
@@ -29,6 +42,23 @@
     Expediente e = new();
     Usuario user = new();
     string strEstado = "";
+    bool visible = false;
+    int idexp;
+
+    public void consultar(int ide)
+    {
+        try
+        {
+            e = ConsultaIdExp.Ejecutar(ide);
+            visible = true;
+            error = "";
+        }
+        catch (Exception err)
+        {
+            error = err.Message;
+            visible = false;
+        }
+    }
 
     public void Modificar(Expediente ex)
     {

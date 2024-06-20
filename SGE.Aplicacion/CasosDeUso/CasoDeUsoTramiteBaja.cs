@@ -1,6 +1,6 @@
 ﻿namespace SGE.Aplicacion;
 
-public class CasoDeUsoTramiteBaja(ITramiteRepositorio repoTram, IServicioAutorizacion auth)
+public class CasoDeUsoTramiteBaja(ITramiteRepositorio repoTram, IServicioAutorizacion auth, IServicioActualizacionEstado actEstado)
 {
   public void Ejecutar(int id, Usuario user)
   {
@@ -10,7 +10,9 @@ public class CasoDeUsoTramiteBaja(ITramiteRepositorio repoTram, IServicioAutoriz
     }
     else
     {
+      Tramite? t = repoTram.ConsultaPorId(id);
       repoTram.BajaTramite(id);
+      actEstado.ActualizarEstado(t.ExpedienteId, user.Id);
     }
   }
 }

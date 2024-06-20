@@ -8,7 +8,7 @@ public class CasoDeUsoUsuarioLogin(IUsuarioRepositorio repoUser, IServicioHash h
         Usuario? user = repoUser.Login(email, hash);
         if (user == null)
         {
-            throw new UsuarioException("Usuario no existe");
+            throw new UsuarioException("El usuario no existe");
         }
         else
         {

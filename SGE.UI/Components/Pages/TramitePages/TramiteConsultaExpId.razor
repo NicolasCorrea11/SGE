@@ -6,7 +6,8 @@
 <PageTitle>SGE | Tramites</PageTitle>
 
 <h3>Consulta de Tramite por ID de Expediente</h3>
-<input placeholder="ID a consultar" @bind="idExp"><br>
+<label for="ide">Id del expediente: </label>
+<input placeholder="ID a consultar" @bind="idExp" id="ide"><br>
 <button class="btn btn-primary" @onclick="() => Consultar(idExp)">Aceptar</button><br>
 @if (visible)
 {
