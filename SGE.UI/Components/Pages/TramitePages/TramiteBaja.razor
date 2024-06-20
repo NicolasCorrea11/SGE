@@ -53,11 +53,11 @@ else
     StateHasChanged();
   }
 
-  public void Buscar(int idt)
+  public void Buscar(int idTram)
   {
     try
     {
-      t = CasoConsulta.Ejecutar(idt);
+      t = CasoConsulta.Ejecutar(idTram);
       visible = true;
     }
     catch (Exception e)
