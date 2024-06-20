@@ -2,96 +2,89 @@
 @rendermode InteractiveServer
 @inject NavigationManager Navigation
 @inject CasoDeUsoUsuarioOtorgarPermiso OtorgarPermiso
-@inject CasoDeUsoUsuarioListar ListarUsuarios
 @inject CasoDeUsoUsuarioConsultaId ConsultaUsuario
-@inject CasoDeUsoUsuarioQuitarPermiso QuitarPerm
+@inject CasoDeUsoUsuarioQuitarPermiso QuitarPermiso
 <PageTitle>SGE | Usuarios</PageTitle>
 
-<h3>Administrar permisos de @u.Nombre @u.Apellido</h3><br>
-    ExpedienteAlta  <input type="checkbox" @bind="p1"><br>
-    ExpedienteBaja  <input type="checkbox" @bind="p2"><br>
-    ExpedienteModificacion  <input type="checkbox" @bind="p3"><br>
-    TramiteAlta  <input type="checkbox" @bind="p4"><br>
-    TramiteBaja  <input type="checkbox" @bind="p5"><br>
-    TramiteModificacion  <input type="checkbox" @bind="p6"><br>
-<button class="btn btn-primary mt-2" @onclick="CambiarPermisos">Cambiar permisos</button><br>
-<button class="btn btn-secondary mt-2" @onclick="Volver">Volver al menu de gestion</button>
-
+<h3>Administrar permisos de @user.Nombre @user.Apellido</h3>
+<h6>Para visualizar los cambios debe recargar la pagina</h6>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Permiso</th>
+            <th>Estado</th>
+            <th>Accion</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Permiso p in permisos)
+        {
+            <tr>
+            <td>@p</td>
+            <td>@GetEstado(p)</td>
+            <td>
+                @if (EstaDisponible(p))
+                {
+                    <button class="btn btn-danger" @onclick="() => Quitar(user.Id, p)">Eliminar</button>
+                }
+                else
+                {
+                    <button class="btn btn-success" @onclick="() => Otorgar(user.Id, p)">Agregar</button>
+                }
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+<button class="btn btn-secondary mt-2" @onclick="Volver">Volver al menu de gestion</button><br>
+@error
 
 @code {
     [Parameter] public int Id { get; set; }
-    bool p1;
-    bool p2;
-    bool p3;
-    bool p4;
-    bool p5;
-    bool p6;
-    Usuario u = new();
-    public void CambiarPermisos()
-    {
-        if (p1)
-        {
-            OtorgarPermiso.Ejecutar(u.Id, (Permiso)0);
-        }
-        else
-        {
-            QuitarPerm.Ejecutar(u.Id, (Permiso)0);
-        }
-        if (p2)
-        {
-            OtorgarPermiso.Ejecutar(u.Id, (Permiso)1);
-        }
-        else
-        {
-            QuitarPerm.Ejecutar(u.Id, (Permiso)1);
-        }
-        if (p3)
-        {
-            OtorgarPermiso.Ejecutar(u.Id, (Permiso)2);
-        }
-        else
-        {
-            QuitarPerm.Ejecutar(u.Id, (Permiso)2);
-        }
-        if (p4)
-        {
-            OtorgarPermiso.Ejecutar(u.Id, (Permiso)3);
-        }
-        else
-        {
-            QuitarPerm.Ejecutar(u.Id, (Permiso)3);
-        }
-        if (p5)
-        {
-            OtorgarPermiso.Ejecutar(u.Id, (Permiso)4);
-        }
-        else
-        {
-            QuitarPerm.Ejecutar(u.Id, (Permiso)4);
-        }
-        if (p6)
-        {
-            OtorgarPermiso.Ejecutar(u.Id, (Permiso)5);
-        }
-        else
-        {
-            QuitarPerm.Ejecutar(u.Id, (Permiso)5);
-        }
-        Volver();
-    }
+    string error = "";
+    Usuario user = new();
+    List<Permiso> permisos = [
+        Permiso.ExpedienteAlta, 
+        Permiso.ExpedienteBaja,
+        Permiso.ExpedienteModificacion,
+        Permiso.TramiteAlta,
+        Permiso.TramiteBaja,
+        Permiso.TramiteModificacion
+    ];
 
     protected override void OnInitialized()
     {
-        u = ConsultaUsuario.Ejecutar(Id);
-        p1 = u.Permisos.Any(p => p == Permiso.ExpedienteAlta);
-        p2 = u.Permisos.Any(p => p == Permiso.ExpedienteBaja);
-        p3 = u.Permisos.Any(p => p == Permiso.ExpedienteModificacion);
-        p4 = u.Permisos.Any(p => p == Permiso.TramiteAlta);
-        p5 = u.Permisos.Any(p => p == Permiso.TramiteBaja);
-        p6 = u.Permisos.Any(p => p == Permiso.TramiteModificacion);
+        try
+        {
+            user = ConsultaUsuario.Ejecutar(Id);
+        }
+        catch (Exception ex)
+        {
+            error = ex.Message;
+        }
     }
 
-    public void Volver()
+    private string GetEstado(Permiso p)
+    {
+        if (EstaDisponible(p))
+            return "Disponible";
+        return "No Disponible";
+    }
+    private bool EstaDisponible(Permiso p) => user.Permisos.Any(x => x == p);
+
+    private void Quitar(int id, Permiso p)
+    {
+        QuitarPermiso.Ejecutar(id, p);
+        StateHasChanged();
+    }
+
+    private void Otorgar(int id, Permiso p)
+    {
+        OtorgarPermiso.Ejecutar(id, p);
+        StateHasChanged();
+    }
+
+    private void Volver()
     {
         Navigation.NavigateTo($"gestion/1");
     }

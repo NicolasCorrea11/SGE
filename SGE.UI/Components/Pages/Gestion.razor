@@ -7,6 +7,7 @@
 <PageTitle>SGE | Gestion</PageTitle>
 
 <h3>Gestion de Usuarios</h3>
+<h6>Para visualizar la eliminacion de usuario debe recargar la pagina</h6>
 <table class="table">
   <thead>
     <tr>
@@ -26,17 +27,11 @@
         <td>@u.Apellido</td>
         <td>@u.Email</td>
         <td>
-          <button class="btn btn-primary">
-            <NavLink class="nav-link text-white" href="@($"/usermod/{u.Id}")">Editar</NavLink>
-          </button>
+          <button class="btn btn-primary" @onclick="() => Editar(u.Id)">Editar</button>
           @if (u.Id != 1)
           {
-            <button class="btn btn-success">
-              <NavLink class="nav-link text-white" href="@($"/adminperm/{u.Id}")">Permisos</NavLink>
-            </button>
-            <td>
-              <button class="btn btn-danger nav-link text-white" @onclick="() => Eliminar(u.Id)">Eliminar</button>
-            </td>
+            <button class="btn btn-success" @onclick="() => Permisos(u.Id)">Permisos</button>
+            <button class="btn btn-danger" @onclick="() => Eliminar(u.Id)">Eliminar</button>
           }
         </td>
       </tr>
@@ -57,12 +52,19 @@
     StateHasChanged();
   }
 
-  public void Eliminar(int id)
+  private void Editar(int id)
+  {
+    Navigation.NavigateTo($"usermod/{id}");
+  }
+  private void Permisos(int id)
+  {
+    Navigation.NavigateTo($"adminperm/{id}");
+  }
+  private void Eliminar(int id)
   {
     try
     {
       CasoBaja.Ejecutar(id);
-      Navigation.NavigateTo($"gestion/1"); // REFRESH (NO LO HACE SOLO)
     }
     catch (Exception ex)
     {
@@ -70,7 +72,7 @@
     }
   }
 
-  public void Volver()
+  private void Volver()
   {
     Navigation.NavigateTo($"home/1");
   }
