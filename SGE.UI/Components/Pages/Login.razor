@@ -1,6 +1,7 @@
 ﻿@rendermode InteractiveServer
 @inject CasoDeUsoUsuarioLogin CasoLogin
 @inject NavigationManager Navigation
+@inject UsuarioLogeado usuario
 <PageTitle>SGE | Login</PageTitle>
 
 <h3>Ingrese a su cuenta</h3>
@@ -24,7 +25,8 @@
         try
         {
             user = CasoLogin.Ejecutar(email, pass);
-            Navigation.NavigateTo($"/home/{user.Id}");
+            usuario.setUser(user);
+            Navigation.NavigateTo($"/home");
         }
         catch (Exception ex)
         {

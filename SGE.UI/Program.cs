@@ -48,7 +48,8 @@ builder.Services
     .AddScoped<IServicioAutorizacion, ServicioAutorizacion>()
     .AddScoped<IServicioActualizacionEstado, ServicioActualizacionEstado>()
     .AddScoped<IServicioHash, ServicioHash>()
-    .AddScoped<IEspecificacionCambioEstado, EspecificacionCambioEstado>();
+    .AddScoped<IEspecificacionCambioEstado, EspecificacionCambioEstado>()
+    .AddSingleton<UsuarioLogeado>();
 
 var app = builder.Build();
 

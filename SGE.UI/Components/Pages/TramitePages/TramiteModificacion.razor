@@ -1,9 +1,9 @@
-﻿@page "/tramitemodificacion/{Id:int}"
+﻿@page "/tramitemodificacion"
 @rendermode InteractiveServer
 @inject CasoDeUsoTramiteModificacion CasoModificacion
-@inject CasoDeUsoUsuarioConsultaId UsuarioConsulta
 @inject CasoDeUsoTramiteConsultaId CasoConsulta
 @inject NavigationManager Navigation
+@inject UsuarioLogeado usuario
 <PageTitle>SGE | Tramite</PageTitle>
 <h3>Modificacion de Tramite</h3>
 <label for="consid">Id del tramite a modificar</label>
@@ -36,13 +36,11 @@
 <CuadroDialogo @ref=dialogo Mensaje=@error />
 
 @code {
-  [Parameter] public int Id { get; set; }
   Tramite t = new();
-  Usuario user = new();
   string error = "";
   int idTram;
   bool visible = false;
-  string? strEtiqueta;
+  string strEtiqueta = "";
   CuadroDialogo dialogo = null!;
 
   public void consultar(int idTram)
@@ -61,19 +59,13 @@
         }
     }
 
-  protected override void OnInitialized()
-  {
-    user = UsuarioConsulta.Ejecutar(Id);
-    StateHasChanged();
-  }
-
   public void Modificar(Tramite t)
   {
     try
     {
       t.Etiqueta = (EtiquetaTramite)Enum.Parse(typeof(EtiquetaTramite), strEtiqueta);
-      CasoModificacion.Ejecutar(t, user);
-      Navigation.NavigateTo($"/home/{user.Id}");
+      CasoModificacion.Ejecutar(t, usuario.user);
+      Navigation.NavigateTo($"/home");
     }
     catch (Exception ex)
     {
@@ -84,6 +76,6 @@
 
   public void Volver()
   {
-    Navigation.NavigateTo($"home/{Id}");
+    Navigation.NavigateTo($"/home");
   }
 }

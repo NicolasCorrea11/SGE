@@ -1,9 +1,9 @@
-﻿@page "/expmod/{Id:int}"
+﻿@page "/expmod"
 @rendermode InteractiveServer
 @inject CasoDeUsoExpedienteModificacion CasoDeUsoExpedienteModificacion
 @inject CasoDeUsoExpedienteConsultaId ConsultaIdExp
 @inject NavigationManager Navigation
-@inject CasoDeUsoUsuarioConsultaId UsuarioConsulta
+@inject UsuarioLogeado usuario
 <PageTitle>SGE | Expedientes</PageTitle>
 
 <h3>Modificacion de Expediente</h3>
@@ -33,10 +33,8 @@
 
 
 @code {
-    [Parameter] public int Id { get; set; }
     string error = "";
     Expediente e = new();
-    Usuario user = new();
     string strEstado = "";
     bool visible = false;
     int idexp;
@@ -63,8 +61,8 @@
         try
         {
             e.Estado = (EstadoExpediente)Enum.Parse(typeof(EstadoExpediente), strEstado);
-            CasoDeUsoExpedienteModificacion.Ejecutar(e, user);
-            Navigation.NavigateTo($"/home/{Id}");
+            CasoDeUsoExpedienteModificacion.Ejecutar(e, usuario.user);
+            Navigation.NavigateTo($"/home");
         }
         catch (Exception e)
         {
@@ -76,14 +74,9 @@
             dialogo.Mostrar();
         }
     }
-    protected override void OnInitialized()
-    {
-        user = UsuarioConsulta.Ejecutar(Id);
-        StateHasChanged();
-    }
     public void Volver()
     {
-        Navigation.NavigateTo($"home/{Id}");
+        Navigation.NavigateTo($"/home");
     }
 
 }

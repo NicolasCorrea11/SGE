@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "yMeC3tJC9yQUagr2tl9p6yliCJzOeJh4Z0PrkXsvWjw94Z48QVfVwYX2VvGNq5g/WzbRZNdnv7qkhxoPvZ8EVg==",
+  "dgSpecHash": "xqzj1ovzDxhqVr55Gt12xfXGJOTBbITlZsvlWoRgvh7o80qi/GHXNNgmxrupYaM8PGV7tkS2bXrS7oBcJpPMYw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Acer\\Desktop\\SGE-copy\\SGE.Repositorios\\SGE.Repositorios.csproj",
+  "projectFilePath": "C:\\Users\\Acer\\Desktop\\SGE\\SGE.Repositorios\\SGE.Repositorios.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Acer\\.nuget\\packages\\microsoft.data.sqlite.core\\8.0.6\\microsoft.data.sqlite.core.8.0.6.nupkg.sha512",
     "C:\\Users\\Acer\\.nuget\\packages\\microsoft.entityframeworkcore\\8.0.6\\microsoft.entityframeworkcore.8.0.6.nupkg.sha512",

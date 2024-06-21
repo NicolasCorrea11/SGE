@@ -3,8 +3,11 @@
 @inject CasoDeUsoUsuarioModificacion CasoDeUsoUsuarioModificacion
 @inject CasoDeUsoUsuarioConsultaId UsuarioConsulta
 @inject NavigationManager Navigation
+@inject UsuarioLogeado usuario
 <PageTitle>SGE | Usuarios</PageTitle>
 
+@if (usuario.user.Id == 1 || usuario.user.Id == Id)
+{
 <h3>Modificacion de Usuario</h3>
 <h5>Ingresar nuevos datos para @user.Nombre @user.Apellido</h5>
 <label for="nom">Nombre: </label>
@@ -16,6 +19,11 @@
 <label for="pw">Contraseña: </label>
 <input type="password" placeholder="" @bind="pass" class="form-control" id="pw"><br>
 <button class="btn btn-primary" @onclick="() => Modificar(user)">Guardar cambios</button><br>
+}
+else
+{
+<p>el usuario ingresado y el que se quiere modificar no coinciden</p>
+}
 <br>@error<br>
 
 @code {
@@ -42,7 +50,7 @@
         {
             user.Contraseña = pass;
             CasoDeUsoUsuarioModificacion.Ejecutar(user);
-            Navigation.NavigateTo($"/home/{user.Id}");
+            Navigation.NavigateTo($"/home");
         }
         catch (Exception ex)
         {

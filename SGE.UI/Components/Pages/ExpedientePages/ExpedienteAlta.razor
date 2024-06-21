@@ -1,8 +1,8 @@
-﻿@page "/expalta/{Id:int}"
+﻿@page "/expalta"
 @rendermode InteractiveServer
 @inject CasoDeUsoExpedienteAlta CasoAlta
-@inject CasoDeUsoUsuarioConsultaId UsuarioConsulta
 @inject NavigationManager Navigation
+@inject UsuarioLogeado usuario
 <PageTitle>SGE | Expediente</PageTitle>
 
 <h3>Alta de Expediente</h3>
@@ -27,24 +27,17 @@
 @code {
     [Parameter] public int Id { get; set; }
     Expediente e = new();
-    Usuario user = new();
     string strEstado = "";
     string error = "";
     CuadroDialogo dialogo = null!;
-
-    protected override void OnInitialized()
-    {
-        user = UsuarioConsulta.Ejecutar(Id);
-        StateHasChanged();
-    }
 
     public void Agregar(Expediente e)
     {
         try
         {
             e.Estado = (EstadoExpediente)Enum.Parse(typeof(EstadoExpediente), strEstado);
-            CasoAlta.Ejecutar(e, user);
-            Navigation.NavigateTo($"/explistar/{Id}");
+            CasoAlta.Ejecutar(e, usuario.user);
+            Navigation.NavigateTo($"/explistar");
         }
         catch (Exception ex)
         {
@@ -60,7 +53,7 @@
 
     public void Volver()
     {
-        Navigation.NavigateTo($"home/{Id}");
+        Navigation.NavigateTo($"/home");
     }
 
 }

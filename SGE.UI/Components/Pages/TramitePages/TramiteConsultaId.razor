@@ -1,4 +1,4 @@
-﻿@page "/tramiteconsultaid/{Id:int}"
+﻿@page "/tramiteconsultaid"
 @rendermode InteractiveServer
 @inject CasoDeUsoTramiteConsultaId CasoConsulta
 @inject NavigationManager Navigation
@@ -40,8 +40,6 @@
 <CuadroDialogo @ref=dialogo Mensaje=@error />
 
 @code {
-  [Parameter] public int Id { get; set; }
-  Usuario user = new();
   Tramite t = new();
   int idTramite;
   string error = "";
@@ -66,6 +64,6 @@
 
   public void Volver()
   {
-    Navigation.NavigateTo($"home/{Id}");
+    Navigation.NavigateTo($"/home");
   }
 }

@@ -1,4 +1,4 @@
-﻿@page "/explistar/{Id:int}"
+﻿@page "/explistar"
 @rendermode InteractiveServer
 @inject CasoDeUsoExpedienteListar CasoListar
 @inject NavigationManager Navigation
@@ -42,7 +42,7 @@
 
     public void Volver()
     {
-        Navigation.NavigateTo($"home/{Id}");
+        Navigation.NavigateTo($"/home");
     }
 
 }

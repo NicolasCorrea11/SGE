@@ -1,4 +1,4 @@
-﻿@page "/exptramlistar/{Id:int}"
+﻿@page "/exptramlistar"
 @rendermode InteractiveServer
 @inject CasoDeUsoExpedienteConsultaTodos ConsultaTodos
 @inject NavigationManager Navigation
@@ -93,6 +93,6 @@
 
     public void Volver()
     {
-        Navigation.NavigateTo($"home/{Id}");
+        Navigation.NavigateTo($"/home");
     }
 }

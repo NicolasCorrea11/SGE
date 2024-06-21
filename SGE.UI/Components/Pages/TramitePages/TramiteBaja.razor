@@ -1,9 +1,9 @@
-﻿@page "/tramitebaja/{Id:int}"
+﻿@page "/tramitebaja"
 @rendermode InteractiveServer
 @inject CasoDeUsoTramiteBaja CasoBaja
 @inject CasoDeUsoTramiteConsultaId CasoConsulta
-@inject CasoDeUsoUsuarioConsultaId CasoDeUsoConsultaUsuarioId
 @inject NavigationManager Navigation
+@inject UsuarioLogeado usuario
 <PageTitle>SGE | Tramite</PageTitle>
 <h3>Baja de Tramite</h3>
 @if (!visible)
@@ -49,12 +49,6 @@ else
 
   CuadroDialogo dialogo = null!;
 
-  protected override void OnInitialized()
-  {
-    user = CasoDeUsoConsultaUsuarioId.Ejecutar(Id);
-    StateHasChanged();
-  }
-
   public void Buscar(int idTram)
   {
     try
@@ -75,8 +69,8 @@ else
   {
     try
     {
-      CasoBaja.Ejecutar(idTram, user);
-      Navigation.NavigateTo($"/tramitelistar/{user.Id}");
+      CasoBaja.Ejecutar(idTram, usuario.user);
+      Navigation.NavigateTo($"/tramitelistar");
     }
     catch (Exception ex)
     {
@@ -87,6 +81,6 @@ else
 
   public void Volver()
   {
-    Navigation.NavigateTo($"home/{Id}");
+    Navigation.NavigateTo($"/home");
   }
 }
