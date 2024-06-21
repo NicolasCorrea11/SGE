@@ -2,7 +2,7 @@
 
 public interface IUsuarioRepositorio
 {
-    public void Signup(Usuario u);
+    public bool Signup(Usuario u);
     public Usuario? Login(string email, string pass);
     public void EliminarUsuario(int id);
     public void ModificarUsuario(Usuario u);

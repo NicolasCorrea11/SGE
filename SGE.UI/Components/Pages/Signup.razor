@@ -19,17 +19,20 @@
     Usuario u = new Usuario();
     string error = "";
     CuadroDialogo dialogo = null!;
+    string pwant = "";
 
     void Agregar()
     {
         try
         {
+            pwant = u.Contraseña;
             CasoSignup.Ejecutar(u);
             Volver();
         }
         catch (Exception ex)
         {
             error = ex.Message;
+            u.Contraseña = pwant;
             dialogo.Mostrar();
         }
     }

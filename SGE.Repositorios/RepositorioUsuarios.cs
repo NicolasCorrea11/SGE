@@ -8,11 +8,20 @@ namespace SGE.Repositorios;
 
 public class RepositorioUsuarios : IUsuarioRepositorio
 {
-    public void Signup(Usuario u)
+    public bool Signup(Usuario u)
     {
         using var context = new BaseContext();
-        context.Usuarios.Add(u);
-        context.SaveChanges();
+        Usuario? rep = context.Usuarios.Where(x => x.Email == u.Email).SingleOrDefault();
+        if (rep == null) 
+        {
+            context.Usuarios.Add(u);
+            context.SaveChanges();
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
     public void EliminarUsuario(int id)
