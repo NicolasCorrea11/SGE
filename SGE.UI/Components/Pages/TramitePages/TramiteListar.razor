@@ -38,6 +38,10 @@
 @code {
   List<Tramite> tramites = [];
 
+    protected override void OnInitialized()
+    {
+        tramites = CasoListar.Ejecutar();
+    }
 
   void Volver()
   {

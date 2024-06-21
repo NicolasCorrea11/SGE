@@ -35,13 +35,15 @@ else
 <p>el usuario ingresado y el que se quiere modificar no coinciden</p>
 }
 <button class="btn btn-secondary mt-2" @onclick="Volver">Volver al menu de gestion</button>
-<br>@error<br>
+<br>
+<CuadroDialogo @ref=dialogo Mensaje=@error />
 
 @code {
     [Parameter] public int Id { get; set; }
     Usuario user = new();
     string pass = "";
     string error = "";
+    CuadroDialogo dialogo = null!;
 
     protected override void OnInitialized()
     {
@@ -66,6 +68,7 @@ else
         catch (Exception ex)
         {
             error = ex.Message;
+            dialogo.Mostrar();
         }
     }
     private void Volver()
