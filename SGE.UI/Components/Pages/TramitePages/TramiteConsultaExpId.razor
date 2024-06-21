@@ -5,10 +5,16 @@
 <PageTitle>SGE | Tramites</PageTitle>
 
 <h3>Consulta de Tramite por ID de Expediente</h3>
-<label for="ide">Id del expediente: </label>
-<input placeholder="ID a consultar" @bind="idExp" id="ide"><br>
-<button class="btn btn-primary" @onclick="() => Consultar(idExp)">Aceptar</button><br>
-@if (visible)
+
+@if (!visible)
+{
+  <form>
+    <label class="mt-2" for="idexp">ID del expediente:</label>
+    <input class="form-control" @bind="idExp" id="idexp">
+  </form>
+  <button class="btn btn-primary mt-2" @onclick="() => Consultar(idExp)">Aceptar</button><br>
+}
+else
 {
   <table class="table">
     <thead>
@@ -47,6 +53,7 @@
   int idExp;
   string error = "";
   bool visible = false;
+  
   void Consultar(int idExp)
   {
     try
@@ -60,8 +67,5 @@
     }
   }
 
-  void Volver()
-  {
-    Navigation.NavigateTo($"/home");
-  }
+  void Volver() => Navigation.NavigateTo($"/home");
 }

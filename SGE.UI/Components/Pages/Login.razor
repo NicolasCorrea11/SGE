@@ -1,7 +1,7 @@
 ﻿@rendermode InteractiveServer
 @inject CasoDeUsoUsuarioLogin CasoLogin
 @inject NavigationManager Navigation
-@inject UsuarioLogeado usuario
+@inject UsuarioLogeado Usuario
 <PageTitle>SGE | Login</PageTitle>
 
 <h3>Ingrese a su cuenta</h3>
@@ -9,30 +9,31 @@
     <input class="form-control" type="email" placeholder="Email" @bind="email"><br>
     <input class="form-control" type="password" placeholder="Contraseña" @bind="pass"><br>
 </form>
-<button class="btn btn-primary" @onclick="Ingresar">Ingresar</button>
-<CuadroDialogo @ref=dialogo Mensaje=@Error />
+<button class="btn btn-primary mt-2" @onclick="Ingresar">Ingresar</button>
+<button class="btn btn-secondary mt-2" @onclick="Registrarse">Registrarse</button>
+<CuadroDialogo @ref=dialogo Mensaje=@error />
 <br>
 
 @code {
     Usuario user = new();
     string email = "";
     string pass = "";
-    string Error = "";
+    string error = "";
     CuadroDialogo dialogo = null!;
 
-    public void Ingresar()
+    void Ingresar()
     {
         try
         {
             user = CasoLogin.Ejecutar(email, pass);
-            usuario.setUser(user);
+            Usuario.SetUser(user);
             Navigation.NavigateTo($"/home");
         }
         catch (Exception ex)
         {
-            Error = ex.Message;
+            error = ex.Message;
             dialogo.Mostrar();
         }
     }
-
+    void Registrarse() => Navigation.NavigateTo($"/signup");
 }

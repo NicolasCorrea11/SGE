@@ -4,12 +4,13 @@
 @inject CasoDeUsoTramiteConsultaId CasoConsulta
 @inject NavigationManager Navigation
 @inject UsuarioLogeado usuario
-<PageTitle>SGE | Tramite</PageTitle>
-<h3>Baja de Tramite</h3>
+<PageTitle>SGE | Tramites</PageTitle>
+
+<h3>Eliminar Tramite</h3>
 @if (!visible)
 {
-  <label for="inp">Id de tramite a eliminar</label>
-  <input placeholder="ID a eliminar" @bind="idTram" class="mt-3 form-control" id="inp" />
+  <label class="mt-2" for="inp">ID de tramite:</label>
+  <input @bind="idTram" class="form-control" id="inp" />
   <button class="btn btn-primary mt-2" @onclick="() => Buscar(idTram)">Buscar</button>
 }
 else
@@ -17,10 +18,10 @@ else
   <table class="table">
     <thead>
       <tr>
-        <th>Id</th>
+        <th>ID</th>
         <th>Contenido</th>
         <th>Etiqueta</th>
-        <th>Expediente asociado</th>
+        <th>ID del expediente</th>
       </tr>
     </thead>
     <tbody>
@@ -32,7 +33,7 @@ else
       </tr>
     </tbody>
   </table>
-  <button class="btn btn-primary" @onclick="() => Eliminar(idTram)">Eliminar</button>
+  <button class="btn btn-primary mt-2" @onclick="() => Eliminar(idTram)">Eliminar</button>
 }
 <CuadroDialogo @ref=dialogo Mensaje=@error />
 <br>
@@ -79,8 +80,5 @@ else
     }
   }
 
-  void Volver()
-  {
-    Navigation.NavigateTo($"/home");
-  }
+  void Volver() => Navigation.NavigateTo($"/home");
 }

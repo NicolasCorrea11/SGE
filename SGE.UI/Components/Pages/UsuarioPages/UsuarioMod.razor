@@ -5,34 +5,35 @@
 @inject NavigationManager Navigation
 @inject UsuarioLogeado usuario
 <PageTitle>SGE | Usuarios</PageTitle>
+
 <h3>Ingresar nuevos datos para @user.Nombre @user.Apellido</h3>
 @if (usuario.user.Id == 1 || usuario.user.Id == Id)
 {
     <form>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Email</th>
-                <th>Password</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><input @bind="user.Nombre" class="form-control" id="nom"><br></td>
-                <td><input @bind="user.Apellido" class="form-control" id="ape"><br></td>
-                <td><input @bind="user.Email" class="form-control" id="ema"><br></td>
-                <td><input type="password" @bind="pass" class="form-control" id="pw"><br></td>
-            </tr>
-        </tbody>
-    </table>
-</form>
-<button class="btn btn-primary" @onclick="() => Modificar(user)">Guardar cambios</button><br>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Email</th>
+                    <th>Password</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input @bind="user.Nombre" class="form-control" id="nom"></td>
+                    <td><input @bind="user.Apellido" class="form-control" id="ape"></td>
+                    <td><input @bind="user.Email" class="form-control" id="ema"></td>
+                    <td><input type="password" @bind="pass" class="form-control" id="pw"></td>
+                </tr>
+            </tbody>
+        </table>
+    </form>
+    <button class="btn btn-primary" @onclick="() => Modificar(user)">Guardar cambios</button><br>
 }
 else
 {
-<p>el usuario ingresado y el que se quiere modificar no coinciden</p>
+    <p>el usuario ingresado y el que se quiere modificar no coinciden</p>
 }
 <button class="btn btn-secondary mt-2" @onclick="Volver">Volver al menu de gestion</button>
 <br>
@@ -56,14 +57,13 @@ else
             error = ex.Message;
         }
     }
-    private void Modificar(Usuario user)
+    void Modificar(Usuario user)
     {
         try
         {
             user.Contraseña = pass;
             CasoDeUsoUsuarioModificacion.Ejecutar(user);
             Navigation.NavigateTo($"/home");
-            StateHasChanged();
         }
         catch (Exception ex)
         {
@@ -71,8 +71,5 @@ else
             dialogo.Mostrar();
         }
     }
-    private void Volver()
-    {
-        Navigation.NavigateTo($"/home");
-    }
+    void Volver() => Navigation.NavigateTo($"/home");
 }

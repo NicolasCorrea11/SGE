@@ -4,18 +4,20 @@
 @inject CasoDeUsoTramiteConsultaId CasoConsulta
 @inject NavigationManager Navigation
 @inject UsuarioLogeado usuario
-<PageTitle>SGE | Tramite</PageTitle>
+<PageTitle>SGE | Tramites</PageTitle>
 
 <h3>Modificacion de Tramite</h3>
-<label for="consid">Id del tramite a modificar</label>
-<input class="mt-3 form-control" placeholder="Id del tramite" @bind="idTram" id="consid"><br>
-<button class="btn btn-primary" @onclick="() => Consultar(idTram)">Buscar</button><br>
-@if (visible)
+@if (!visible)
+{
+  <label class="mt-2" for="consid">ID a modificar:</label>
+  <input class="form-control" @bind="idTram" id="consid"><br>
+  <button class="btn btn-primary mt-2" @onclick="() => Consultar(idTram)">Buscar</button><br>
+}
+else
 {
   <form>
-    <label for="cont">Contenido: </label>
-    <input class="form-control" placeholder="Contenido" @bind="t.Contenido" id="cont"><br>
-    <label for="etiq">Etiqueta: </label>
+    <label class="mt-2" for="cont">Contenido:</label>
+    <input class="form-control" @bind="t.Contenido" id="cont">
     <select class="form-control" @bind="strEtiqueta" id="etiq">
       <option value="" disabled selected>Seleccione una etiqueta</option>
       <option>EscritoPresentado</option>
@@ -26,9 +28,7 @@
       <option>PaseAlArchivo</option>
     </select><br>
   </form>
-  <button class="btn btn-primary" @onclick="() => Modificar(t)">Guardar cambios</button>
-
-  <br>
+  <button class="btn btn-primary mt-2" @onclick="() => Modificar(t)">Guardar cambios</button><br>
 }
 <button class="btn btn-secondary mt-2" @onclick="Volver">Volver al menu</button>
 <br>
@@ -46,7 +46,7 @@
   string strEtiqueta = "";
   CuadroDialogo dialogo = null!;
 
-  public void Consultar(int idTram)
+  void Consultar(int idTram)
   {
     try
     {
@@ -67,7 +67,7 @@
     {
       t.Etiqueta = (EtiquetaTramite)Enum.Parse(typeof(EtiquetaTramite), strEtiqueta);
       CasoModificacion.Ejecutar(t, usuario.user);
-      Navigation.NavigateTo($"/home");
+      Navigation.NavigateTo($"/tramitelistar");
     }
     catch (Exception ex)
     {
@@ -76,8 +76,5 @@
     }
   }
 
-  public void Volver()
-  {
-    Navigation.NavigateTo($"/home");
-  }
+  void Volver() => Navigation.NavigateTo($"/home");
 }

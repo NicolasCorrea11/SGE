@@ -2,15 +2,15 @@
 
 public class UsuarioLogeado
 {
-    public Usuario user {get; set;} = new();
+    public Usuario User { get; set; } = new();
 
-    public void setUser(Usuario user)
+    public void SetUser(Usuario user)
     {
-        this.user = user;
+        User = user;
     }
 
     public void CerrarSesion()
     {
-        this.user = new Usuario();
+        User = new Usuario();
     }
 }

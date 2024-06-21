@@ -2,10 +2,10 @@
 @rendermode InteractiveServer
 @inject CasoDeUsoUsuarioConsultaId UsuarioConsulta
 @inject NavigationManager Navigation
-@inject UsuarioLogeado usuario
+@inject UsuarioLogeado Usuario
 <PageTitle>SGE | Home</PageTitle>
 
-<h3>Bienvenido @usuario.user.Nombre @usuario.user.Apellido </h3>
+<h3>Bienvenido @Usuario.user.Nombre @Usuario.user.Apellido </h3>
 <table class="table">
     <thead>
         <tr>
@@ -39,38 +39,39 @@
             <td><NavLink class="nav-link" href="@($"/tramiteconsultaetiqueta")">Consultar tramites con etiqueta</NavLink></td>
         </tr>
         <tr>
+            <td></td>
             <td><NavLink class="nav-link" href="@($"/tramiteconsultaexpid")">Consultar tramites con ID de expediente</NavLink></td>
         </tr>
     </tbody>
 </table>
-@if (@usuario.user.Id == 1)
+@if (@Usuario.user.Id == 1)
 {
     <button class="btn btn-primary mt-2"><NavLink class="nav-link text-white" href="/gestion">Gestion de Usuarios</NavLink></button>
 }
 else
 {
-    <button class="btn btn-primary mt-2"><NavLink class="nav-link text-white" href="@($"/usermod/{usuario.user.Id}")">Cambiar datos personales</NavLink></button>
+    <button class="btn btn-primary mt-2"><NavLink class="nav-link text-white" href="@($"/usermod/{Usuario.user.Id}")">Cambiar datos personales</NavLink></button>
 }
 <br>
-<button class="btn btn-danger mt-2"><NavLink class="nav-link text-white" @onclick="cerrar">Cerrar Sesion</NavLink></button>
-<br>
-@code {
+<button class="btn btn-danger mt-2"><NavLink class="nav-link text-white" @onclick="Cerrar">Cerrar Sesion</NavLink></button>
 
+
+@code {
     protected override void OnInitialized()
     {
         try
         {
-            usuario.user = UsuarioConsulta.Ejecutar(usuario.user.Id);
+            Usuario.user = UsuarioConsulta.Ejecutar(Usuario.user.Id);
             StateHasChanged();
         }
-        catch (Exception e)
+        catch
         {
             Navigation.NavigateTo("/");
         }
     }
-    private void cerrar()
+    void Cerrar()
     {
-        usuario.CerrarSesion();
+        Usuario.CerrarSesion();
         Navigation.NavigateTo("/");
     }
 }

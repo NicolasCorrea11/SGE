@@ -3,13 +3,13 @@
 @inject CasoDeUsoExpedienteAlta CasoAlta
 @inject NavigationManager Navigation
 @inject UsuarioLogeado usuario
-<PageTitle>SGE | Expediente</PageTitle>
+<PageTitle>SGE | Expedientes</PageTitle>
 
-<h3>Alta de Expediente</h3>
+<h3>Agregar Expediente</h3>
 <form>
     <label for="carat">Caratula del expediente: </label>
-    <input class="mt-3 form-control" placeholder="Caratula" @bind="e.Caratula" id="carat" />
-    <label for="despl">Estado del expediente: </label>
+    <input class="form-control" placeholder="Caratula" @bind="e.Caratula" id="carat">
+    <label class="mt-3" for="despl">Estado del expediente: </label>
     <select class="form-control" @bind="strEstado" id="despl">
         <option value="" disabled selected>Seleccione un estado</option>
         <option>RecienIniciado</option>

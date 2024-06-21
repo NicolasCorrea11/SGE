@@ -4,7 +4,10 @@
 @inject CasoDeUsoExpedienteListar CasoListar
 @inject NavigationManager Navigation
 <PageTitle>SGE | Expedientes</PageTitle>
+
 <h3>Lista de Expedientes</h3>
+@if (expedientes.Count > 0)
+{
 <table class="table">
     <thead>
         <tr>
@@ -30,19 +33,17 @@
         }
     </tbody>
 </table>
+}
+else
+{
+    <br><h5>No existen expedientes</h5>
+}
 <button class="btn btn-secondary mt-2" @onclick="Volver">Volver al menu</button>
 
 @code {
     List<Expediente> expedientes = [];
 
-    protected override void OnInitialized()
-    {
-        expedientes = CasoListar.Ejecutar();
-    }
-
-    void Volver()
-    {
-        Navigation.NavigateTo($"/home");
-    }
-
+    protected override void OnInitialized() => expedientes = CasoListar.Ejecutar();
+    
+    void Volver() => Navigation.NavigateTo($"/home");
 }

@@ -6,10 +6,16 @@
 <PageTitle>SGE | Tramites</PageTitle>
 
 <h3>Consulta de Tramite por ID</h3>
-<label for="idt">Id de tramite a consultar</label>
-<input placeholder="ID a consultar" @bind="idTramite" class="mt-3 form-control" id="idt"><br>
-<button class="btn btn-primary" @onclick="() => Consultar(idTramite)">Aceptar</button><br>
-@if (visible)
+
+@if (!visible)
+{
+  <form>
+    <label for="idt">ID de Tramite:</label>
+    <input placeholder="ID a consultar" @bind="idTramite" class="form-control" id="idt">
+  </form>
+  <button class="btn btn-primary mt-2" @onclick="() => Consultar(idTramite)">Aceptar</button><br>
+}
+else
 {
   <table class="table">
     <thead>
@@ -36,8 +42,7 @@
     </tbody>
   </table>
 }
-<button class="btn btn-secondary mt-2" @onclick="Volver">Volver al menu</button>
-<br>
+<button class="btn btn-secondary mt-2" @onclick="Volver">Volver al menu</button><br>
 <CuadroDialogo @ref=dialogo Mensaje=@error />
 
 @code {
@@ -63,8 +68,5 @@
     }
   }
 
-  void Volver()
-  {
-    Navigation.NavigateTo($"/home");
-  }
+  void Volver() => Navigation.NavigateTo($"/home");
 }

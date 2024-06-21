@@ -7,15 +7,15 @@ public class UsuarioValidador
         msg = "";
         if (user.Nombre == "")
         {
-            msg += "El nombre no puede estar vacio  |||\n";
+            msg += "El nombre no puede estar vacio ||\n";
         }
         if (user.Apellido == "")
         {
-            msg += "El apellido no puede estar vacio |||\n";
+            msg += "El apellido no puede estar vacio ||\n";
         }
         if (user.Email == "")
         {
-            msg += "El Email no puede ser vacio |||\n";
+            msg += "El Email no puede ser vacio ||\n";
         }
         if (user.Contraseña == "")
         {

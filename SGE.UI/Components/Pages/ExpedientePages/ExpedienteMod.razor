@@ -3,19 +3,21 @@
 @inject CasoDeUsoExpedienteModificacion CasoDeUsoExpedienteModificacion
 @inject CasoDeUsoExpedienteConsultaId ConsultaIdExp
 @inject NavigationManager Navigation
-@inject UsuarioLogeado usuario
+@inject UsuarioLogeado Usuario
 <PageTitle>SGE | Expedientes</PageTitle>
 
 <h3>Modificacion de Expediente</h3>
-<label for="idExp">Id del expediente a modificar</label>
-<input class="mt-3 form-control" @bind="idExp" id="idExp"><br>
-<button class="btn btn-primary" @onclick="() => Consultar(idExp)">Buscar</button><br>
-@if (visible)
+@if (!visible)
+{
+    <label class="mt-2" for="idExp">ID a modificar:</label>
+    <input class="form-control" @bind="idExp" id="idExp">
+    <button class="btn btn-primary mt-2" @onclick="() => Consultar(idExp)">Buscar</button><br>
+}
+else
 {
     <form>
-        <label for="carat">Caratula: </label>
-        <input class="form-control" placeholder="Caratula" @bind="e.Caratula" id="carat"><br>
-        <label for="est">Estado: </label>
+        <label class="mt-2" for="carat">Caratula:</label>
+        <input class="form-control" @bind="e.Caratula" id="carat">
         <select class="form-control" @bind="strEstado" id="est">
             <option value="" disabled selected>Seleccione un estado</option>
             <option>RecienIniciado</option>
@@ -25,12 +27,9 @@
             <option>Finalizado</option>
         </select><br>
     </form>
-    <button class="btn btn-primary" @onclick="() => Modificar(e)">Guardar cambios</button>
-
-    <br>
+    <button class="btn btn-primary mt-2" @onclick="() => Modificar(e)">Guardar cambios</button><br>
 }
-<button class="btn btn-secondary mt-2" @onclick="Volver">Volver al menu</button>
-<br>
+<button class="btn btn-secondary mt-2" @onclick="Volver">Volver al menu</button><br>
 <CuadroDialogo @ref=dialogo Mensaje=@error />
 
 
@@ -63,8 +62,8 @@
         try
         {
             e.Estado = (EstadoExpediente)Enum.Parse(typeof(EstadoExpediente), strEstado);
-            CasoDeUsoExpedienteModificacion.Ejecutar(e, usuario.user);
-            Navigation.NavigateTo($"/home");
+            CasoDeUsoExpedienteModificacion.Ejecutar(e, Usuario.user);
+            Navigation.NavigateTo($"/explistar");
         }
         catch (Exception ex)
         {
@@ -76,8 +75,5 @@
             dialogo.Mostrar();
         }
     }
-    public void Volver()
-    {
-        Navigation.NavigateTo($"/home");
-    }
+    void Volver() => Navigation.NavigateTo($"/home");
 }

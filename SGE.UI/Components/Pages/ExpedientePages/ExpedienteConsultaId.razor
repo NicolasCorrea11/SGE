@@ -3,12 +3,16 @@
 @inject NavigationManager Navigation
 @inject CasoDeUsoUsuarioConsultaId UsuarioConsulta
 @inject CasoDeUsoExpedienteConsultaId CasoConsulta
-<PageTitle>SGE | Expediente</PageTitle>
+<PageTitle>SGE | Expedientes</PageTitle>
 
 <h3>Consulta de Expediente por ID</h3>
-<input placeholder="ID a consultar" @bind="idExp" class="mt-3 form-control" /><br>
-<button class="btn btn-primary" @onclick="() => Consultar(idExp)">Aceptar</button><br>
-@if (visible)
+@if (!visible)
+{
+    <label class="mt-2" for="id">Id del expediente a modificar:</label>
+    <input placeholder="ID a consultar" @bind="idExp" class="mt-2 form-control" id="id"><br>
+    <button class="btn btn-primary mt-2" @onclick="() => Consultar(idExp)">Aceptar</button><br>
+}
+else
 {
     <table class="table">
         <thead>
@@ -44,10 +48,7 @@
     bool visible = false;
     CuadroDialogo dialogo = null!;
 
-    void Volver()
-    {
-        Navigation.NavigateTo($"/home");
-    }
+    void Volver() => Navigation.NavigateTo($"/home");
 
     void Consultar(int idExp)
     {
@@ -57,9 +58,9 @@
             visible = true;
             error = "";
         }
-        catch (Exception e)
+        catch (Exception ex)
         {
-            error = e.Message;
+            error = ex.Message;
             dialogo.Mostrar();
             visible = false;
         }
