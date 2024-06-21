@@ -12,7 +12,8 @@ public class CasoDeUsoTramiteBaja(ITramiteRepositorio repoTram, IServicioAutoriz
     {
       Tramite? t = repoTram.ConsultaPorId(id);
       repoTram.BajaTramite(id);
-      actEstado.ActualizarEstado(t.ExpedienteId, user.Id);
+      if (t != null)
+        actEstado.ActualizarEstado(t.ExpedienteId, user.Id);
     }
   }
 }
