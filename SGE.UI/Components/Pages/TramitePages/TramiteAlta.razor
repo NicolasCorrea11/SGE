@@ -41,7 +41,7 @@
     {
       exp = ConsultaIdExp.Ejecutar(t.ExpedienteId);
       t.Etiqueta = (EtiquetaTramite)Enum.Parse(typeof(EtiquetaTramite), strEtiqueta);
-      CasoAlta.Ejecutar(t, usuario.user);
+      CasoAlta.Ejecutar(t, usuario.User);
       Navigation.NavigateTo($"/tramitelistar");
     }
     catch (Exception ex)

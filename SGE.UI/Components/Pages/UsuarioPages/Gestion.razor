@@ -8,7 +8,7 @@
 <PageTitle>SGE | Gestion</PageTitle>
 
 <h3>Gestion de Usuarios</h3>
-@if (usuario.user.Id == 1) 
+@if (usuario.User.Id == 1) 
 {
 <table class="table">
   <thead>
@@ -41,7 +41,7 @@
   </tbody>
 </table>
 }
-@if (usuario.user.Id != 1)
+@if (usuario.User.Id != 1)
 {
   <p>Necesitar ser administrador para gestionar usuarios</p>
 }
@@ -57,10 +57,10 @@
     usuarios = UsuarioListar.Ejecutar();
   }
 
-  private void Editar(int id) => Navigation.NavigateTo($"usermod/{id}");
-  private void Permisos(int id) => Navigation.NavigateTo($"adminperm/{id}");
+  void Editar(int id) => Navigation.NavigateTo($"usermod/{id}");
+  void Permisos(int id) => Navigation.NavigateTo($"adminperm/{id}");
 
-  private void Eliminar(int id)
+  void Eliminar(int id)
   {
     try
     {
@@ -73,9 +73,6 @@
     }
   }
 
-  private void Volver()
-  {
-    Navigation.NavigateTo($"/home");
-  }
+  void Volver() => Navigation.NavigateTo($"/home");
 
 }

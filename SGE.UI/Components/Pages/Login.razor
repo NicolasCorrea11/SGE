@@ -26,7 +26,7 @@
         try
         {
             user = CasoLogin.Ejecutar(email, pass);
-            Usuario.SetUser(user);
+            Usuario.User = user;
             Navigation.NavigateTo($"/home");
         }
         catch (Exception ex)

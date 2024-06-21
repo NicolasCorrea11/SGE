@@ -14,7 +14,7 @@ public class RepositorioExpediente : IExpedienteRepositorio
     public void BajaExpediente(int id)
     {
         using var context = new BaseContext();
-        Expediente? e = context.Expedientes.Where(t => t.Id == id).SingleOrDefault();
+        var e = context.Expedientes.Where(t => t.Id == id).SingleOrDefault();
         if (e != null)
         {
             context.Expedientes.Remove(e);
@@ -44,7 +44,7 @@ public class RepositorioExpediente : IExpedienteRepositorio
     {
         using var context = new BaseContext();
         List<object> lista = [];
-        Expediente? exp = context.Expedientes.Where(e => e.Id == id).SingleOrDefault();
+        var exp = context.Expedientes.Where(e => e.Id == id).SingleOrDefault();
         if (exp != null)
         {
             lista.Add(exp);

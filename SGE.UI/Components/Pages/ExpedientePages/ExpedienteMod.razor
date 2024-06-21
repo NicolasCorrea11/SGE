@@ -62,7 +62,7 @@ else
         try
         {
             e.Estado = (EstadoExpediente)Enum.Parse(typeof(EstadoExpediente), strEstado);
-            CasoDeUsoExpedienteModificacion.Ejecutar(e, Usuario.user);
+            CasoDeUsoExpedienteModificacion.Ejecutar(e, Usuario.User);
             Navigation.NavigateTo($"/explistar");
         }
         catch (Exception ex)

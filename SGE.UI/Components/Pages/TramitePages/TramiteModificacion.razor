@@ -66,7 +66,7 @@ else
     try
     {
       t.Etiqueta = (EtiquetaTramite)Enum.Parse(typeof(EtiquetaTramite), strEtiqueta);
-      CasoModificacion.Ejecutar(t, usuario.user);
+      CasoModificacion.Ejecutar(t, usuario.User);
       Navigation.NavigateTo($"/tramitelistar");
     }
     catch (Exception ex)
