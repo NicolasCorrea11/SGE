@@ -58,8 +58,15 @@ else
 
     protected override void OnInitialized()
     {
-        usuario.user = UsuarioConsulta.Ejecutar(usuario.user.Id);
-        StateHasChanged();
+        try
+        {
+            usuario.user = UsuarioConsulta.Ejecutar(usuario.user.Id);
+            StateHasChanged();
+        }
+        catch (Exception e)
+        {
+            Navigation.NavigateTo("/");
+        }
     }
     private void cerrar()
     {

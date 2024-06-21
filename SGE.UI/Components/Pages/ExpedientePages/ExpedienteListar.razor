@@ -35,6 +35,11 @@
 @code {
     List<Expediente> expedientes = [];
 
+    protected override void OnInitialized()
+    {
+        expedientes = CasoListar.Ejecutar();
+    }
+
     void Volver()
     {
         Navigation.NavigateTo($"/home");
