@@ -9,14 +9,15 @@
     <input class="form-control" type="password" placeholder="Contraseña" @bind="pass"><br>
 </form>
 <button class="btn btn-primary" @onclick="Ingresar">Ingresar</button>
+<CuadroDialogo @ref=dialogo Mensaje=@Error />
 <br>
-@error
 
 @code {
     Usuario user = new();
     string email = "";
     string pass = "";
-    string error = "";
+    string Error = "";
+    CuadroDialogo dialogo = null!;
 
     public void Ingresar()
     {
@@ -28,6 +29,7 @@
         catch (Exception ex)
         {
             Error = ex.Message;
+            dialogo.Mostrar();
         }
     }
 

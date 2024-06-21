@@ -35,7 +35,7 @@
 }
 <button class="btn btn-secondary mt-2" @onclick="Volver">Volver al menu</button>
 <br>
-@error
+<CuadroDialogo @ref=dialogo Mensaje=@error />
 
 @code {
     [Parameter] public int Id { get; set; }
@@ -43,6 +43,7 @@
     string error = "";
     Expediente e = new();
     bool visible = false;
+    CuadroDialogo dialogo = null!;
 
     protected override void OnInitialized()
     {
@@ -72,6 +73,7 @@
         catch (Exception e)
         {
             error = e.Message;
+            dialogo.Mostrar();
             visible = false;
         }
     }

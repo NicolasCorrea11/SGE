@@ -26,11 +26,7 @@
 <button class="btn btn-primary" @onclick="() => Agregar(t)">Aceptar</button><br>
 <button class="btn btn-secondary mt-2" @onclick="Volver">Volver al menu</button>
 <br>
-@if (@error == "Must specify valid information for parsing in the string. (Parameter 'value')")
-{
-  error = "Debe seleccionar una etiqueta";
-}
-@error
+<CuadroDialogo @ref=dialogo Mensaje=@error />
 
 @code {
   [Parameter] public int Id { get; set; }
@@ -39,6 +35,7 @@
   string strEtiqueta = "";
   string error = "";
   Expediente exp = new();
+  CuadroDialogo dialogo = null!;
 
   protected override void OnInitialized()
   {
@@ -64,6 +61,11 @@
     catch (Exception ex)
     {
       error = ex.Message;
+      if (error == "Must specify valid information for parsing in the string. (Parameter 'value')")
+      {
+        error = "Debe seleccionar una etiqueta";
+      } 
+      dialogo.Mostrar();
     }
   }
 

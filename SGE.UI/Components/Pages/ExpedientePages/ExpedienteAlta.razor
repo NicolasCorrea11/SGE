@@ -19,11 +19,7 @@
         <option>Finalizado</option>
     </select><br>
 </form>
-@if (@error == "Must specify valid information for parsing in the string. (Parameter 'value')")
-{
-    error = "Debe seleccionar un estado";
-}
-@error
+<CuadroDialogo @ref=dialogo Mensaje=@error />
 <br>
 <button class="btn btn-primary" @onclick="() => Agregar(e)">Aceptar</button><br>
 <button class="btn btn-secondary mt-2" @onclick="Volver">Volver al menu</button>
@@ -34,6 +30,7 @@
     Usuario user = new();
     string strEstado = "";
     string error = "";
+    CuadroDialogo dialogo = null!;
 
     protected override void OnInitialized()
     {
@@ -58,6 +55,11 @@
         catch (Exception ex)
         {
             error = ex.Message;
+            if (error == "Must specify valid information for parsing in the string. (Parameter 'value')")
+            {
+                error = "Debe seleccionar un estado";
+            }
+            dialogo.Mostrar();
         }
 
     }

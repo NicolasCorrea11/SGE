@@ -36,7 +36,8 @@ else
 <br>
 <button class="btn btn-secondary mt-2" @onclick="Volver">Volver al menu</button>
 <br>
-@error
+<CuadroDialogo @ref=dialogo Mensaje=@error />
+
 
 
 @code {
@@ -46,6 +47,7 @@ else
     int idExp;
     string error = "";
     bool visible = false;
+    CuadroDialogo dialogo = null!;
 
     protected override void OnInitialized()
     {
@@ -70,6 +72,7 @@ else
         catch (Exception err)
         {
             error = err.Message;
+            dialogo.Mostrar();
         }
     }
 

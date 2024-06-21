@@ -64,7 +64,7 @@
 <button class="btn btn-primary mt-2" @onclick="() => Consultar(idExp)">Aceptar</button><br>
 <button class="btn btn-secondary mt-2" @onclick="Volver">Volver al menu</button>
 <br>
-@error
+<CuadroDialogo @ref=dialogo Mensaje=@error />
 
 @code {
     [Parameter] public int Id { get; set; }
@@ -73,6 +73,8 @@
     Expediente e = new();
     int idExp;
     bool visible = false;
+    CuadroDialogo dialogo = null!;
+
 
     protected override void OnInitialized()
     {
@@ -97,6 +99,7 @@
         catch (Exception ex)
         {
             error = ex.Message;
+            dialogo.Mostrar();
             visible = false;
         }
     }
