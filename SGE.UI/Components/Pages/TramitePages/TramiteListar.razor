@@ -3,6 +3,7 @@
 @inject CasoDeUsoTramiteListar CasoListar
 @inject NavigationManager Navigation
 <PageTitle>SGE | Tramites</PageTitle>
+
 <h3>Lista de Tramites</h3>
 <table class="table">
     <thead>
@@ -39,11 +40,17 @@
 
   protected override void OnInitialized()
   {
-    tramites = CasoListar.Ejecutar();
-    StateHasChanged();
+    try
+    {
+      Usuario user = UsuarioConsulta.Ejecutar(Id);
+    }
+    catch
+    {
+      Navigation.NavigateTo("/");
+    }
   }
 
-  public void Volver()
+  void Volver()
   {
     Navigation.NavigateTo($"/home");
   }

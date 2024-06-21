@@ -7,25 +7,27 @@
 <PageTitle>SGE | Expedientes</PageTitle>
 
 <h3>Modificacion de Expediente</h3>
-<label for="consid">Id del expediente a modificar</label>
-<input class="mt-3 form-control" placeholder="Id del expediente" @bind="idexp" id="consid"><br>
-<button class="btn btn-primary" @onclick="() => consultar(idexp)">Buscar</button><br>
-@if (visible) 
+<label for="idExp">Id del expediente a modificar</label>
+<input class="mt-3 form-control" @bind="idExp" id="idExp"><br>
+<button class="btn btn-primary" @onclick="() => Consultar(idExp)">Buscar</button><br>
+@if (visible)
 {
-<form>
-    <label for="carat">Caratula: </label>
-    <input class="form-control" placeholder="Caratula" @bind="e.Caratula" id="carat"><br>
-    <label for="est">Estado: </label>
-    <select class="form-control" @bind="strEstado" id="est">
-        <option value="" disabled selected>Seleccione un estado</option>
-        <option>RecienIniciado</option>
-        <option>ParaResolver</option>
-        <option>ConResolucion</option>
-        <option>EnNotificacion</option>
-        <option>Finalizado</option>
-    </select><br>
-</form>
-<button class="btn btn-primary" @onclick="() => Modificar(e)">Guardar cambios</button><br>
+    <form>
+        <label for="carat">Caratula: </label>
+        <input class="form-control" placeholder="Caratula" @bind="e.Caratula" id="carat"><br>
+        <label for="est">Estado: </label>
+        <select class="form-control" @bind="strEstado" id="est">
+            <option value="" disabled selected>Seleccione un estado</option>
+            <option>RecienIniciado</option>
+            <option>ParaResolver</option>
+            <option>ConResolucion</option>
+            <option>EnNotificacion</option>
+            <option>Finalizado</option>
+        </select><br>
+    </form>
+    <button class="btn btn-primary" @onclick="() => Modificar(e)">Guardar cambios</button>
+
+    <br>
 }
 <button class="btn btn-secondary mt-2" @onclick="Volver">Volver al menu</button>
 <br>
@@ -40,23 +42,35 @@
     int idexp;
     CuadroDialogo dialogo = null!;
 
-    public void consultar(int ide)
+    protected override void OnInitialized()
     {
         try
         {
-            e = ConsultaIdExp.Ejecutar(ide);
+            user = UsuarioConsulta.Ejecutar(Id);
+        }
+        catch
+        {
+            Navigation.NavigateTo("/");
+        }
+    }
+
+    void Consultar(int idExp)
+    {
+        try
+        {
+            e = ConsultaIdExp.Ejecutar(idExp);
             visible = true;
             error = "";
         }
-        catch (Exception err)
+        catch (Exception ex)
         {
-            error = err.Message;
+            error = ex.Message;
             dialogo.Mostrar();
             visible = false;
         }
     }
 
-    public void Modificar(Expediente ex)
+    void Modificar(Expediente e)
     {
         try
         {
@@ -64,9 +78,9 @@
             CasoDeUsoExpedienteModificacion.Ejecutar(e, usuario.user);
             Navigation.NavigateTo($"/home");
         }
-        catch (Exception e)
+        catch (Exception ex)
         {
-            error = e.Message;
+            error = ex.Message;
             if (error == "Must specify valid information for parsing in the string. (Parameter 'value')")
             {
                 error = "Debe seleccionar un estado";
@@ -74,9 +88,14 @@
             dialogo.Mostrar();
         }
     }
+<<<<<<< HEAD
     public void Volver()
     {
         Navigation.NavigateTo($"/home");
     }
+=======
+
+    void Volver() => Navigation.NavigateTo($"home/{Id}");
+>>>>>>> 2a4723181eb53793017accd44a8b979eef5239a4
 
 }

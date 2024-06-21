@@ -8,8 +8,11 @@
 <PageTitle>SGE | Gestion</PageTitle>
 
 <h3>Gestion de Usuarios</h3>
+<<<<<<< HEAD
 @if (usuario.user.Id == 1) 
 {
+=======
+>>>>>>> 2a4723181eb53793017accd44a8b979eef5239a4
 <table class="table">
   <thead>
     <tr>
@@ -54,18 +57,19 @@
 
   protected override void OnInitialized()
   {
-    usuarios = UsuarioListar.Ejecutar();
-    StateHasChanged();
+    try
+    {
+      Usuario user = UsuarioConsulta.Ejecutar(Id);
+    }
+    catch
+    {
+      Navigation.NavigateTo("/");
+    }
   }
 
-  private void Editar(int id)
-  {
-    Navigation.NavigateTo($"usermod/{id}");
-  }
-  private void Permisos(int id)
-  {
-    Navigation.NavigateTo($"adminperm/{id}");
-  }
+  private void Editar(int id) => Navigation.NavigateTo($"usermod/{id}");
+  private void Permisos(int id) => Navigation.NavigateTo($"adminperm/{id}");
+
   private void Eliminar(int id)
   {
     try

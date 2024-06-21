@@ -9,7 +9,7 @@
 
 <form>
   <label for="cont">Contenido: </label>
-  <input class="mt-3 form-control" placeholder="Contenido" @bind="t.Contenido" id="cont">
+  <input class="mt-3 form-control" @bind="t.Contenido" id="cont">
   <label for="etiq">Etiqueta: </label>
   <select class="form-control mt-3" @bind="strEtiqueta" id="etiq">
     <option value="" disabled selected>Seleccione una etiqueta</option>
@@ -21,7 +21,7 @@
     <option>PaseAlArchivo</option>
   </select>
   <label for="expid">Id del expediente asociado: </label>
-  <input class="form-control" placeholder="Id del expediente" @bind="t.ExpedienteId" id="expid"><br>
+  <input class="form-control" @bind="t.ExpedienteId" id="expid"><br>
 </form>
 <button class="btn btn-primary" @onclick="() => Agregar(t)">Aceptar</button><br>
 <button class="btn btn-secondary mt-2" @onclick="Volver">Volver al menu</button>
@@ -32,14 +32,30 @@
   Tramite t = new();
   string strEtiqueta = "";
   string error = "";
-  Expediente exist = new();
+  Expediente exp = new();
   CuadroDialogo dialogo = null!;
 
+<<<<<<< HEAD
   public void Agregar(Tramite t)
+=======
+  protected override void OnInitialized()
   {
     try
     {
-      exist = ConsultaIdExp.Ejecutar(t.ExpedienteId);
+      user = UsuarioConsulta.Ejecutar(Id);
+    }
+    catch
+    {
+      Navigation.NavigateTo("/");
+    }
+  }
+
+  void Agregar(Tramite t)
+>>>>>>> 2a4723181eb53793017accd44a8b979eef5239a4
+  {
+    try
+    {
+      exp = ConsultaIdExp.Ejecutar(t.ExpedienteId);
       t.Etiqueta = (EtiquetaTramite)Enum.Parse(typeof(EtiquetaTramite), strEtiqueta);
       CasoAlta.Ejecutar(t, usuario.user);
       Navigation.NavigateTo($"/tramitelistar");
@@ -54,8 +70,13 @@
       dialogo.Mostrar();
     }
   }
+<<<<<<< HEAD
   public void Volver()
   {
     Navigation.NavigateTo($"/home");
   }
+=======
+
+  void Volver() => Navigation.NavigateTo($"home/{Id}");
+>>>>>>> 2a4723181eb53793017accd44a8b979eef5239a4
 }

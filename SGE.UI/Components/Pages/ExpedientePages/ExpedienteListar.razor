@@ -1,5 +1,6 @@
 ﻿@page "/explistar"
 @rendermode InteractiveServer
+@inject CasoDeUsoUsuarioConsultaId UsuarioConsulta
 @inject CasoDeUsoExpedienteListar CasoListar
 @inject NavigationManager Navigation
 <PageTitle>SGE | Expedientes</PageTitle>
@@ -32,15 +33,22 @@
 <button class="btn btn-secondary mt-2" @onclick="Volver">Volver al menu</button>
 
 @code {
-    [Parameter] public int Id {get; set;}
+    [Parameter] public int Id { get; set; }
     List<Expediente> expedientes = [];
 
-    protected override void OnInitialized() {
-        expedientes = CasoListar.Ejecutar();
-        StateHasChanged();
+    protected override void OnInitialized()
+    {
+        try
+        {
+            Usuario user = UsuarioConsulta.Ejecutar(Id);
+        }
+        catch
+        {
+            Navigation.NavigateTo("/");
+        }
     }
 
-    public void Volver()
+    void Volver()
     {
         Navigation.NavigateTo($"/home");
     }

@@ -10,7 +10,7 @@
 @if (!visible)
 {
     <label for="inp">Id de expediente a eliminar</label>
-    <input placeholder="ID a eliminar" @bind="idExp" class="mt-3 form-control" id="inp"/>
+    <input placeholder="ID a eliminar" @bind="idExp" class="mt-3 form-control" id="inp" />
     <button class="btn btn-primary mt-2" @onclick="() => Buscar(idExp)">Buscar</button>
 }
 else
@@ -48,7 +48,23 @@ else
     bool visible = false;
     CuadroDialogo dialogo = null!;
 
+<<<<<<< HEAD
     public void Buscar(int id)
+=======
+    protected override void OnInitialized()
+    {
+        try
+        {
+            user = UsuarioConsulta.Ejecutar(Id);
+        }
+        catch
+        {
+            Navigation.NavigateTo("/");
+        }
+    }
+    
+    void Buscar(int id)
+>>>>>>> 2a4723181eb53793017accd44a8b979eef5239a4
     {
         try
         {
@@ -63,7 +79,7 @@ else
         }
     }
 
-    public void Eliminar(int idExp)
+    void Eliminar(int idExp)
     {
         try
         {
@@ -76,7 +92,7 @@ else
         }
     }
 
-    public void Volver()
+    void Volver()
     {
         Navigation.NavigateTo($"/home");
     }

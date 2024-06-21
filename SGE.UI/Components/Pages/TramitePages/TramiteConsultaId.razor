@@ -1,5 +1,6 @@
 ﻿@page "/tramiteconsultaid"
 @rendermode InteractiveServer
+@inject CasoDeUsoUsuarioConsultaId UsuarioConsulta
 @inject CasoDeUsoTramiteConsultaId CasoConsulta
 @inject NavigationManager Navigation
 <PageTitle>SGE | Tramites</PageTitle>
@@ -40,13 +41,29 @@
 <CuadroDialogo @ref=dialogo Mensaje=@error />
 
 @code {
+<<<<<<< HEAD
+=======
+  [Parameter] public int Id { get; set; }
+>>>>>>> 2a4723181eb53793017accd44a8b979eef5239a4
   Tramite t = new();
   int idTramite;
   string error = "";
   bool visible = false;
   CuadroDialogo dialogo = null!;
 
-  public void Consultar(int idTramite)
+  protected override void OnInitialized()
+  {
+    try
+    {
+      Usuario user = UsuarioConsulta.Ejecutar(Id);
+    }
+    catch
+    {
+      Navigation.NavigateTo("/");
+    }
+  }
+
+  void Consultar(int idTramite)
   {
     try
     {
@@ -62,7 +79,7 @@
     }
   }
 
-  public void Volver()
+  void Volver()
   {
     Navigation.NavigateTo($"/home");
   }

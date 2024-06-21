@@ -6,6 +6,7 @@
 @inject UsuarioLogeado usuario
 <PageTitle>SGE | Usuarios</PageTitle>
 
+<<<<<<< HEAD
 @if (usuario.user.Id == 1 || usuario.user.Id == Id)
 {
 <h3>Modificacion de Usuario</h3>
@@ -24,6 +25,31 @@ else
 {
 <p>el usuario ingresado y el que se quiere modificar no coinciden</p>
 }
+=======
+<h3>Ingresar nuevos datos para @user.Nombre @user.Apellido</h3>
+<form>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Email</th>
+                <th>Password</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input @bind="user.Nombre" class="form-control" id="nom"><br></td>
+                <td><input @bind="user.Apellido" class="form-control" id="ape"><br></td>
+                <td><input @bind="user.Email" class="form-control" id="ema"><br></td>
+                <td><input type="password" @bind="pass" class="form-control" id="pw"><br></td>
+            </tr>
+        </tbody>
+    </table>
+</form>
+<button class="btn btn-primary" @onclick="() => Modificar(user)">Guardar cambios</button><br>
+<button class="btn btn-secondary mt-2" @onclick="Volver">Volver al menu de gestion</button>
+>>>>>>> 2a4723181eb53793017accd44a8b979eef5239a4
 <br>@error<br>
 
 @code {
@@ -37,24 +63,31 @@ else
         try
         {
             user = UsuarioConsulta.Ejecutar(Id);
-            StateHasChanged();
         }
         catch (Exception ex)
         {
             error = ex.Message;
         }
     }
-    public void Modificar(Usuario user)
+    private void Modificar(Usuario user)
     {
         try
         {
             user.Contraseña = pass;
             CasoDeUsoUsuarioModificacion.Ejecutar(user);
+<<<<<<< HEAD
             Navigation.NavigateTo($"/home");
+=======
+            Navigation.NavigateTo($"home/{user.Id}");
+>>>>>>> 2a4723181eb53793017accd44a8b979eef5239a4
         }
         catch (Exception ex)
         {
             error = ex.Message;
         }
+    }
+    private void Volver()
+    {
+        Navigation.NavigateTo($"home/{user.Id}");
     }
 }

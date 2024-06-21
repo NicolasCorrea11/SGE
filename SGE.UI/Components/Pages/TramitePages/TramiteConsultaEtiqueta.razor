@@ -54,7 +54,24 @@
   string strEtiqueta = "";
   string error = "";
   bool visible = false;
+<<<<<<< HEAD
   public void Consultar(string strEtiqueta)
+=======
+
+  protected override void OnInitialized()
+  {
+    try
+    {
+      user = UsuarioConsulta.Ejecutar(Id);
+    }
+    catch
+    {
+      Navigation.NavigateTo("/");
+    }
+  }
+
+  void Consultar(string strEtiqueta)
+>>>>>>> 2a4723181eb53793017accd44a8b979eef5239a4
   {
     try
     {
@@ -68,7 +85,7 @@
     }
   }
 
-  public void Volver()
+  void Volver()
   {
     Navigation.NavigateTo($"/home");
   }
