@@ -1,13 +1,8 @@
 ﻿namespace SGE.Aplicacion;
 
-public class UsuarioLogeado
+public class SesionActual
 {
     public Usuario User { get; set; } = new();
-
-    public void SetUser(Usuario user)
-    {
-        User = user;
-    }
 
     public void CerrarSesion()
     {

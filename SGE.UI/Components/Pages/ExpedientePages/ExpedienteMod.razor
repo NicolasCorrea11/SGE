@@ -3,7 +3,7 @@
 @inject CasoDeUsoExpedienteModificacion CasoDeUsoExpedienteModificacion
 @inject CasoDeUsoExpedienteConsultaId ConsultaIdExp
 @inject NavigationManager Navigation
-@inject UsuarioLogeado Usuario
+@inject SesionActual Sesion
 <PageTitle>SGE | Expedientes</PageTitle>
 
 <h3>Modificacion de Expediente</h3>
@@ -62,7 +62,7 @@ else
         try
         {
             e.Estado = (EstadoExpediente)Enum.Parse(typeof(EstadoExpediente), strEstado);
-            CasoDeUsoExpedienteModificacion.Ejecutar(e, Usuario.User);
+            CasoDeUsoExpedienteModificacion.Ejecutar(e, Sesion.User);
             Navigation.NavigateTo($"/explistar");
         }
         catch (Exception ex)

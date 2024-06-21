@@ -3,12 +3,12 @@
 @inject CasoDeUsoUsuarioModificacion CasoDeUsoUsuarioModificacion
 @inject CasoDeUsoUsuarioConsultaId UsuarioConsulta
 @inject NavigationManager Navigation
-@inject UsuarioLogeado usuario
+@inject SesionActual Sesion
 <PageTitle>SGE | Usuarios</PageTitle>
 
-<h3>Ingresar nuevos datos para @user.Nombre @user.Apellido</h3>
-@if (usuario.User.Id == 1 || usuario.User.Id == Id)
+@if (Sesion.User.Id == 1 || Sesion.User.Id == Id)
 {
+    <h3>Ingresar nuevos datos para @user.Nombre @user.Apellido</h3>
     <form>
         <table class="table">
             <thead>
@@ -33,7 +33,7 @@
 }
 else
 {
-    <p>el usuario ingresado y el que se quiere modificar no coinciden</p>
+    <h3>No tiene permisos para modificar otro usuario</h3>
 }
 <button class="btn btn-secondary mt-2" @onclick="Volver">Volver al menu de gestion</button>
 <br>

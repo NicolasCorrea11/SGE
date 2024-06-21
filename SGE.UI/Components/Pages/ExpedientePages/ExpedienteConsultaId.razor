@@ -2,7 +2,7 @@
 @rendermode InteractiveServer
 @inject NavigationManager Navigation
 @inject CasoDeUsoUsuarioConsultaId UsuarioConsulta
-@inject CasoDeUsoExpedienteConsultaId CasoConsulta
+@inject CasoDeUsoExpedienteConsultaId ExpedienteConsulta
 <PageTitle>SGE | Expedientes</PageTitle>
 
 <h3>Consulta de Expediente por ID</h3>
@@ -54,7 +54,7 @@ else
     {
         try
         {
-            e = CasoConsulta.Ejecutar(idExp);
+            e = ExpedienteConsulta.Ejecutar(idExp);
             visible = true;
             error = "";
         }

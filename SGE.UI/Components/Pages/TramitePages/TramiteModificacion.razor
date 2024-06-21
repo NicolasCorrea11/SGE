@@ -3,7 +3,7 @@
 @inject CasoDeUsoTramiteModificacion CasoModificacion
 @inject CasoDeUsoTramiteConsultaId CasoConsulta
 @inject NavigationManager Navigation
-@inject UsuarioLogeado usuario
+@inject SesionActual Sesion
 <PageTitle>SGE | Tramites</PageTitle>
 
 <h3>Modificacion de Tramite</h3>
@@ -66,7 +66,7 @@ else
     try
     {
       t.Etiqueta = (EtiquetaTramite)Enum.Parse(typeof(EtiquetaTramite), strEtiqueta);
-      CasoModificacion.Ejecutar(t, usuario.User);
+      CasoModificacion.Ejecutar(t, Sesion.User);
       Navigation.NavigateTo($"/tramitelistar");
     }
     catch (Exception ex)

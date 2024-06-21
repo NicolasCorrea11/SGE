@@ -3,7 +3,7 @@
 @inject CasoDeUsoTramiteBaja CasoBaja
 @inject CasoDeUsoTramiteConsultaId CasoConsulta
 @inject NavigationManager Navigation
-@inject UsuarioLogeado usuario
+@inject SesionActual Sesion
 <PageTitle>SGE | Tramites</PageTitle>
 
 <h3>Eliminar Tramite</h3>
@@ -35,10 +35,8 @@ else
   </table>
   <button class="btn btn-primary mt-2" @onclick="() => Eliminar(idTram)">Eliminar</button>
 }
+<br><button class="btn btn-secondary mt-2" @onclick="Volver">Volver al menu</button><br>
 <CuadroDialogo @ref=dialogo Mensaje=@error />
-<br>
-<button class="btn btn-secondary mt-2" @onclick="Volver">Volver al menu</button>
-<br>
 
 @code {
   [Parameter] public int Id { get; set; }
@@ -47,7 +45,6 @@ else
   int idTram;
   string error = "";
   bool visible = false;
-
   CuadroDialogo dialogo = null!;
 
   void Buscar(int idTram)
@@ -70,7 +67,7 @@ else
   {
     try
     {
-      CasoBaja.Ejecutar(idTram, usuario.User);
+      CasoBaja.Ejecutar(idTram, Sesion.User);
       Navigation.NavigateTo($"/tramitelistar");
     }
     catch (Exception ex)

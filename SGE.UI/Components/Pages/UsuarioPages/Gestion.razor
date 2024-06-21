@@ -4,11 +4,11 @@
 @inject CasoDeUsoUsuarioConsultaId UsuarioConsulta
 @inject CasoDeUsoUsuarioEliminar CasoBaja
 @inject NavigationManager Navigation
-@inject UsuarioLogeado usuario
+@inject SesionActual Sesion
 <PageTitle>SGE | Gestion</PageTitle>
 
 <h3>Gestion de Usuarios</h3>
-@if (usuario.User.Id == 1) 
+@if (Sesion.User.Id == 1) 
 {
 <table class="table">
   <thead>
@@ -41,7 +41,7 @@
   </tbody>
 </table>
 }
-@if (usuario.User.Id != 1)
+@if (Sesion.User.Id != 1)
 {
   <p>Necesitar ser administrador para gestionar usuarios</p>
 }
@@ -74,5 +74,4 @@
   }
 
   void Volver() => Navigation.NavigateTo($"/home");
-
 }

@@ -1,7 +1,7 @@
 ﻿@rendermode InteractiveServer
 @inject CasoDeUsoUsuarioLogin CasoLogin
 @inject NavigationManager Navigation
-@inject UsuarioLogeado Usuario
+@inject SesionActual Sesion
 <PageTitle>SGE | Login</PageTitle>
 
 <h3>Ingrese a su cuenta</h3>
@@ -12,7 +12,6 @@
 <button class="btn btn-primary mt-2" @onclick="Ingresar">Ingresar</button>
 <button class="btn btn-secondary mt-2" @onclick="Registrarse">Registrarse</button>
 <CuadroDialogo @ref=dialogo Mensaje=@error />
-<br>
 
 @code {
     Usuario user = new();
@@ -26,7 +25,7 @@
         try
         {
             user = CasoLogin.Ejecutar(email, pass);
-            Usuario.User = user;
+            Sesion.User = user;
             Navigation.NavigateTo($"/home");
         }
         catch (Exception ex)

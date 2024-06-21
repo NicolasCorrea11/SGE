@@ -1,6 +1,6 @@
 ﻿@page "/signup"
 @rendermode InteractiveServer
-@inject CasoDeUsoUsuarioSignup CasoDeUsoSignup
+@inject CasoDeUsoUsuarioSignup CasoSignup
 @inject NavigationManager NavigationManager
 <PageTitle>SGE | Signup</PageTitle>
 
@@ -18,13 +18,13 @@
 @code {
     Usuario u = new Usuario();
     string error = "";
-
     CuadroDialogo dialogo = null!;
+
     void Agregar()
     {
         try
         {
-            CasoDeUsoSignup.Ejecutar(u);
+            CasoSignup.Ejecutar(u);
             Volver();
         }
         catch (Exception ex)

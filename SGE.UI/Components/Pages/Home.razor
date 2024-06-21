@@ -2,10 +2,10 @@
 @rendermode InteractiveServer
 @inject CasoDeUsoUsuarioConsultaId UsuarioConsulta
 @inject NavigationManager Navigation
-@inject UsuarioLogeado Usuario
+@inject SesionActual Sesion
 <PageTitle>SGE | Home</PageTitle>
 
-<h3>Bienvenido @Usuario.User.Nombre @Usuario.User.Apellido </h3>
+<h3>Bienvenido @Sesion.User.Nombre @Sesion.User.Apellido </h3>
 <table class="table">
     <thead>
         <tr>
@@ -44,13 +44,13 @@
         </tr>
     </tbody>
 </table>
-@if (Usuario.User.Id == 1)
+@if (Sesion.User.Id == 1)
 {
     <button class="btn btn-primary mt-2"><NavLink class="nav-link text-white" href="/gestion">Gestion de Usuarios</NavLink></button>
 }
 else
 {
-    <button class="btn btn-primary mt-2"><NavLink class="nav-link text-white" href="@($"/usermod/{Usuario.User.Id}")">Cambiar datos personales</NavLink></button>
+    <button class="btn btn-primary mt-2"><NavLink class="nav-link text-white" href="@($"/usermod/{Sesion.User.Id}")">Cambiar datos personales</NavLink></button>
 }
 <br>
 <button class="btn btn-danger mt-2"><NavLink class="nav-link text-white" @onclick="Cerrar">Cerrar Sesion</NavLink></button>
@@ -61,7 +61,7 @@ else
     {
         try
         {
-            Usuario.User = UsuarioConsulta.Ejecutar(Usuario.User.Id);
+            Sesion.User = UsuarioConsulta.Ejecutar(Sesion.User.Id);
             StateHasChanged();
         }
         catch
@@ -71,7 +71,7 @@ else
     }
     void Cerrar()
     {
-        Usuario.CerrarSesion();
+        Sesion.CerrarSesion();
         Navigation.NavigateTo("/");
     }
 }

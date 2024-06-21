@@ -3,8 +3,8 @@
 @inject CasoDeUsoTramiteAlta CasoAlta
 @inject NavigationManager Navigation
 @inject CasoDeUsoExpedienteConsultaId ConsultaIdExp
-@inject UsuarioLogeado usuario
-<PageTitle>SGE | Tramite</PageTitle>
+@inject SesionActual Sesion
+<PageTitle>SGE | Tramites</PageTitle>
 
 <h3>Agregar Tramite</h3>
 <form>
@@ -41,7 +41,7 @@
     {
       exp = ConsultaIdExp.Ejecutar(t.ExpedienteId);
       t.Etiqueta = (EtiquetaTramite)Enum.Parse(typeof(EtiquetaTramite), strEtiqueta);
-      CasoAlta.Ejecutar(t, usuario.User);
+      CasoAlta.Ejecutar(t, Sesion.User);
       Navigation.NavigateTo($"/tramitelistar");
     }
     catch (Exception ex)

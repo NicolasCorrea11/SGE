@@ -1,9 +1,9 @@
 ﻿@page "/expbaja"
 @rendermode InteractiveServer
 @inject CasoDeUsoExpedienteBaja CasoBaja
-@inject CasoDeUsoExpedienteConsultaId ConsultaIdExp
+@inject CasoDeUsoExpedienteConsultaId ExpedienteConsulta
 @inject NavigationManager Navigation
-@inject UsuarioLogeado usuario
+@inject SesionActual Sesion
 <PageTitle>SGE | Expedientes</PageTitle>
 
 <h3>Eliminar Expediente</h3>
@@ -52,7 +52,7 @@ else
     {
         try
         {
-            e = ConsultaIdExp.Ejecutar(id);
+            e = ExpedienteConsulta.Ejecutar(id);
             visible = true;
             error = "";
         }
@@ -67,7 +67,7 @@ else
     {
         try
         {
-            CasoBaja.Ejecutar(idExp, usuario.User);
+            CasoBaja.Ejecutar(idExp, Sesion.User);
             Navigation.NavigateTo($"/explistar");
         }
         catch (Exception ex)

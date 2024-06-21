@@ -2,7 +2,7 @@
 @rendermode InteractiveServer
 @inject CasoDeUsoExpedienteAlta CasoAlta
 @inject NavigationManager Navigation
-@inject UsuarioLogeado usuario
+@inject SesionActual Sesion
 <PageTitle>SGE | Expedientes</PageTitle>
 
 <h3>Agregar Expediente</h3>
@@ -36,7 +36,7 @@
         try
         {
             e.Estado = (EstadoExpediente)Enum.Parse(typeof(EstadoExpediente), strEstado);
-            CasoAlta.Ejecutar(e, usuario.User);
+            CasoAlta.Ejecutar(e, Sesion.User);
             Navigation.NavigateTo($"/explistar");
         }
         catch (Exception ex)
@@ -51,9 +51,5 @@
 
     }
 
-    void Volver()
-    {
-        Navigation.NavigateTo($"/home");
-    }
-
+    void Volver() => Navigation.NavigateTo($"/home");
 }

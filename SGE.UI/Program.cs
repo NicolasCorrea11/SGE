@@ -49,7 +49,7 @@ builder.Services
     .AddScoped<IServicioActualizacionEstado, ServicioActualizacionEstado>()
     .AddScoped<IServicioHash, ServicioHash>()
     .AddScoped<IEspecificacionCambioEstado, EspecificacionCambioEstado>()
-    .AddSingleton<UsuarioLogeado>();
+    .AddSingleton<SesionActual>();
 
 var app = builder.Build();
 
