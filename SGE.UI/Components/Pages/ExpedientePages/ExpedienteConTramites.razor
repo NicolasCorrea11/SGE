@@ -67,7 +67,6 @@
 <CuadroDialogo @ref=dialogo Mensaje=@error />
 
 @code {
-    [Parameter] public int Id { get; set; }
     List<object> lista = [];
     string error = "";
     Expediente e = new();
@@ -75,18 +74,6 @@
     bool visible = false;
     CuadroDialogo dialogo = null!;
 
-
-    protected override void OnInitialized()
-    {
-        try
-        {
-            Usuario user = UsuarioConsulta.Ejecutar(Id);
-        }
-        catch
-        {
-            Navigation.NavigateTo("/");
-        }
-    }
 
     void Consultar(int idExp)
     {

@@ -47,7 +47,6 @@
   CuadroDialogo dialogo = null!;
 
   public void Consultar(int idTram)
-<<<<<<< HEAD
   {
     try
     {
@@ -62,54 +61,7 @@
       dialogo.Mostrar();
     }
   }
-
-<<<<<<< HEAD
-  public void Modificar(Tramite t)
-=======
-  protected override void OnInitialized()
-  {
-    try
-    {
-      user = UsuarioConsulta.Ejecutar(Id);
-    }
-    catch
-    {
-      Navigation.NavigateTo("/");
-    }
-  }
-
   void Modificar(Tramite t)
->>>>>>> 2a4723181eb53793017accd44a8b979eef5239a4
-=======
-  {
-    try
-    {
-      t = CasoConsulta.Ejecutar(idTram);
-      visible = true;
-      error = "";
-    }
-    catch (Exception ex)
-    {
-      error = ex.Message;   
-      visible = false;
-      dialogo.Mostrar();
-    }
-  }
-
-  protected override void OnInitialized()
-  {
-    try
-    {
-      user = UsuarioConsulta.Ejecutar(Id);
-    }
-    catch
-    {
-      Navigation.NavigateTo("/");
-    }
-  }
-
-  void Modificar(Tramite t)
->>>>>>> 2a4723181eb53793017accd44a8b979eef5239a4
   {
     try
     {
@@ -124,16 +76,8 @@
     }
   }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
   public void Volver()
   {
     Navigation.NavigateTo($"/home");
   }
-=======
-  void Volver() => Navigation.NavigateTo($"home/{Id}");
->>>>>>> 2a4723181eb53793017accd44a8b979eef5239a4
-=======
-  void Volver() => Navigation.NavigateTo($"home/{Id}");
->>>>>>> 2a4723181eb53793017accd44a8b979eef5239a4
 }

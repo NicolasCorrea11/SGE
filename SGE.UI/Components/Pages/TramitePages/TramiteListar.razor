@@ -38,17 +38,6 @@
 @code {
   List<Tramite> tramites = [];
 
-  protected override void OnInitialized()
-  {
-    try
-    {
-      Usuario user = UsuarioConsulta.Ejecutar(Id);
-    }
-    catch
-    {
-      Navigation.NavigateTo("/");
-    }
-  }
 
   void Volver()
   {

@@ -39,20 +39,8 @@
     Expediente e = new();
     string strEstado = "";
     bool visible = false;
-    int idexp;
+    int idExp;
     CuadroDialogo dialogo = null!;
-
-    protected override void OnInitialized()
-    {
-        try
-        {
-            user = UsuarioConsulta.Ejecutar(Id);
-        }
-        catch
-        {
-            Navigation.NavigateTo("/");
-        }
-    }
 
     void Consultar(int idExp)
     {
@@ -88,19 +76,8 @@
             dialogo.Mostrar();
         }
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
     public void Volver()
     {
         Navigation.NavigateTo($"/home");
     }
-=======
-
-    void Volver() => Navigation.NavigateTo($"home/{Id}");
->>>>>>> 2a4723181eb53793017accd44a8b979eef5239a4
-=======
-
-    void Volver() => Navigation.NavigateTo($"home/{Id}");
->>>>>>> 2a4723181eb53793017accd44a8b979eef5239a4
-
 }

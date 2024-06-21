@@ -38,48 +38,17 @@
 <CuadroDialogo @ref=dialogo Mensaje=@error />
 
 @code {
-    [Parameter] public int Id { get; set; }
     int idExp;
     string error = "";
     Expediente e = new();
     bool visible = false;
     CuadroDialogo dialogo = null!;
 
-    protected override void OnInitialized()
-<<<<<<< HEAD
-=======
-    {
-        try
-        {
-            Usuario user = UsuarioConsulta.Ejecutar(Id);
-        }
-        catch
-        {
-            Navigation.NavigateTo("/");
-        }
-    }
-
-    void Volver()
->>>>>>> 2a4723181eb53793017accd44a8b979eef5239a4
-    {
-        try
-        {
-            Usuario user = UsuarioConsulta.Ejecutar(Id);
-        }
-        catch
-        {
-            Navigation.NavigateTo("/");
-        }
-    }
-
-<<<<<<< HEAD
     void Volver()
     {
         Navigation.NavigateTo($"/home");
     }
 
-=======
->>>>>>> 2a4723181eb53793017accd44a8b979eef5239a4
     void Consultar(int idExp)
     {
         try
