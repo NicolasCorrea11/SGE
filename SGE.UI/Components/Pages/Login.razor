@@ -10,13 +10,13 @@
 </form>
 <button class="btn btn-primary" @onclick="Ingresar">Ingresar</button>
 <br>
-@Error
+@error
 
 @code {
     Usuario user = new();
     string email = "";
     string pass = "";
-    string Error = "";
+    string error = "";
 
     public void Ingresar()
     {

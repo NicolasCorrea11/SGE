@@ -5,17 +5,29 @@
 @inject NavigationManager Navigation
 <PageTitle>SGE | Usuarios</PageTitle>
 
-<h3>Modificacion de Usuario</h3>
-<h5>Ingresar nuevos datos para @user.Nombre @user.Apellido</h5>
-<label for="nom">Nombre: </label>
-<input placeholder="Nombre" @bind="user.Nombre" class="form-control" id="nom"><br>
-<label for="ape">Apellido: </label>
-<input placeholder="Apellido" @bind="user.Apellido" class="form-control" id="ape"><br>
-<label for="ema">Email: </label>
-<input placeholder="Mail" @bind="user.Email" class="form-control" id="ema"><br>
-<label for="pw">Contraseña: </label>
-<input type="password" placeholder="" @bind="pass" class="form-control" id="pw"><br>
+<h3>Ingresar nuevos datos para @user.Nombre @user.Apellido</h3>
+<form>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Email</th>
+                <th>Password</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input @bind="user.Nombre" class="form-control" id="nom"><br></td>
+                <td><input @bind="user.Apellido" class="form-control" id="ape"><br></td>
+                <td><input @bind="user.Email" class="form-control" id="ema"><br></td>
+                <td><input type="password" @bind="pass" class="form-control" id="pw"><br></td>
+            </tr>
+        </tbody>
+    </table>
+</form>
 <button class="btn btn-primary" @onclick="() => Modificar(user)">Guardar cambios</button><br>
+<button class="btn btn-secondary mt-2" @onclick="Volver">Volver al menu de gestion</button>
 <br>@error<br>
 
 @code {
@@ -29,24 +41,27 @@
         try
         {
             user = UsuarioConsulta.Ejecutar(Id);
-            StateHasChanged();
         }
         catch (Exception ex)
         {
             error = ex.Message;
         }
     }
-    public void Modificar(Usuario user)
+    private void Modificar(Usuario user)
     {
         try
         {
             user.Contraseña = pass;
             CasoDeUsoUsuarioModificacion.Ejecutar(user);
-            Navigation.NavigateTo($"/home/{user.Id}");
+            Navigation.NavigateTo($"home/{user.Id}");
         }
         catch (Exception ex)
         {
             error = ex.Message;
         }
+    }
+    private void Volver()
+    {
+        Navigation.NavigateTo($"home/{user.Id}");
     }
 }

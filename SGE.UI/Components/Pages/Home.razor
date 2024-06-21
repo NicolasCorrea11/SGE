@@ -13,46 +13,81 @@
         </tr>
     </thead>
     <tbody>
-        <tr> 
-            <td><NavLink class="nav-link" href="@($"/expalta/{user.Id}")">Agregar expediente</NavLink></td>
-            <td><NavLink class="nav-link" href="@($"/tramitealta/{user.Id}")">Agregar tramite</NavLink></td>
-        </tr>
-        <tr> 
-            <td><NavLink class="nav-link" href="@($"/expbaja/{user.Id}")">Eliminar expediente</NavLink></td>
-            <td><NavLink class="nav-link" href="@($"/tramitebaja/{user.Id}")">Eliminar tramite</NavLink></td>
-        </tr>
-        <tr> 
-            <td><NavLink class="nav-link" href="@($"/expmod/{user.Id}")">Modificar expediente</NavLink></td>
-            <td><NavLink class="nav-link" href="@($"/tramitemodificacion/{user.Id}")">Modificar tramite</NavLink></td>
+        <tr>
+            <td>
+                <NavLink class="nav-link" href="@($"/expalta/{user.Id}")">Agregar expediente</NavLink>
+            </td>
+            <td>
+                <NavLink class="nav-link" href="@($"/tramitealta/{user.Id}")">Agregar tramite</NavLink>
+            </td>
         </tr>
         <tr>
-            <td><NavLink class="nav-link" href="@($"/explistar/{user.Id}")">Lista de expedientes</NavLink></td>
-            <td><NavLink class="nav-link" href="@($"/tramitelistar/{user.Id}")">Lista de tramites</NavLink></td>
+            <td>
+                <NavLink class="nav-link" href="@($"/expbaja/{user.Id}")">Eliminar expediente</NavLink>
+            </td>
+            <td>
+                <NavLink class="nav-link" href="@($"/tramitebaja/{user.Id}")">Eliminar tramite</NavLink>
+            </td>
         </tr>
         <tr>
-            <td><NavLink class="nav-link" href="@($"/expconsultaid/{user.Id}")">Consultar expediente con ID</NavLink></td>
-            <td><NavLink class="nav-link" href="@($"/tramiteconsultaid/{user.Id}")">Consultar tramite con ID</NavLink></td>
+            <td>
+                <NavLink class="nav-link" href="@($"/expmod/{user.Id}")">Modificar expediente</NavLink>
+            </td>
+            <td>
+                <NavLink class="nav-link" href="@($"/tramitemodificacion/{user.Id}")">Modificar tramite</NavLink>
+            </td>
         </tr>
         <tr>
-            <td><NavLink class="nav-link" href="@($"/exptramlistar/{user.Id}")">Listar expediente junto a sus tramites</NavLink></td>
-            <td><NavLink class="nav-link" href="@($"/tramiteconsultaetiqueta/{user.Id}")">Consultar tramites con etiqueta</NavLink></td>
+            <td>
+                <NavLink class="nav-link" href="@($"/explistar/{user.Id}")">Lista de expedientes</NavLink>
+            </td>
+            <td>
+                <NavLink class="nav-link" href="@($"/tramitelistar/{user.Id}")">Lista de tramites</NavLink>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <NavLink class="nav-link" href="@($"/expconsultaid/{user.Id}")">Consultar expediente con ID</NavLink>
+            </td>
+            <td>
+                <NavLink class="nav-link" href="@($"/tramiteconsultaid/{user.Id}")">Consultar tramite con ID</NavLink>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <NavLink class="nav-link" href="@($"/exptramlistar/{user.Id}")">Listar expediente junto a sus tramites
+                </NavLink>
+            </td>
+            <td>
+                <NavLink class="nav-link" href="@($"/tramiteconsultaetiqueta/{user.Id}")">Consultar tramites con
+                    etiqueta</NavLink>
+            </td>
         </tr>
         <tr>
             <td></td>
-            <td><NavLink class="nav-link" href="@($"/tramiteconsultaexpid/{user.Id}")">Consultar tramites con ID de expediente</NavLink></td>
+            <td>
+                <NavLink class="nav-link" href="@($"/tramiteconsultaexpid/{user.Id}")">Consultar tramites con ID de
+                    expediente</NavLink>
+            </td>
         </tr>
     </tbody>
 </table>
 @if (Id == 1)
 {
-    <button class="btn btn-primary mt-2"><NavLink class="nav-link text-white" href="/gestion/1">Gestion de Usuarios</NavLink></button>
+    <button class="btn btn-primary mt-2">
+        <NavLink class="nav-link text-white" href="/gestion/1">Gestion de Usuarios</NavLink>
+    </button>
 }
 else
 {
-    <button class="btn btn-primary mt-2"><NavLink class="nav-link text-white" href="@($"/usermod/{user.Id}")">Cambiar datos personales</NavLink></button>
+    <button class="btn btn-primary mt-2">
+        <NavLink class="nav-link text-white" href="@($"/usermod/{user.Id}")">Cambiar datos personales</NavLink>
+    </button>
 }
 <br>
-<button class="btn btn-danger mt-2"><NavLink class="nav-link text-white" href="/">Cerrar Sesion</NavLink></button>
+<button class="btn btn-danger mt-2">
+    <NavLink class="nav-link text-white" href="/">Cerrar Sesion</NavLink>
+</button>
 <br>@error
 
 

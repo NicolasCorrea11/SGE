@@ -7,7 +7,6 @@
 <PageTitle>SGE | Gestion</PageTitle>
 
 <h3>Gestion de Usuarios</h3>
-<h6>Para visualizar la eliminacion de usuario debe recargar la pagina</h6>
 <table class="table">
   <thead>
     <tr>
@@ -48,18 +47,19 @@
 
   protected override void OnInitialized()
   {
-    usuarios = UsuarioListar.Ejecutar();
-    StateHasChanged();
+    try
+    {
+      Usuario user = UsuarioConsulta.Ejecutar(Id);
+    }
+    catch
+    {
+      Navigation.NavigateTo("/");
+    }
   }
 
-  private void Editar(int id)
-  {
-    Navigation.NavigateTo($"usermod/{id}");
-  }
-  private void Permisos(int id)
-  {
-    Navigation.NavigateTo($"adminperm/{id}");
-  }
+  private void Editar(int id) => Navigation.NavigateTo($"usermod/{id}");
+  private void Permisos(int id) => Navigation.NavigateTo($"adminperm/{id}");
+
   private void Eliminar(int id)
   {
     try

@@ -37,11 +37,17 @@
 
     protected override void OnInitialized()
     {
-        user = UsuarioConsulta.Ejecutar(Id);
-        StateHasChanged();
+        try
+        {
+            user = UsuarioConsulta.Ejecutar(Id);
+        }
+        catch
+        {
+            Navigation.NavigateTo("/");
+        }
     }
 
-    public void Agregar(Expediente e)
+    void Agregar(Expediente e)
     {
         try
         {
@@ -56,7 +62,7 @@
 
     }
 
-    public void Volver()
+    void Volver()
     {
         Navigation.NavigateTo($"home/{Id}");
     }

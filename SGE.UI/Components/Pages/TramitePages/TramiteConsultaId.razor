@@ -1,5 +1,6 @@
 ﻿@page "/tramiteconsultaid/{Id:int}"
 @rendermode InteractiveServer
+@inject CasoDeUsoUsuarioConsultaId UsuarioConsulta
 @inject CasoDeUsoTramiteConsultaId CasoConsulta
 @inject NavigationManager Navigation
 <PageTitle>SGE | Tramites</PageTitle>
@@ -41,13 +42,24 @@
 
 @code {
   [Parameter] public int Id { get; set; }
-  Usuario user = new();
   Tramite t = new();
   int idTramite;
   string error = "";
   bool visible = false;
 
-  public void Consultar(int idTramite)
+  protected override void OnInitialized()
+  {
+    try
+    {
+      Usuario user = UsuarioConsulta.Ejecutar(Id);
+    }
+    catch
+    {
+      Navigation.NavigateTo("/");
+    }
+  }
+
+  void Consultar(int idTramite)
   {
     try
     {
@@ -62,7 +74,7 @@
     }
   }
 
-  public void Volver()
+  void Volver()
   {
     Navigation.NavigateTo($"home/{Id}");
   }

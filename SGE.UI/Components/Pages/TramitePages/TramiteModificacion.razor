@@ -5,33 +5,36 @@
 @inject CasoDeUsoTramiteConsultaId CasoConsulta
 @inject NavigationManager Navigation
 <PageTitle>SGE | Tramite</PageTitle>
+
 <h3>Modificacion de Tramite</h3>
 <label for="consid">Id del tramite a modificar</label>
 <input class="mt-3 form-control" placeholder="Id del tramite" @bind="idTram" id="consid"><br>
 <button class="btn btn-primary" @onclick="() => consultar(idTram)">Buscar</button><br>
-@if (visible) 
+@if (visible)
 {
-<form>
+  <form>
     <label for="cont">Contenido: </label>
     <input class="form-control" placeholder="Contenido" @bind="t.Contenido" id="cont"><br>
     <label for="etiq">Etiqueta: </label>
     <select class="form-control" @bind="strEtiqueta" id="etiq">
-        <option value="" disabled selected>Seleccione una etiqueta</option>
-        <option>EscritoPresentado</option>
-        <option>PaseAEstudio</option>
-        <option>Despacho</option>
-        <option>Resolucion</option>
-        <option>Notificacion</option>
-        <option>PaseAlArchivo</option>
+      <option value="" disabled selected>Seleccione una etiqueta</option>
+      <option>EscritoPresentado</option>
+      <option>PaseAEstudio</option>
+      <option>Despacho</option>
+      <option>Resolucion</option>
+      <option>Notificacion</option>
+      <option>PaseAlArchivo</option>
     </select><br>
-</form>
-<button class="btn btn-primary" @onclick="() => Modificar(t)">Guardar cambios</button><br>
+  </form>
+  <button class="btn btn-primary" @onclick="() => Modificar(t)">Guardar cambios</button>
+
+  <br>
 }
 <button class="btn btn-secondary mt-2" @onclick="Volver">Volver al menu</button>
 <br>
 @if (@error == "Value cannot be null. (Parameter 'value')")
 {
-    error = "Debe seleccionar una etiqueta";
+  error = "Debe seleccionar una etiqueta";
 }
 @error
 
@@ -42,30 +45,37 @@
   string error = "";
   int idTram;
   bool visible = false;
-  string? strEtiqueta;
-
-  public void consultar(int idTram)
-    {
-        try
-        {
-            t = CasoConsulta.Ejecutar(idTram);
-            visible = true;
-            error = "";
-        }
-        catch (Exception err)
-        {
-            error = err.Message;
-            visible = false;
-        }
-    }
+  string strEtiqueta = "";
 
   protected override void OnInitialized()
   {
-    user = UsuarioConsulta.Ejecutar(Id);
-    StateHasChanged();
+    try
+    {
+      user = UsuarioConsulta.Ejecutar(Id);
+    }
+    catch
+    {
+      Navigation.NavigateTo("/");
+    }
   }
 
-  public void Modificar(Tramite t)
+  void consultar(int idTram)
+  {
+    try
+    {
+      t = CasoConsulta.Ejecutar(idTram);
+      visible = true;
+      error = "";
+    }
+    catch (Exception ex)
+    {
+      error = ex.Message;
+      visible = false;
+    }
+  }
+
+
+  void Modificar(Tramite t)
   {
     try
     {
@@ -79,7 +89,7 @@
     }
   }
 
-  public void Volver()
+  void Volver()
   {
     Navigation.NavigateTo($"home/{Id}");
   }

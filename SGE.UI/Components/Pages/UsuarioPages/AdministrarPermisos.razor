@@ -2,7 +2,7 @@
 @rendermode InteractiveServer
 @inject NavigationManager Navigation
 @inject CasoDeUsoUsuarioOtorgarPermiso OtorgarPermiso
-@inject CasoDeUsoUsuarioConsultaId ConsultaUsuario
+@inject CasoDeUsoUsuarioConsultaId UsuarioConsulta
 @inject CasoDeUsoUsuarioQuitarPermiso QuitarPermiso
 <PageTitle>SGE | Usuarios</PageTitle>
 
@@ -20,19 +20,19 @@
         @foreach (Permiso p in permisos)
         {
             <tr>
-            <td>@p</td>
-            <td>@GetEstado(p)</td>
-            <td>
-                @if (EstaDisponible(p))
-                {
-                    <button class="btn btn-danger" @onclick="() => Quitar(user.Id, p)">Eliminar</button>
-                }
-                else
-                {
-                    <button class="btn btn-success" @onclick="() => Otorgar(user.Id, p)">Agregar</button>
-                }
-            </td>
-        </tr>
+                <td>@p</td>
+                <td>@GetEstado(p)</td>
+                <td>
+                    @if (EstaDisponible(p))
+                    {
+                        <button class="btn btn-danger" @onclick="() => Quitar(user.Id, p)">Eliminar</button>
+                    }
+                    else
+                    {
+                        <button class="btn btn-success" @onclick="() => Otorgar(user.Id, p)">Agregar</button>
+                    }
+                </td>
+            </tr>
         }
     </tbody>
 </table>
@@ -43,8 +43,9 @@
     [Parameter] public int Id { get; set; }
     string error = "";
     Usuario user = new();
-    List<Permiso> permisos = [
-        Permiso.ExpedienteAlta, 
+    List<Permiso> permisos = 
+    [
+        Permiso.ExpedienteAlta,
         Permiso.ExpedienteBaja,
         Permiso.ExpedienteModificacion,
         Permiso.TramiteAlta,
@@ -56,11 +57,11 @@
     {
         try
         {
-            user = ConsultaUsuario.Ejecutar(Id);
+            user = UsuarioConsulta.Ejecutar(Id);
         }
-        catch (Exception ex)
+        catch
         {
-            error = ex.Message;
+            Navigation.NavigateTo("/");
         }
     }
 
@@ -76,14 +77,12 @@
     {
         QuitarPermiso.Ejecutar(id, p);
         OnInitialized();
-        StateHasChanged();
     }
 
     private void Otorgar(int id, Permiso p)
     {
         OtorgarPermiso.Ejecutar(id, p);
         OnInitialized();
-        StateHasChanged();
     }
 
     private void Volver()

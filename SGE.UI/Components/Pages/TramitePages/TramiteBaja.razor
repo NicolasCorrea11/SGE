@@ -2,37 +2,37 @@
 @rendermode InteractiveServer
 @inject CasoDeUsoTramiteBaja CasoBaja
 @inject CasoDeUsoTramiteConsultaId CasoConsulta
-@inject CasoDeUsoUsuarioConsultaId CasoDeUsoConsultaUsuarioId
+@inject CasoDeUsoUsuarioConsultaId UsuarioConsulta
 @inject NavigationManager Navigation
 <PageTitle>SGE | Tramite</PageTitle>
 <h3>Baja de Tramite</h3>
 @if (!visible)
 {
-    <label for="inp">Id de tramite a eliminar</label>
-    <input placeholder="ID a eliminar" @bind="idTram" class="mt-3 form-control" id="inp"/>
-    <button class="btn btn-primary mt-2" @onclick="() => Buscar(idTram)">Buscar</button>
+  <label for="inp">Id de tramite a eliminar</label>
+  <input placeholder="ID a eliminar" @bind="idTram" class="mt-3 form-control" id="inp" />
+  <button class="btn btn-primary mt-2" @onclick="() => Buscar(idTram)">Buscar</button>
 }
 else
 {
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Contenido</th>
-                <th>Etiqueta</th>
-                <th>Expediente asociado</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>@t.Id</td>
-                <td>@t.Contenido</td>
-                <td>@t.Etiqueta</td>
-                <td>@t.ExpedienteId</td>
-            </tr>
-        </tbody>
-    </table>
-    <button class="btn btn-primary" @onclick="() => Eliminar(idTram)">Eliminar</button>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>Contenido</th>
+        <th>Etiqueta</th>
+        <th>Expediente asociado</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>@t.Id</td>
+        <td>@t.Contenido</td>
+        <td>@t.Etiqueta</td>
+        <td>@t.ExpedienteId</td>
+      </tr>
+    </tbody>
+  </table>
+  <button class="btn btn-primary" @onclick="() => Eliminar(idTram)">Eliminar</button>
 }
 <br>
 <button class="btn btn-secondary mt-2" @onclick="Volver">Volver al menu</button>
@@ -49,11 +49,17 @@ else
 
   protected override void OnInitialized()
   {
-    user = CasoDeUsoConsultaUsuarioId.Ejecutar(Id);
-    StateHasChanged();
+    try
+    {
+      user = UsuarioConsulta.Ejecutar(Id);
+    }
+    catch
+    {
+      Navigation.NavigateTo("/");
+    }
   }
 
-  public void Buscar(int idTram)
+  void Buscar(int idTram)
   {
     try
     {
@@ -65,10 +71,10 @@ else
       error = e.Message;
       visible = false;
     }
-    
+
   }
 
-  public void Eliminar(int idTram)
+  void Eliminar(int idTram)
   {
     try
     {
@@ -81,7 +87,7 @@ else
     }
   }
 
-  public void Volver()
+  void Volver()
   {
     Navigation.NavigateTo($"home/{Id}");
   }

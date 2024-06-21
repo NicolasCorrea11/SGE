@@ -1,6 +1,7 @@
 ﻿@page "/expconsultaid/{Id:int}"
 @rendermode InteractiveServer
 @inject NavigationManager Navigation
+@inject CasoDeUsoUsuarioConsultaId UsuarioConsulta
 @inject CasoDeUsoExpedienteConsultaId CasoConsulta
 <PageTitle>SGE | Expediente</PageTitle>
 
@@ -43,12 +44,24 @@
     Expediente e = new();
     bool visible = false;
 
-    public void Volver()
+    protected override void OnInitialized()
+    {
+        try
+        {
+            Usuario user = UsuarioConsulta.Ejecutar(Id);
+        }
+        catch
+        {
+            Navigation.NavigateTo("/");
+        }
+    }
+
+    void Volver()
     {
         Navigation.NavigateTo($"home/{Id}");
     }
 
-    public void Consultar(int idExp)
+    void Consultar(int idExp)
     {
         try
         {
