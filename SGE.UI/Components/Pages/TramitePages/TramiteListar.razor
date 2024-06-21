@@ -1,7 +1,6 @@
-﻿@page "/tramitelistar/{Id:int}"
+﻿@page "/tramitelistar"
 @rendermode InteractiveServer
 @inject CasoDeUsoTramiteListar CasoListar
-@inject CasoDeUsoUsuarioConsultaId UsuarioConsulta
 @inject NavigationManager Navigation
 <PageTitle>SGE | Tramites</PageTitle>
 
@@ -37,7 +36,6 @@
 
 
 @code {
-  [Parameter] public int Id { get; set; }
   List<Tramite> tramites = [];
 
   protected override void OnInitialized()
@@ -54,6 +52,6 @@
 
   void Volver()
   {
-    Navigation.NavigateTo($"home/{Id}");
+    Navigation.NavigateTo($"/home");
   }
 }

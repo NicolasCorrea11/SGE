@@ -1,4 +1,4 @@
-﻿@page "/tramiteconsultaid/{Id:int}"
+﻿@page "/tramiteconsultaid"
 @rendermode InteractiveServer
 @inject CasoDeUsoUsuarioConsultaId UsuarioConsulta
 @inject CasoDeUsoTramiteConsultaId CasoConsulta
@@ -41,7 +41,13 @@
 <CuadroDialogo @ref=dialogo Mensaje=@error />
 
 @code {
+<<<<<<< HEAD
+=======
   [Parameter] public int Id { get; set; }
+<<<<<<< HEAD
+>>>>>>> 2a4723181eb53793017accd44a8b979eef5239a4
+=======
+>>>>>>> 2a4723181eb53793017accd44a8b979eef5239a4
   Tramite t = new();
   int idTramite;
   string error = "";
@@ -78,6 +84,6 @@
 
   void Volver()
   {
-    Navigation.NavigateTo($"home/{Id}");
+    Navigation.NavigateTo($"/home");
   }
 }

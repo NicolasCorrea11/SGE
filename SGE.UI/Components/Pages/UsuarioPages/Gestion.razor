@@ -1,12 +1,21 @@
-﻿@page "/gestion/1"
+﻿@page "/gestion"
 @rendermode InteractiveServer
 @inject CasoDeUsoUsuarioListar UsuarioListar
 @inject CasoDeUsoUsuarioConsultaId UsuarioConsulta
 @inject CasoDeUsoUsuarioEliminar CasoBaja
 @inject NavigationManager Navigation
+@inject UsuarioLogeado usuario
 <PageTitle>SGE | Gestion</PageTitle>
 
 <h3>Gestion de Usuarios</h3>
+<<<<<<< HEAD
+<<<<<<< HEAD
+@if (usuario.user.Id == 1) 
+{
+=======
+>>>>>>> 2a4723181eb53793017accd44a8b979eef5239a4
+=======
+>>>>>>> 2a4723181eb53793017accd44a8b979eef5239a4
 <table class="table">
   <thead>
     <tr>
@@ -37,11 +46,15 @@
     }
   </tbody>
 </table>
+}
+@if (usuario.user.Id != 1)
+{
+  <p>Necesitar ser administrador para gestionar usuarios</p>
+}
 <button class="btn btn-secondary mt-2" @onclick="Volver">Volver al menu</button>
 @error
 
 @code {
-  [Parameter] public int Id { get; set; }
   List<Usuario> usuarios = [];
   string error = "";
 
@@ -75,7 +88,7 @@
 
   private void Volver()
   {
-    Navigation.NavigateTo($"home/1");
+    Navigation.NavigateTo($"/home");
   }
 
 }

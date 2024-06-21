@@ -1,9 +1,9 @@
-﻿@page "/tramitemodificacion/{Id:int}"
+﻿@page "/tramitemodificacion"
 @rendermode InteractiveServer
 @inject CasoDeUsoTramiteModificacion CasoModificacion
-@inject CasoDeUsoUsuarioConsultaId UsuarioConsulta
 @inject CasoDeUsoTramiteConsultaId CasoConsulta
 @inject NavigationManager Navigation
+@inject UsuarioLogeado usuario
 <PageTitle>SGE | Tramite</PageTitle>
 
 <h3>Modificacion de Tramite</h3>
@@ -39,9 +39,7 @@
 <CuadroDialogo @ref=dialogo Mensaje=@error />
 
 @code {
-  [Parameter] public int Id { get; set; }
   Tramite t = new();
-  Usuario user = new();
   string error = "";
   int idTram;
   bool visible = false;
@@ -49,6 +47,40 @@
   CuadroDialogo dialogo = null!;
 
   public void Consultar(int idTram)
+<<<<<<< HEAD
+  {
+    try
+    {
+      t = CasoConsulta.Ejecutar(idTram);
+      visible = true;
+      error = "";
+    }
+    catch (Exception ex)
+    {
+      error = ex.Message;   
+      visible = false;
+      dialogo.Mostrar();
+    }
+  }
+
+<<<<<<< HEAD
+  public void Modificar(Tramite t)
+=======
+  protected override void OnInitialized()
+  {
+    try
+    {
+      user = UsuarioConsulta.Ejecutar(Id);
+    }
+    catch
+    {
+      Navigation.NavigateTo("/");
+    }
+  }
+
+  void Modificar(Tramite t)
+>>>>>>> 2a4723181eb53793017accd44a8b979eef5239a4
+=======
   {
     try
     {
@@ -77,12 +109,13 @@
   }
 
   void Modificar(Tramite t)
+>>>>>>> 2a4723181eb53793017accd44a8b979eef5239a4
   {
     try
     {
       t.Etiqueta = (EtiquetaTramite)Enum.Parse(typeof(EtiquetaTramite), strEtiqueta);
-      CasoModificacion.Ejecutar(t, user);
-      Navigation.NavigateTo($"/home/{user.Id}");
+      CasoModificacion.Ejecutar(t, usuario.user);
+      Navigation.NavigateTo($"/home");
     }
     catch (Exception ex)
     {
@@ -91,5 +124,16 @@
     }
   }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+  public void Volver()
+  {
+    Navigation.NavigateTo($"/home");
+  }
+=======
   void Volver() => Navigation.NavigateTo($"home/{Id}");
+>>>>>>> 2a4723181eb53793017accd44a8b979eef5239a4
+=======
+  void Volver() => Navigation.NavigateTo($"home/{Id}");
+>>>>>>> 2a4723181eb53793017accd44a8b979eef5239a4
 }

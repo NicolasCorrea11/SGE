@@ -4,8 +4,11 @@
 @inject CasoDeUsoUsuarioOtorgarPermiso OtorgarPermiso
 @inject CasoDeUsoUsuarioConsultaId UsuarioConsulta
 @inject CasoDeUsoUsuarioQuitarPermiso QuitarPermiso
+@inject UsuarioLogeado usuario
 <PageTitle>SGE | Usuarios</PageTitle>
 
+@if (usuario.user.Id == 1) 
+{
 <h3>Administrar permisos de @user.Nombre @user.Apellido</h3>
 <h6>Para visualizar los cambios debe recargar la pagina</h6>
 <table class="table">
@@ -36,6 +39,11 @@
         }
     </tbody>
 </table>
+}
+else
+{
+    <p>Necesitar ser adminitrador para modificar permisos</p>
+}
 <button class="btn btn-secondary mt-2" @onclick="Volver">Volver al menu de gestion</button><br>
 @error
 
@@ -87,6 +95,6 @@
 
     private void Volver()
     {
-        Navigation.NavigateTo($"gestion/1");
+        Navigation.NavigateTo($"/gestion");
     }
 }

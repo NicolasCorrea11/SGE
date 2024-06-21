@@ -1,4 +1,4 @@
-﻿@page "/expconsultaid/{Id:int}"
+﻿@page "/expconsultaid"
 @rendermode InteractiveServer
 @inject NavigationManager Navigation
 @inject CasoDeUsoUsuarioConsultaId UsuarioConsulta
@@ -46,6 +46,8 @@
     CuadroDialogo dialogo = null!;
 
     protected override void OnInitialized()
+<<<<<<< HEAD
+=======
     {
         try
         {
@@ -58,10 +60,26 @@
     }
 
     void Volver()
+>>>>>>> 2a4723181eb53793017accd44a8b979eef5239a4
     {
-        Navigation.NavigateTo($"home/{Id}");
+        try
+        {
+            Usuario user = UsuarioConsulta.Ejecutar(Id);
+        }
+        catch
+        {
+            Navigation.NavigateTo("/");
+        }
     }
 
+<<<<<<< HEAD
+    void Volver()
+    {
+        Navigation.NavigateTo($"/home");
+    }
+
+=======
+>>>>>>> 2a4723181eb53793017accd44a8b979eef5239a4
     void Consultar(int idExp)
     {
         try

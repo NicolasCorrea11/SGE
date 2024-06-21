@@ -1,7 +1,6 @@
-﻿@page "/tramiteconsultaetiqueta/{Id:int}"
+﻿@page "/tramiteconsultaetiqueta"
 @rendermode InteractiveServer
 @inject CasoDeUsoTramiteConsultaEtiqueta CasoConsulta
-@inject CasoDeUsoUsuarioConsultaId UsuarioConsulta
 @inject NavigationManager Navigation
 <PageTitle>SGE | Tramites</PageTitle>
 
@@ -51,12 +50,13 @@
 
 
 @code {
-  [Parameter] public int Id { get; set; }
-  Usuario user = new();
   List<Tramite> tramites = new();
   string strEtiqueta = "";
   string error = "";
   bool visible = false;
+<<<<<<< HEAD
+  public void Consultar(string strEtiqueta)
+=======
 
   protected override void OnInitialized()
   {
@@ -71,6 +71,10 @@
   }
 
   void Consultar(string strEtiqueta)
+<<<<<<< HEAD
+>>>>>>> 2a4723181eb53793017accd44a8b979eef5239a4
+=======
+>>>>>>> 2a4723181eb53793017accd44a8b979eef5239a4
   {
     try
     {
@@ -86,6 +90,6 @@
 
   void Volver()
   {
-    Navigation.NavigateTo($"home/{user.Id}");
+    Navigation.NavigateTo($"/home");
   }
 }

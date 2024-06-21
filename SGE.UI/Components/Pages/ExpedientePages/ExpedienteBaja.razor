@@ -1,9 +1,9 @@
-﻿@page "/expbaja/{Id:int}"
+﻿@page "/expbaja"
 @rendermode InteractiveServer
 @inject CasoDeUsoExpedienteBaja CasoBaja
 @inject CasoDeUsoExpedienteConsultaId ConsultaIdExp
-@inject CasoDeUsoUsuarioConsultaId UsuarioConsulta
 @inject NavigationManager Navigation
+@inject UsuarioLogeado usuario
 <PageTitle>SGE | Expedientes</PageTitle>
 
 <h3>Baja de Expediente</h3>
@@ -42,13 +42,15 @@ else
 
 @code {
     [Parameter] public int Id { get; set; }
-    Usuario user = new();
     Expediente e = new();
     int idExp;
     string error = "";
     bool visible = false;
     CuadroDialogo dialogo = null!;
 
+<<<<<<< HEAD
+    public void Buscar(int id)
+=======
     protected override void OnInitialized()
     {
         try
@@ -62,6 +64,10 @@ else
     }
     
     void Buscar(int id)
+<<<<<<< HEAD
+>>>>>>> 2a4723181eb53793017accd44a8b979eef5239a4
+=======
+>>>>>>> 2a4723181eb53793017accd44a8b979eef5239a4
     {
         try
         {
@@ -80,8 +86,8 @@ else
     {
         try
         {
-            CasoBaja.Ejecutar(idExp, user);
-            Navigation.NavigateTo($"/home/{user.Id}");
+            CasoBaja.Ejecutar(idExp, usuario.user);
+            Navigation.NavigateTo($"/home");
         }
         catch (Exception err)
         {
@@ -91,6 +97,6 @@ else
 
     void Volver()
     {
-        Navigation.NavigateTo($"home/{Id}");
+        Navigation.NavigateTo($"/home");
     }
 }

@@ -1,9 +1,17 @@
-﻿@page "/tramitebaja/{Id:int}"
+﻿@page "/tramitebaja"
 @rendermode InteractiveServer
 @inject CasoDeUsoTramiteBaja CasoBaja
 @inject CasoDeUsoTramiteConsultaId CasoConsulta
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
 @inject CasoDeUsoUsuarioConsultaId UsuarioConsulta
+>>>>>>> 2a4723181eb53793017accd44a8b979eef5239a4
+=======
+@inject CasoDeUsoUsuarioConsultaId UsuarioConsulta
+>>>>>>> 2a4723181eb53793017accd44a8b979eef5239a4
 @inject NavigationManager Navigation
+@inject UsuarioLogeado usuario
 <PageTitle>SGE | Tramite</PageTitle>
 <h3>Baja de Tramite</h3>
 @if (!visible)
@@ -49,6 +57,9 @@ else
 
   CuadroDialogo dialogo = null!;
 
+<<<<<<< HEAD
+  public void Buscar(int idTram)
+=======
   protected override void OnInitialized()
   {
     try
@@ -62,6 +73,10 @@ else
   }
 
   void Buscar(int idTram)
+<<<<<<< HEAD
+>>>>>>> 2a4723181eb53793017accd44a8b979eef5239a4
+=======
+>>>>>>> 2a4723181eb53793017accd44a8b979eef5239a4
   {
     try
     {
@@ -81,8 +96,8 @@ else
   {
     try
     {
-      CasoBaja.Ejecutar(idTram, user);
-      Navigation.NavigateTo($"/tramitelistar/{user.Id}");
+      CasoBaja.Ejecutar(idTram, usuario.user);
+      Navigation.NavigateTo($"/tramitelistar");
     }
     catch (Exception ex)
     {
@@ -93,6 +108,6 @@ else
 
   void Volver()
   {
-    Navigation.NavigateTo($"home/{Id}");
+    Navigation.NavigateTo($"/home");
   }
 }
