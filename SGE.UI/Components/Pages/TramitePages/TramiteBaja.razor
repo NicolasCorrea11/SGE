@@ -2,14 +2,6 @@
 @rendermode InteractiveServer
 @inject CasoDeUsoTramiteBaja CasoBaja
 @inject CasoDeUsoTramiteConsultaId CasoConsulta
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-@inject CasoDeUsoUsuarioConsultaId UsuarioConsulta
->>>>>>> 2a4723181eb53793017accd44a8b979eef5239a4
-=======
-@inject CasoDeUsoUsuarioConsultaId UsuarioConsulta
->>>>>>> 2a4723181eb53793017accd44a8b979eef5239a4
 @inject NavigationManager Navigation
 @inject UsuarioLogeado usuario
 <PageTitle>SGE | Tramite</PageTitle>
@@ -57,26 +49,7 @@ else
 
   CuadroDialogo dialogo = null!;
 
-<<<<<<< HEAD
-  public void Buscar(int idTram)
-=======
-  protected override void OnInitialized()
-  {
-    try
-    {
-      user = UsuarioConsulta.Ejecutar(Id);
-    }
-    catch
-    {
-      Navigation.NavigateTo("/");
-    }
-  }
-
   void Buscar(int idTram)
-<<<<<<< HEAD
->>>>>>> 2a4723181eb53793017accd44a8b979eef5239a4
-=======
->>>>>>> 2a4723181eb53793017accd44a8b979eef5239a4
   {
     try
     {
