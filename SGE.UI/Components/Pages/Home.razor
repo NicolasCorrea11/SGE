@@ -57,18 +57,6 @@ else
 
 
 @code {
-    protected override void OnInitialized()
-    {
-        try
-        {
-            Sesion.User = UsuarioConsulta.Ejecutar(Sesion.User.Id);
-            StateHasChanged();
-        }
-        catch
-        {
-            Navigation.NavigateTo("/");
-        }
-    }
     void Cerrar()
     {
         Sesion.CerrarSesion();
